@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="language" content="en" />
+        <link href="./assets/5db5ec49/css/bootstrap.css" rel="stylesheet">
+<link href="./assets/fc316e5a/solarized_light.css" rel="stylesheet">
+<link href="./assets/cf0e475c/style.css" rel="stylesheet">
+<script src="./assets/d6ff6548/jquery.js"></script>
+<script src="./assets/5db5ec49/js/bootstrap.js"></script>
+<script src="./assets/b81d502/jssearch.js"></script>    <title>Guía del proyecto</title>
+</head>
+<body>
+
+<div class="wrap">
+    <nav id="w34" class="navbar-inverse navbar-fixed-top navbar"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w34-collapse"><span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span></button><a class="navbar-brand" href="./index.html">Guía del proyecto</a></div><div id="w34-collapse" class="collapse navbar-collapse"><ul id="w35" class="navbar-nav nav"><li><a href="./api/index.html">Class reference</a></li>
+<li><a href="./README.html">Guide</a></li></ul><div class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <input id="searchbox" type="text" class="form-control" placeholder="Search">
+  </div>
+</div>
+</div></nav>
+    <div id="search-resultbox" style="display: none;" class="modal-content">
+        <ul id="search-results">
+        </ul>
+    </div>
+
+    
+<div class="row">
+    <div class="col-md-2">
+                <div id="navigation" class="list-group"><a class="list-group-item" href="#navigation-24" data-toggle="collapse" data-parent="#navigation">Descripción general <b class="caret"></b></a><div id="navigation-24" class="submenu panel-collapse collapse"><a class="list-group-item" href="./descripcion.html#funcionalidad-principal-de-la-aplicacion">Funcionalidad principal de la aplicación</a>
+<a class="list-group-item" href="./descripcion.html#objetivos-generales">Objetivos generales</a>
+<a class="list-group-item" href="./descripcion.html#url-del-repositorio">URL del repositorio</a>
+<a class="list-group-item" href="./descripcion.html#url-de-la-documentacion">URL de la documentación</a></div>
+<a class="list-group-item" href="#navigation-25" data-toggle="collapse" data-parent="#navigation">Instrucciones de instalación y despliegue <b class="caret"></b></a><div id="navigation-25" class="submenu panel-collapse collapse"><a class="list-group-item" href="./instalacion.html#en-local">En local</a>
+<a class="list-group-item" href="./instalacion.html#en-la-nube">En la nube</a></div>
+<a class="list-group-item" href="#navigation-26" data-toggle="collapse" data-parent="#navigation">Catálogo de requisitos <b class="caret"></b></a><div id="navigation-26" class="submenu panel-collapse collapse"><a class="list-group-item" href="./requisitos.html#cuadro-resumen">Cuadro resumen</a></div>
+<a class="list-group-item" href="#navigation-27" data-toggle="collapse" data-parent="#navigation">Manual de usuario <b class="caret"></b></a><div id="navigation-27" class="submenu panel-collapse collapse"><a class="list-group-item" href="./manual.html">Manual de usuario</a></div>
+<a class="list-group-item" href="#navigation-28" data-toggle="collapse" data-parent="#navigation">Decisiones adoptadas <b class="caret"></b></a><div id="navigation-28" class="submenu panel-collapse collapse"><a class="list-group-item" href="./decisiones.html">Decisiones adoptadas</a></div>
+<a class="list-group-item" href="#navigation-29" data-toggle="collapse" data-parent="#navigation">Dificultades encontradas <b class="caret"></b></a><div id="navigation-29" class="submenu panel-collapse collapse"><a class="list-group-item" href="./dificultades.html">Dificultades encontradas</a></div>
+<a class="list-group-item" href="#navigation-30" data-toggle="collapse" data-parent="#navigation">Diagramas <b class="caret"></b></a><div id="navigation-30" class="submenu panel-collapse collapse"><a class="list-group-item" href="./diagramas.html#diagramas-de-clases">Diagramas de clases</a>
+<a class="list-group-item" href="./diagramas.html#diagramas-de-estructura-logica-de-datos">Diagramas de estructura lógica de datos</a></div>
+<a class="list-group-item" href="#navigation-31" data-toggle="collapse" data-parent="#navigation">Glosario de términos <b class="caret"></b></a><div id="navigation-31" class="submenu panel-collapse collapse"><a class="list-group-item" href="./glosario.html">Glosario de términos</a></div>
+<a class="list-group-item" href="#navigation-32" data-toggle="collapse" data-parent="#navigation">Conclusiones <b class="caret"></b></a><div id="navigation-32" class="submenu panel-collapse collapse"><a class="list-group-item" href="./conclusiones.html">Conclusiones</a></div>
+<a class="list-group-item" href="#navigation-33" data-toggle="collapse" data-parent="#navigation">Anexos <b class="caret"></b></a><div id="navigation-33" class="submenu panel-collapse collapse"><a class="list-group-item" href="./anexos.html">Anexos</a></div></div>    </div>
+    <div class="col-md-9 guide-content" role="main">
+        <h1>Catálogo de requisitos <span id="catalogo-de-requisitos"></span><a href="#catalogo-de-requisitos" class="hashlink">&para;</a></h1><table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R01</strong>     </th><th align="left"><strong>Tabla Noticias </strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">almacenar datos de noticias (titulo , descripción , fecha , autor)</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/1">1</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R02</strong>     </th><th align="left"><strong>Tabla Liga</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">almacenar datos de cada liga (nombre,equipos)</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/2">2</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R03</strong>     </th><th align="left"><strong>Tabla Equipos</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">almacenar datos de cada equipo (nombre,estadio,jugadores,liga)</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/3">3</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R04</strong>     </th><th align="left"><strong>Tabla Jugadores</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">almacenar  datos de cada jugador (nombre,posición,edad,equipo)</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/4">4</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R05</strong>     </th><th align="left"><strong>Tabla Partidos</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">almacenar datos de cada partido (fecha,equipo local,equipo visitante,detalles del partido)</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Media</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/5">5</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R06</strong>     </th><th align="left"><strong>Tabla Detalles_Partido</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">detalles del partido de cada jugador (goles,minutos  jugados, tarjetas)</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Media</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/6">6</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R07</strong>     </th><th align="left"><strong>Buscador</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">tener un buscador para acceder rápidamente a equipos , jugadores o ligas</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/7">7</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R08</strong>     </th><th align="left"><strong>Tabla Posts</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Almacenara datos de cada entrada en el foro(autor,titulo,descripción,fecha)</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/8">8</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R09</strong>     </th><th align="left"><strong>Tabla Respuestas</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">se almacenara los datos de cada respuesta en el post (autor,post,descripción,fecha)</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/9">9</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R10</strong>     </th><th align="left"><strong>Tabla Posts-Equipo</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Almacenara datos de cada entrada en el foro(autor,titulo,descripción,fecha)</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/10">10</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R11</strong>     </th><th align="left"><strong>Tabla Respuestas-Equipo</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">se almacenara los datos de cada respuesta en el post (autor,post,descripción,fecha)</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/11">11</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R12</strong>     </th><th align="left"><strong>Herramienta de tácticas</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">una herramienta de diseño para la creación de tácticas y estrategias</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Difícil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/12">12</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R13</strong>     </th><th align="left"><strong>Tabla Img Predefinidas</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">una tabla para almacenar imágenes como plantilla para la herramienta de diseño</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/13">13</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R14</strong>     </th><th align="left"><strong>Tabla Img Usuario</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">una tabla para guardar las imágenes como plantilla para cada usuario</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/14">14</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R15</strong>     </th><th align="left"><strong>Tabla Equipo Usuario</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">almacenara datos de los equipos creador por los usuarios (creador,nombre,miembros)</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/15">15</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R16</strong>     </th><th align="left"><strong>Crear tabla Miembro Equipo</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">donde se guarda cada participante de cada equipo</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/16">16</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R17</strong>     </th><th align="left"><strong>Crear Tabla Usuario</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">tabla que almacena los datos de cada usuario</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Información</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/17">17</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R18</strong>     </th><th align="left"><strong>Crear atajos de teclado</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">para acceder rápidamente a las distintas pestañas</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v3</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/18">18</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R19</strong>     </th><th align="left"><strong>Ver Noticias</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Un visitante podrá ver el contenido de las noticias y de los comentarios</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/19">19</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R20</strong>     </th><th align="left"><strong>Comentar Noticias</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Un usuario podrá comentar las noticias</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/20">20</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R21</strong>     </th><th align="left"><strong>Subir Noticias</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Usuarios con permisos podrán subir sus propias noticias</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/21">21</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R22</strong>     </th><th align="left"><strong>Registrar Usuarios</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/22">22</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R23</strong>     </th><th align="left"><strong>Verificar usuario</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">verificar usuario mediante correo electrónico</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/23">23</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R24</strong>     </th><th align="left"><strong>Logear Usuario</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">el usuario podrá iniciar sesión</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/24">24</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R25</strong>     </th><th align="left"><strong>Deslogear</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">el usuario podrá cerrar la sesión</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/25">25</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R26</strong>     </th><th align="left"><strong>Consultar datos de usuario</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">un usuario podrá ver sus datos</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/26">26</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R27</strong>     </th><th align="left"><strong>Modificar datos de usuario</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">un usuario podrá cambiar sus datos</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/27">27</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R28</strong>     </th><th align="left"><strong>Darse de baja</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">los usuarios podrán darse de baja de la web</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/28">28</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R29</strong>     </th><th align="left"><strong>Ver Ligas</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Un visitante podrá ver la información sobre las ligas</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Media</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/29">29</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R30</strong>     </th><th align="left"><strong>Ver Equipos</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Un visitante podrá ver la información sobre los equipos y sus jugadores</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v1</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/30">30</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R31</strong>     </th><th align="left"><strong>Ver Horario de Partidos</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Los visitantes podrán ver un calendario con fecha y hora de los partidos</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Media</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/31">31</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R32</strong>     </th><th align="left"><strong>Ver Detalles del partido</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Los visitantes podrán obtener información mas detallada del partido</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/32">32</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R33</strong>     </th><th align="left"><strong>Comentar Partidos</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Los usuarios podrán comentar los partidos</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/33">33</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R34</strong>     </th><th align="left"><strong>Acceder al foro</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Los visitantes podrán acceder al foro y leer sus entradas</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/34">34</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R35</strong>     </th><th align="left"><strong>Crear entrada</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Los usuarios podrán añadir entradas al foro</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/35">35</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R36</strong>     </th><th align="left"><strong>Responder a entradas</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Los usuarios podrán responder a entradas del foro</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/36">36</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R37</strong>     </th><th align="left"><strong>Valorar entradas</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Los usuarios podrán valorar las entradas (like,dislike)</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Opcional</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v3</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/37">37</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R38</strong>     </th><th align="left"><strong>Añadir img a su plantilla</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Los usuarios podrán añadir imágenes para su plantilla</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/38">38</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R39</strong>     </th><th align="left"><strong>Crear Equipos</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Los usuarios podrán crear sus propios equipos</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/39">39</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R40</strong>     </th><th align="left"><strong>Añadir miembros</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Los usuarios podrán añadir miembros a sus equipos</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/40">40</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R41</strong>     </th><th align="left"><strong>Eliminar miembros</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Los usuarios podrán eliminar miembros de sus equipos</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/41">41</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R42</strong>     </th><th align="left"><strong>Aceptar equipos</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Los usuarios podrán aceptar o no su entrada a equipos</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v2</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/42">42</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R43</strong>     </th><th align="left"><strong>Acceder al foro del equipo</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">Los miembros de un equipo podrán acceder a su propio foro ,crear entradas y  responder a entradas</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Importante</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v3</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/43">43</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R44</strong>     </th><th align="left"><strong>Notificar un error</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong> </td><td align="left">En cualquier momento , los visitantes podrán enviar un correo explicando el supuesto error</td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Opcional</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong> </td><td align="left">Fácil</td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v3</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/44">44</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R45</strong>     </th><th align="left"><strong>Validación de los formulario</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/45">45</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R46</strong>     </th><th align="left"><strong>Gestión de ventanas</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/46">46</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R47</strong>     </th><th align="left"><strong>Manejo de eventos</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/47">47</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R48</strong>     </th><th align="left"><strong>Manipulación del DOM</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/48">48</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R49</strong>     </th><th align="left"><strong>Mecanismo de almacenamiento</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/49">49</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R50</strong>     </th><th align="left"><strong>jQuery</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/50">50</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R51</strong>     </th><th align="left"><strong>Plugin no utilizado en clase</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/51">51</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R52</strong>     </th><th align="left"><strong>Ajax</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/52">52</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R53</strong>     </th><th align="left"><strong>PHP 7.1</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/53">53</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R54</strong>     </th><th align="left"><strong>Yii2</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/54">54</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R55</strong>     </th><th align="left"><strong>PostgreSQL 9.6 o superior</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/55">55</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R56</strong>     </th><th align="left"><strong>Despliegue en Heroku</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong>     </td><td align="left">v3</td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/56">56</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R57</strong>     </th><th align="left"><strong>Codeception</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/57">57</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R58</strong>     </th><th align="left"><strong>Code Climate</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/58">58</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R59</strong>     </th><th align="left"><strong>La aplicación debe ser escalable</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/59">59</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R60</strong>     </th><th align="left"><strong>Se utilizaran etiquetas HTML5</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/60">60</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R61</strong>     </th><th align="left"><strong>Existirán transiciones,transformaciones, animaciones y contenido multimedia.</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/61">61</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R62</strong>     </th><th align="left"><strong>Validador para HTML5 y CSS3</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/62">62</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R63</strong>     </th><th align="left"><strong>Accesibilidad AA</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/63">63</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R64</strong>     </th><th align="left"><strong>Prueba del seis</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Funcional</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/64">64</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R65</strong>     </th><th align="left"><strong>Uso de microdatos</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/65">65</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R66</strong>     </th><th align="left"><strong>Despliegue en Host</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/66">66</a></td></tr>
+</tbody>
+</table>
+<table class="table table-bordered table-striped">
+<thead>
+<tr><th align="right"><strong>R67</strong>     </th><th align="left"><strong>Despliegue en local</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="right"><strong>Descripción</strong></td></tr>
+<tr><td align="right"><strong>Prioridad</strong>   </td><td align="left">Mínimo</td></tr>
+<tr><td align="right"><strong>Tipo</strong>        </td><td align="left">Técnico</td></tr>
+<tr><td align="right"><strong>Complejidad</strong></td></tr>
+<tr><td align="right"><strong>Entrega</strong></td></tr>
+<tr><td align="right"><strong>Incidencia</strong>  </td><td align="left"><a href="https://github.com/danitoro97/druidKuma/issues/67">67</a></td></tr>
+</tbody>
+</table>
+<h2>Cuadro resumen <span id="cuadro-resumen"></span><a href="#cuadro-resumen" class="hashlink">&para;</a></h2><table class="table table-bordered table-striped">
+<thead>
+<tr><th align="left"><strong>Requisito</strong> </th><th align="center"><strong>Prioridad</strong> </th><th align="center"><strong>Tipo</strong> </th><th align="center"><strong>Complejidad</strong> </th><th align="center"><strong>Entrega</strong> </th><th align="center"><strong>Incidencia</strong></th></tr>
+</thead>
+<tbody>
+<tr><td align="left">(<strong>R01</strong>) Tabla Noticias  </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/1">1</a></td></tr>
+<tr><td align="left">(<strong>R02</strong>) Tabla Liga </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/2">2</a></td></tr>
+<tr><td align="left">(<strong>R03</strong>) Tabla Equipos </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/3">3</a></td></tr>
+<tr><td align="left">(<strong>R04</strong>) Tabla Jugadores </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/4">4</a></td></tr>
+<tr><td align="left">(<strong>R05</strong>) Tabla Partidos </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Media </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/5">5</a></td></tr>
+<tr><td align="left">(<strong>R06</strong>) Tabla Detalles_Partido </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Media </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/6">6</a></td></tr>
+<tr><td align="left">(<strong>R07</strong>) Buscador </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/7">7</a></td></tr>
+<tr><td align="left">(<strong>R08</strong>) Tabla Posts </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/8">8</a></td></tr>
+<tr><td align="left">(<strong>R09</strong>) Tabla Respuestas </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/9">9</a></td></tr>
+<tr><td align="left">(<strong>R10</strong>) Tabla Posts-Equipo </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/10">10</a></td></tr>
+<tr><td align="left">(<strong>R11</strong>) Tabla Respuestas-Equipo </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/11">11</a></td></tr>
+<tr><td align="left">(<strong>R12</strong>) Herramienta de tácticas </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Difícil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/12">12</a></td></tr>
+<tr><td align="left">(<strong>R13</strong>) Tabla Img Predefinidas </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Fácil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/13">13</a></td></tr>
+<tr><td align="left">(<strong>R14</strong>) Tabla Img Usuario </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Fácil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/14">14</a></td></tr>
+<tr><td align="left">(<strong>R15</strong>) Tabla Equipo Usuario </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/15">15</a></td></tr>
+<tr><td align="left">(<strong>R16</strong>) Crear tabla Miembro Equipo </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/16">16</a></td></tr>
+<tr><td align="left">(<strong>R17</strong>) Crear Tabla Usuario </td><td align="center">Importante </td><td align="center">Información </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/17">17</a></td></tr>
+<tr><td align="left">(<strong>R18</strong>) Crear atajos de teclado </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v3 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/18">18</a></td></tr>
+<tr><td align="left">(<strong>R19</strong>) Ver Noticias </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/19">19</a></td></tr>
+<tr><td align="left">(<strong>R20</strong>) Comentar Noticias </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/20">20</a></td></tr>
+<tr><td align="left">(<strong>R21</strong>) Subir Noticias </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/21">21</a></td></tr>
+<tr><td align="left">(<strong>R22</strong>) Registrar Usuarios </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/22">22</a></td></tr>
+<tr><td align="left">(<strong>R23</strong>) Verificar usuario </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/23">23</a></td></tr>
+<tr><td align="left">(<strong>R24</strong>) Logear Usuario </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/24">24</a></td></tr>
+<tr><td align="left">(<strong>R25</strong>) Deslogear </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/25">25</a></td></tr>
+<tr><td align="left">(<strong>R26</strong>) Consultar datos de usuario </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/26">26</a></td></tr>
+<tr><td align="left">(<strong>R27</strong>) Modificar datos de usuario </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/27">27</a></td></tr>
+<tr><td align="left">(<strong>R28</strong>) Darse de baja </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/28">28</a></td></tr>
+<tr><td align="left">(<strong>R29</strong>) Ver Ligas </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Media </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/29">29</a></td></tr>
+<tr><td align="left">(<strong>R30</strong>) Ver Equipos </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v1 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/30">30</a></td></tr>
+<tr><td align="left">(<strong>R31</strong>) Ver Horario de Partidos </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Media </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/31">31</a></td></tr>
+<tr><td align="left">(<strong>R32</strong>) Ver Detalles del partido </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/32">32</a></td></tr>
+<tr><td align="left">(<strong>R33</strong>) Comentar Partidos </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/33">33</a></td></tr>
+<tr><td align="left">(<strong>R34</strong>) Acceder al foro </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/34">34</a></td></tr>
+<tr><td align="left">(<strong>R35</strong>) Crear entrada </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/35">35</a></td></tr>
+<tr><td align="left">(<strong>R36</strong>) Responder a entradas </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/36">36</a></td></tr>
+<tr><td align="left">(<strong>R37</strong>) Valorar entradas </td><td align="center">Opcional </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v3 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/37">37</a></td></tr>
+<tr><td align="left">(<strong>R38</strong>) Añadir img a su plantilla </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/38">38</a></td></tr>
+<tr><td align="left">(<strong>R39</strong>) Crear Equipos </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/39">39</a></td></tr>
+<tr><td align="left">(<strong>R40</strong>) Añadir miembros </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/40">40</a></td></tr>
+<tr><td align="left">(<strong>R41</strong>) Eliminar miembros </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/41">41</a></td></tr>
+<tr><td align="left">(<strong>R42</strong>) Aceptar equipos </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v2 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/42">42</a></td></tr>
+<tr><td align="left">(<strong>R43</strong>) Acceder al foro del equipo </td><td align="center">Importante </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v3 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/43">43</a></td></tr>
+<tr><td align="left">(<strong>R44</strong>) Notificar un error </td><td align="center">Opcional </td><td align="center">Funcional </td><td align="center">Fácil </td><td align="center">v3 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/44">44</a></td></tr>
+<tr><td align="left">(<strong>R45</strong>) Validación de los formulario </td><td align="center">Mínimo </td><td align="center">Funcional </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/45">45</a></td></tr>
+<tr><td align="left">(<strong>R46</strong>) Gestión de ventanas </td><td align="center">Mínimo </td><td align="center">Funcional </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/46">46</a></td></tr>
+<tr><td align="left">(<strong>R47</strong>) Manejo de eventos </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/47">47</a></td></tr>
+<tr><td align="left">(<strong>R48</strong>) Manipulación del DOM </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/48">48</a></td></tr>
+<tr><td align="left">(<strong>R49</strong>) Mecanismo de almacenamiento </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/49">49</a></td></tr>
+<tr><td align="left">(<strong>R50</strong>) jQuery </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/50">50</a></td></tr>
+<tr><td align="left">(<strong>R51</strong>) Plugin no utilizado en clase </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/51">51</a></td></tr>
+<tr><td align="left">(<strong>R52</strong>) Ajax </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/52">52</a></td></tr>
+<tr><td align="left">(<strong>R53</strong>) PHP 7.1 </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/53">53</a></td></tr>
+<tr><td align="left">(<strong>R54</strong>) Yii2 </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/54">54</a></td></tr>
+<tr><td align="left">(<strong>R55</strong>) PostgreSQL 9.6 o superior </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/55">55</a></td></tr>
+<tr><td align="left">(<strong>R56</strong>) Despliegue en Heroku </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center">v3 </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/56">56</a></td></tr>
+<tr><td align="left">(<strong>R57</strong>) Codeception </td><td align="center">Mínimo </td><td align="center">Funcional </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/57">57</a></td></tr>
+<tr><td align="left">(<strong>R58</strong>) Code Climate </td><td align="center">Mínimo </td><td align="center">Funcional </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/58">58</a></td></tr>
+<tr><td align="left">(<strong>R59</strong>) La aplicación debe ser escalable </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/59">59</a></td></tr>
+<tr><td align="left">(<strong>R60</strong>) Se utilizaran etiquetas HTML5 </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/60">60</a></td></tr>
+<tr><td align="left">(<strong>R61</strong>) Existirán transiciones,transformaciones, animaciones y contenido multimedia. </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/61">61</a></td></tr>
+<tr><td align="left">(<strong>R62</strong>) Validador para HTML5 y CSS3 </td><td align="center">Mínimo </td><td align="center">Funcional </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/62">62</a></td></tr>
+<tr><td align="left">(<strong>R63</strong>) Accesibilidad AA </td><td align="center">Mínimo </td><td align="center">Funcional </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/63">63</a></td></tr>
+<tr><td align="left">(<strong>R64</strong>) Prueba del seis </td><td align="center">Mínimo </td><td align="center">Funcional </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/64">64</a></td></tr>
+<tr><td align="left">(<strong>R65</strong>) Uso de microdatos </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/65">65</a></td></tr>
+<tr><td align="left">(<strong>R66</strong>) Despliegue en Host </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/66">66</a></td></tr>
+<tr><td align="left">(<strong>R67</strong>) Despliegue en local </td><td align="center">Mínimo </td><td align="center">Técnico </td><td align="center"> </td><td align="center"> </td><td align="center"><a href="https://github.com/danitoro97/druidKuma/issues/67">67</a></td></tr>
+</tbody>
+</table>
+        <div class="toplink"><a href="#" class="h1" title="go to top"><span class="glyphicon glyphicon-arrow-up"></a></div>
+    </div>
+</div>
+
+
+</div>
+
+<footer class="footer">
+        <p class="pull-right"><small>Page generated on Mon, 05 Mar 2018 20:22:26 +0000</small></p>
+    Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
+
+<script>jQuery(function ($) {
+    var shiftWindow = function () { scrollBy(0, -50) };
+    if (location.hash) setTimeout(shiftWindow, 1);
+    window.addEventListener("hashchange", shiftWindow);
+var element = document.createElement("script");
+element.src = "./jssearch.index.js";
+document.body.appendChild(element);
+
+var searchBox = $('#searchbox');
+
+// search when typing in search field
+searchBox.on("keyup", function(event) {
+    var query = $(this).val();
+
+    if (query == '' || event.which == 27) {
+        $('#search-resultbox').hide();
+        return;
+    } else if (event.which == 13) {
+        var selectedLink = $('#search-resultbox a.selected');
+        if (selectedLink.length != 0) {
+            document.location = selectedLink.attr('href');
+            return;
+        }
+    } else if (event.which == 38 || event.which == 40) {
+        $('#search-resultbox').show();
+
+        var selected = $('#search-resultbox a.selected');
+        if (selected.length == 0) {
+            $('#search-results').find('a').first().addClass('selected');
+        } else {
+            var next;
+            if (event.which == 40) {
+                next = selected.parent().next().find('a').first();
+            } else {
+                next = selected.parent().prev().find('a').first();
+            }
+            if (next.length != 0) {
+                var resultbox = $('#search-results');
+                var position = next.position();
+
+//              TODO scrolling is buggy and jumps around
+//                resultbox.scrollTop(Math.floor(position.top));
+//                console.log(position.top);
+
+                selected.removeClass('selected');
+                next.addClass('selected');
+            }
+        }
+
+        return;
+    }
+    $('#search-resultbox').show();
+    $('#search-results').html('<li><span class="no-results">No results</span></li>');
+
+    var result = jssearch.search(query);
+
+    if (result.length > 0) {
+        var i = 0;
+        var resHtml = '';
+
+        for (var key in result) {
+            if (i++ > 20) {
+                break;
+            }
+            resHtml = resHtml +
+            '<li><a href="' + result[key].file.u.substr(3) +'"><span class="title">' + result[key].file.t + '</span>' +
+            '<span class="description">' + result[key].file.d + '</span></a></li>';
+        }
+        $('#search-results').html(resHtml);
+    }
+});
+
+// hide the search results on ESC
+$(document).on("keyup", function(event) { if (event.which == 27) { $('#search-resultbox').hide(); } });
+// hide search results on click to document
+$(document).bind('click', function (e) { $('#search-resultbox').hide(); });
+// except the following:
+searchBox.bind('click', function(e) { e.stopPropagation(); });
+$('#search-resultbox').bind('click', function(e) { e.stopPropagation(); });
+
+});</script></body>
+</html>
