@@ -2,12 +2,12 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\Noticias;
 use app\models\NoticiasSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * NoticiasController implements the CRUD actions for Noticias model.
@@ -35,18 +35,25 @@ class NoticiasController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new NoticiasSearch();
+        /*$searchModel = new NoticiasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]);*/
+        $model = Noticias::find()
+                ->select('id ,titulo, img, substring(texto from 0 for 50) as texto,creador_id, created_at')
+                ->orderBy(['created_at' => SORT_DESC])
+                ->all();
+        return $this->render('index2', [
+            'noticias' => $model,
         ]);
     }
 
     /**
      * Displays a single Noticias model.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -64,7 +71,7 @@ class NoticiasController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Noticias();
+        /*$model = new Noticias();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,19 +79,19 @@ class NoticiasController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-        ]);
+        ]);*/
     }
 
     /**
      * Updates an existing Noticias model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        /*$model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -92,27 +99,27 @@ class NoticiasController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-        ]);
+        ]);*/
     }
 
     /**
      * Deletes an existing Noticias model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        /*$this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index']);*/
     }
 
     /**
      * Finds the Noticias model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id
      * @return Noticias the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
