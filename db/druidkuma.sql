@@ -52,10 +52,8 @@ CREATE TABLE noticias (
     ,   creador_id BIGINT REFERENCES usuarios(id)
                     ON DELETE NO ACTION
                     ON UPDATE CASCADE
-    ,   created_at TIMESTAMP(0) 
+    ,   created_at TIMESTAMP(0)
     ,   updated_at TIMESTAMP(0)
 );
 
---Insert noticias --
-INSERT INTO noticias (titulo,texto,img,created_at,creador_id)
-    VALUES ('Prueba', 'esto es mi primera prueba', 'https://www.dropbox.com/s/oeqfye2gh9pmhdu/descarga.png?dl=1', '2018-03-06',1);
+--Insert noticias , es un fichero aparte--
