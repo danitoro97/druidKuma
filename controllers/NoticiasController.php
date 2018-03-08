@@ -43,12 +43,36 @@ class NoticiasController extends Controller
             'dataProvider' => $dataProvider,
         ]);*/
         $model = Noticias::find()
-                ->select('id ,titulo, img, substring(texto from 0 for 50) as texto,creador_id, created_at')
+                ->select('noticias.id ,titulo, img, substring(texto from 0 for 50) as texto,creador_id, noticias.created_at')
+                ->joinWith('creador')
                 ->orderBy(['created_at' => SORT_DESC])
+                ->limit(Noticias::PageSize)
+                ->offset(0)
                 ->all();
         return $this->render('index2', [
             'noticias' => $model,
         ]);
+    }
+
+    public function actionAjax($page)
+    {
+        $model = Noticias::find()
+                ->select('noticias.id ,titulo, img, substring(texto from 0 for 50) as texto,creador_id, noticias.created_at')
+                ->joinWith('creador')
+                ->orderBy(['created_at' => SORT_DESC])
+                ->limit(Noticias::PageSize)
+                ->offset($page)
+                ->all();
+
+        $a = '';
+
+        foreach ($model as $noticia) {
+            $a .= $this->renderAjax('_noticias', [
+                'noticia' => $noticia,
+            ]);
+        }
+
+        return $a;
     }
 
     /**

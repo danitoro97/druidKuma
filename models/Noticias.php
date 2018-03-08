@@ -19,6 +19,8 @@ use yii\db\Expression;
  */
 class Noticias extends \yii\db\ActiveRecord
 {
+    public const PageSize = 2;
+
     /**
      * {@inheritdoc}
      */

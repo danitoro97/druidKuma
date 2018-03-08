@@ -1,7 +1,8 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\grid\GridView;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\NoticiasSearch */
@@ -10,6 +11,42 @@ use yii\grid\GridView;
 $this->title = 'Noticias';
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCssFile('/css/noticias.css');
+
+$ruta = Url::to(['noticias/ajax']);
+$js = <<<EOT
+var s = document.body.scrollHeight-800;
+$(window).scroll(function(){
+    console.log(document.body.scrollHeight);
+    console.log($(this).scrollTop());
+    //var s = document.body.scrollHeight-800;
+    if ($(this).scrollTop() > s) {
+        console.log('peticionAjax');
+        //$(this).off();
+        s =1000000;
+
+        $.ajax({
+            url: '$ruta',
+            type: 'get',
+            data: {
+                page:$('.noticias').length,
+            },
+            success : function (data) {
+                //console.log(data);
+                var h = $('.row').html();
+                h += data;
+                $('.row').html(h);
+                //$(this).on();
+                s = document.body.scrollHeight-800;
+            },
+            error: function (){
+                console.log('error');
+            }
+        })
+    }
+});
+EOT;
+
+$this->registerJs($js);
 ?>
 <div class="noticias-index">
 
