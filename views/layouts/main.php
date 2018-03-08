@@ -7,10 +7,19 @@ use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\web\View;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+$js = <<<EOT
+$('#gotop').gotop({
+  customHtml: '<span class="glyphicon glyphicon-menu-up"></span>',
+
+});
+EOT;
+
+$this->registerJs($js, View::POS_READY);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -63,6 +72,9 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
+        <div id="gotop">
+
+        </div>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
