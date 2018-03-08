@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use app\models\Noticias;
-use app\models\NoticiasSearch;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -35,25 +34,21 @@ class NoticiasController extends Controller
      */
     public function actionIndex()
     {
-        /*$searchModel = new NoticiasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);*/
-        $model = Noticias::find()
-                ->select('noticias.id ,titulo, img, substring(texto from 0 for 50) as texto,creador_id, noticias.created_at')
-                ->joinWith('creador')
-                ->orderBy(['created_at' => SORT_DESC])
-                ->limit(Noticias::PageSize)
-                ->offset(0)
-                ->all();
-        return $this->render('index2', [
-            'noticias' => $model,
+            'noticias' => Noticias::find()
+                    ->select('noticias.id ,titulo, img, substring(texto from 0 for 50) as texto,creador_id, noticias.created_at')
+                    ->joinWith('creador')
+                    ->orderBy(['created_at' => SORT_DESC])
+                    ->limit(Noticias::PageSize)
+                    ->offset(0)
+                    ->all(),
         ]);
     }
-
+    /**
+     * Devulve lista de noticias.
+     * @param  [type] $page Numero de noticias ya mostradas
+     * @return [type]       Devulve una vista parcial
+     */
     public function actionAjax($page)
     {
         $model = Noticias::find()

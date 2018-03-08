@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="col-xs-10 col-xs-offset-1 col-md-5">
+<div class="col-xs-10 col-xs-offset-1 col-md-5 noticias">
     <h2><?=Html::a(Html::encode($noticia->titulo), ['noticias/view', 'id' => $noticia->id])?></h2>
     <figure>
         <img src="<?=Html::encode($noticia->img)?>" alt="" class="noticia-img img-responsive">
