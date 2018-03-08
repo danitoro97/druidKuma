@@ -52,12 +52,12 @@ $this->registerJs($js, View::POS_READY);
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Iniciar sesión', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Cerrar sesión (' . Yii::$app->user->identity->nombre . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()

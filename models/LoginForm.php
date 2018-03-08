@@ -9,7 +9,6 @@ use yii\base\Model;
  * LoginForm is the model behind the login form.
  *
  * @property User|null $user This property is read-only.
- *
  */
 class LoginForm extends Model
 {
@@ -32,6 +31,25 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            ['username', function ($attribute, $params, $validator) {
+                $usuario = Usuarios::findOne(['nombre' => $this->$attribute]);
+
+                if ($usuario !== null) {
+                    if ($usuario->token_val !== null) {
+                        Yii::$app->session->setFlash('error', 'El usuario no está validado, revise su correo');
+                        $this->addError($attribute);
+                    }
+                }
+            }, 'skipOnEmpty' => false],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Nombre de usuario',
+            'password' => 'Contraseña',
+            'rememberMe' => 'Recuérdame',
         ];
     }
 
@@ -60,20 +78,20 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
         return false;
     }
 
     /**
-     * Finds user by [[username]]
+     * Finds user by [[username]].
      *
      * @return User|null
      */
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = Usuarios::findOne(['nombre' => $this->username]);
         }
 
         return $this->_user;
