@@ -6,6 +6,7 @@ use app\models\Usuarios;
 use app\models\UsuariosSearch;
 use Yii;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -66,8 +67,23 @@ class UsuariosController extends Controller
     {
         $model = new Usuarios();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $r = Yii::$app->mailer->compose('validacion', ['token_val' => $model->token_val])
+                    ->setFrom(Yii::$app->params['adminEmail'])
+                    ->setTo($model->email)
+                    ->setSubject('Correo de confirmacion de DruidKuma')
+                    ->setTextBody('Hola, bienvenido a DruidKuma ' .
+                    Url::to(['usuarios/validar', 'token_val' => $model->token_val], true)
+                    . ' Gracias,DruidKuma')
+                    ->send();
+            if (!$r) {
+                Yii::$app->session->setFlash('info', 'Ha ocurrido un error al enviar el correo de validacion');
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+            Yii::$app->session->setFlash('info', 'Revise su correo para validar la cuenta');
+            return $this->goHome();
         }
 
         return $this->render('create', [
