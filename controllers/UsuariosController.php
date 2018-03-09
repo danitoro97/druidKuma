@@ -9,6 +9,8 @@ use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 /**
  * UsuariosController implements the CRUD actions for Usuarios model.
@@ -59,6 +61,23 @@ class UsuariosController extends Controller
     }
 
     /**
+     * Action que valida a un usuario , validar a un usuario consiste en
+     * tener el token_val a null.
+     * @param  string $token_val Token de acceso
+     * @return [type]            [description]
+     */
+    public function actionValidar($token_val)
+    {
+        if ($u = Usuarios::findOne(['token_val' => $token_val])) {
+            $u->token_val = null;
+            $u->save();
+            Yii::$app->user->login($u);
+            Yii::$app->session->setFlash('success', 'Usuario validado con exito');
+        }
+        return $this->goHome();
+    }
+
+    /**
      * Creates a new Usuarios model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -67,7 +86,12 @@ class UsuariosController extends Controller
     {
         $model = new Usuarios();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $r = Yii::$app->mailer->compose('validacion', ['token_val' => $model->token_val])
                     ->setFrom(Yii::$app->params['adminEmail'])
                     ->setTo($model->email)

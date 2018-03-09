@@ -1,14 +1,14 @@
 <?php
 
-use yii\helpers\Html;
+use yii\helpers\Url;
 
 ?>
-<h3>Bienvenido a DruidKuma</h3>
-use yii\helpers\Html;
-<p>
-    Hola,
+<h3>Hola, bienvenido a DruidKuma</h3>
 
-<?=Html::a(Html::encode('Activar cuenta'), ['usuarios/validar', 'token_val' => $token_val])?>
+<p>
+    Haz click en el siguiente enlace para validar su cuenta
+
+<?=Url::to(['usuarios/validar', 'token_val' => $token_val], true)?>
 
 Gracias,
 
