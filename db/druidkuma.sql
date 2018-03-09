@@ -25,7 +25,7 @@ CREATE TABLE usuarios (
     ,   nombre     VARCHAR(255) NOT NULL UNIQUE
     ,   email      VARCHAR(255) NOT NULL UNIQUE
     ,   password   VARCHAR(255) NOT NULL
-    ,   auth_key   VARCHAR(255)
+    ,   auth_key   VARCHAR(255) UNIQUE
     ,   token_val  VARCHAR(255) UNIQUE
     ,   role_id    BIGINT NOT NULL DEFAULT 1 REFERENCES roles(id)
                     ON DELETE NO ACTION
