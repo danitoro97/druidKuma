@@ -102,6 +102,8 @@ class UsuariosController extends Controller
                     ->send();
             if (!$r) {
                 Yii::$app->session->setFlash('info', 'Ha ocurrido un error al enviar el correo de validacion');
+                $model->password = '';
+                $model->password_repeat = '';
                 return $this->render('create', [
                     'model' => $model,
                 ]);
