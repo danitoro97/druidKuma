@@ -6,6 +6,8 @@ $log = require __DIR__ . '/log.php';
 
 $config = [
     'id' => 'basic',
+    'name' => 'DruidKuma',
+    'defaultRoute' => 'noticias',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -33,18 +35,17 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
-            /*
+            'useFileTransport' => false,
+
             // comment the following array to send mail using php's mail function:
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
-                'username' => $params['smtpUsername'],
+                'username' => $params['adminEmail'],
                 'password' => getenv('SMTP_PASS'),
                 'port' => '587',
                 'encryption' => 'tls',
             ],
-            */
         ],
         'log' => $log,
         'db' => $db,

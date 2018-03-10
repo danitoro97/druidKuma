@@ -24,12 +24,19 @@ use yii\web\IdentityInterface;
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
+    public $password_repeat;
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'usuarios';
+    }
+
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['password_repeat']);
     }
 
     public function behaviors()
@@ -50,14 +57,18 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['nombre', 'email', 'password'], 'required'],
+            [['nombre', 'email', 'password', 'password_repeat'], 'required'],
             [['role_id'], 'default', 'value' => 1],
             [['role_id'], 'integer'],
-            //[['created_at'], 'safe'],
+            [['email'], 'email'],
+            [['password_repeat'], 'compare', 'compareAttribute' => 'password'],
+            [['password'], function ($attributes, $params, $validador) {
+                if (mb_strlen($this->$attributes) < 7) {
+                    $this->addError($attributes, 'La contraseña debe ser al menos de 7 caracteres');
+                }
+            }],
             [['nombre', 'email', 'password', 'auth_key', 'token_val'], 'string', 'max' => 255],
-            [['email'], 'unique'],
-            [['nombre'], 'unique'],
-            [['token_val'], 'unique'],
+            [['auth_key', 'token_val', 'email', 'nombre'], 'unique'],
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::className(), 'targetAttribute' => ['role_id' => 'id']],
         ];
     }
@@ -69,13 +80,14 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'nombre' => 'Nombre',
+            'nombre' => 'Nombre de usuario',
             'email' => 'Email',
-            'password' => 'Password',
+            'password' => 'Contraseña',
             'auth_key' => 'Auth Key',
             'token_val' => 'Token Val',
             'role_id' => 'Role ID',
             'created_at' => 'Created At',
+            'password_repeat' => 'Confirmar contraseña',
         ];
     }
 
@@ -153,5 +165,29 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function validatePassword($password)
     {
         return Yii::$app->getSecurity()->validatePassword($password, $this->password);
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                $key = Yii::$app->security->generateRandomString();
+
+                while (self::findOne(['auth_key' => $key]) != null) {
+                    $key = Yii::$app->security->generateRandomString();
+                }
+                $this->auth_key = $key = Yii::$app->security->generateRandomString();
+                $key = Yii::$app->security->generateRandomString();
+
+                while (self::findOne(['token_val' => $key]) != null) {
+                    $key = Yii::$app->security->generateRandomString();
+                }
+
+                $this->token_val = $key = Yii::$app->security->generateRandomString();
+                $this->password = Yii::$app->security->generatePasswordHash($this->password);
+            }
+            return true;
+        }
+        return false;
     }
 }

@@ -56,6 +56,9 @@ a.desc:after {
     content: /*"\e114"*/ "\e152";
 }
 
+.breadcrumb a {
+    color:black;
+}
 .sort-numerical a.asc:after {
     content: "\e153";
 }

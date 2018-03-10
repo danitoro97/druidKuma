@@ -1,0 +1,19 @@
+#login-form {
+    padding-top: 3%;
+}
+
+
+.row a:link, a:visited {
+    background-color: white;
+    color: black;
+    border: 2px solid #286090;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.row a:hover, a:active {
+    background-color: #286090;
+    color: white;
+}
