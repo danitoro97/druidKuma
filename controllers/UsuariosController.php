@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -28,6 +29,22 @@ class UsuariosController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+            'access' => [
+                    'class' => AccessControl::className(),
+                    'only' => ['create', 'update', 'delete'],
+                    'rules' => [
+                            [
+                                    'allow' => true,
+                                    'actions' => ['create'],
+                                    'roles' => ['?'],
+                            ],
+                            [
+                                'allow' => true,
+                                'actions' => ['update', 'delete'],
+                                'roles' => ['@'],
+                            ],
+                    ],
             ],
         ];
     }
