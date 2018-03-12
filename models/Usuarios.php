@@ -31,7 +31,16 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public $password_repeat;
 
+    /**
+     * Constante para el escenario crear.
+     * @var string
+     */
     public const ESCENARIO_CREAR = 'crear';
+
+    /**
+     * Constante para el escenario actualizar.
+     * @var string
+     */
     public const ESCENARIO_ACTUALIZAR = 'actualizar';
 
     /**
