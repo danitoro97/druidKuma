@@ -32,6 +32,7 @@ CREATE TABLE usuarios (
                     ON UPDATE CASCADE
     ,   created_at TIMESTAMP(0)
     ,   updated_at TIMESTAMP(0)
+    ,   soft_delete boolean  default false
 );
 
 --INSERT USUARIOS --

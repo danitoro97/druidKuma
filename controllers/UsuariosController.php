@@ -71,6 +71,12 @@ class UsuariosController extends Controller
      */
     public function actionView($id)
     {
+        $user = Usuarios::findOne($id);
+        if ($user->isNotVisible()) {
+            Yii::$app->session->setFlash('error', 'Este usuario no es visible');
+            return $this->goBack();
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
