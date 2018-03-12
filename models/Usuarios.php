@@ -104,9 +104,18 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             'auth_key' => 'Auth Key',
             'token_val' => 'Token Val',
             'role_id' => 'Role ID',
-            'created_at' => 'Created At',
+            'created_at' => 'Fecha de alta',
+            'updated_at' => 'Última actualización',
             'password_repeat' => 'Confirmar contraseña',
         ];
+    }
+    /**
+     * Si el usuario es visible.
+     * @return bool [description]
+     */
+    public function isNotVisible()
+    {
+        return $this->soft_delete;
     }
 
     /**
