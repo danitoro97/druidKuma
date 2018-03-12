@@ -34,9 +34,9 @@ class UsuariosController extends Controller
                     'only' => ['create', 'update', 'delete'],
                     'rules' => [
                             [
-                                    'allow' => true,
-                                    'actions' => ['create'],
-                                    'roles' => ['?'],
+                                'allow' => true,
+                                'actions' => ['create'],
+                                'roles' => ['?'],
                             ],
                             [
                                 'allow' => true,

@@ -44,9 +44,33 @@ $this->registerJs($js, View::POS_READY);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+    $item = [
+            ['label' => 'Inicio', 'url' => ['/noticias/index']],
+            //['label' => 'Noticias', 'url' => ['/noticias/index']],
+            ['label' => 'About', 'url' => ['/site/about']],
+            ['label' => 'Contact', 'url' => ['/site/contact']]
+        ];
+
+    if (Yii::$app->user->isGuest) {
+        $item[] = ['label' => 'Iniciar sesión' , 'url' => ['/site/login']];
+    }  else {
+        $item[] = [
+           'label' => 'Usuarios (' . Yii::$app->user->identity->nombre . ')',
+           'items' => [
+               ['label' => 'Modificar datos', 'url' => ['usuarios/update']],
+               '<li class="divider"></li>',
+               [
+                   'label' => 'Logout',
+                   'url' => ['site/logout'],
+                   'linkOptions' => ['data-method' => 'POST'],
+               ],
+           ]
+       ];
+    }
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
+        'items' =>/* [
             ['label' => 'Inicio', 'url' => ['/noticias/index']],
             //['label' => 'Noticias', 'url' => ['/noticias/index']],
             ['label' => 'About', 'url' => ['/site/about']],
@@ -63,7 +87,8 @@ $this->registerJs($js, View::POS_READY);
                 . Html::endForm()
                 . '</li>'
             )
-        ],
+        ],*/
+        $item ,
     ]);
     NavBar::end();
     ?>

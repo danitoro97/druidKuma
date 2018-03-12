@@ -176,6 +176,11 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         return Yii::$app->getSecurity()->validatePassword($password, $this->password);
     }
 
+    /**
+     * Realiza modificaciones el modelo antes de insertar.
+     * @param  bool $insert    Verdadero si es insert falso si es update
+     * @return [type]         [description]
+     */
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
@@ -215,8 +220,8 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                         $this->token_val = $key = Yii::$app->security->generateRandomString();
                         //mandar correo
                         $this->enviarCorreo();
-                        Yii::$app->session->setFlash('info', 'Haz cambiado el correo debes validar la cuenta , para ello revise su correo');
                         Yii::$app->user->logout();
+                        Yii::$app->session->setFlash('info', 'Haz cambiado el correo debes validar la cuenta , para ello revise su correo');
                     }
 
                     if ($this->password == '') {
