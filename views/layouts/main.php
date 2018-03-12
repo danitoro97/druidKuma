@@ -44,38 +44,45 @@ $this->registerJs($js, View::POS_READY);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
+    $item = [
             ['label' => 'Inicio', 'url' => ['/noticias/index']],
             //['label' => 'Noticias', 'url' => ['/noticias/index']],
             ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Iniciar sesión', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Cerrar sesión (' . Yii::$app->user->identity->nombre . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
+            ['label' => 'Contact', 'url' => ['/site/contact']]
+        ];
+
+    if (Yii::$app->user->isGuest) {
+        $item[] = ['label' => 'Iniciar sesión' , 'url' => ['/site/login']];
+    }  else {
+        $item[] = [
+           'label' => 'Usuarios (' . Yii::$app->user->identity->nombre . ')',
+           'items' => [
+               ['label' => 'Modificar datos', 'url' => ['usuarios/update']],
+               '<li class="divider"></li>',
+               [
+                   'label' => 'Logout',
+                   'url' => ['site/logout'],
+                   'linkOptions' => ['data-method' => 'POST'],
+               ],
+           ]
+       ];
+    }
+
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' =>$item ,
     ]);
     NavBar::end();
     ?>
+    <div id="gotop">
 
+    </div>
     <div class="container">
         <?= Breadcrumbs::widget([
             'itemTemplate' => "<li>{link}</li>\n",
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <div id="gotop">
 
-        </div>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>

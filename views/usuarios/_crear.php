@@ -18,16 +18,16 @@ use yii\widgets\ActiveForm;
                     'id' => 'usuarios-form'
                 ]); ?>
 
-                <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'nombre',['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'email',['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'password',['enableAjaxValidation' => true])->passwordInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'password_repeat')->passwordInput(['maxlength' => true]) ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Actualizar', ['class' => 'btn btn-info']) ?>
+                    <?= Html::submitButton('Registrar', ['class' => 'btn btn-success']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>

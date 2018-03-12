@@ -5,8 +5,8 @@ namespace app\controllers;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -28,6 +28,22 @@ class UsuariosController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+            'access' => [
+                    'class' => AccessControl::className(),
+                    'only' => ['create', 'update', 'delete'],
+                    'rules' => [
+                            [
+                                'allow' => true,
+                                'actions' => ['create'],
+                                'roles' => ['?'],
+                            ],
+                            [
+                                'allow' => true,
+                                'actions' => ['update', 'delete'],
+                                'roles' => ['@'],
+                            ],
+                    ],
             ],
         ];
     }
@@ -85,6 +101,7 @@ class UsuariosController extends Controller
     public function actionCreate()
     {
         $model = new Usuarios();
+        $model->scenario = Usuarios::ESCENARIO_CREAR;
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -92,14 +109,7 @@ class UsuariosController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $r = Yii::$app->mailer->compose('validacion', ['token_val' => $model->token_val])
-                    ->setFrom(Yii::$app->params['adminEmail'])
-                    ->setTo($model->email)
-                    ->setSubject('Correo de confirmacion de DruidKuma')
-                    ->setTextBody('Hola, bienvenido a DruidKuma ' .
-                    Url::to(['usuarios/validar', 'token_val' => $model->token_val], true)
-                    . ' Gracias,DruidKuma')
-                    ->send();
+            $r = $model->enviarCorreo();
             if (!$r) {
                 Yii::$app->session->setFlash('info', 'Ha ocurrido un error al enviar el correo de validacion');
                 $model->password = '';
@@ -120,21 +130,24 @@ class UsuariosController extends Controller
     /**
      * Updates an existing Usuarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate()
     {
-        /*$model = $this->findModel($id);
+        $model = Yii::$app->user->identity;
+        $model->scenario = Usuarios::ESCENARIO_ACTUALIZAR;
+        $model->password = '';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', 'Usuario actualizado');
+            return $this->goBack();
         }
 
         return $this->render('update', [
             'model' => $model,
-        ]);*/
+        ]);
     }
 
     /**

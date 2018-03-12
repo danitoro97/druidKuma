@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\helpers\Url;
 use yii\web\IdentityInterface;
 
 /**
@@ -24,7 +25,23 @@ use yii\web\IdentityInterface;
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
+    /**
+     * Variable para comprobar que introduce la misma contraseña dos veces.
+     * @var [type]
+     */
     public $password_repeat;
+
+    /**
+     * Constante para el escenario crear.
+     * @var string
+     */
+    public const ESCENARIO_CREAR = 'crear';
+
+    /**
+     * Constante para el escenario actualizar.
+     * @var string
+     */
+    public const ESCENARIO_ACTUALIZAR = 'actualizar';
 
     /**
      * {@inheritdoc}
@@ -43,10 +60,10 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return array_merge(parent::behaviors(), [
             [
-            'class' => TimestampBehavior::className(),
-            'createdAtAttribute' => 'created_at',
-            'updatedAtAttribute' => 'updated_at',
-            'value' => new Expression('NOW()'),
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
             ],
         ]);
     }
@@ -57,11 +74,12 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['nombre', 'email', 'password', 'password_repeat'], 'required'],
+            [['nombre', 'email'], 'required'],
+            [['password_repeat', 'password'], 'required', 'on' => self::ESCENARIO_CREAR],
             [['role_id'], 'default', 'value' => 1],
             [['role_id'], 'integer'],
             [['email'], 'email'],
-            [['password_repeat'], 'compare', 'compareAttribute' => 'password'],
+            [['password_repeat'], 'compare', 'compareAttribute' => 'password', 'on' => [self::ESCENARIO_CREAR, self::ESCENARIO_ACTUALIZAR]],
             [['password'], function ($attributes, $params, $validador) {
                 if (mb_strlen($this->$attributes) < 7) {
                     $this->addError($attributes, 'La contraseña debe ser al menos de 7 caracteres');
@@ -167,6 +185,11 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         return Yii::$app->getSecurity()->validatePassword($password, $this->password);
     }
 
+    /**
+     * Realiza modificaciones el modelo antes de insertar.
+     * @param  bool $insert    Verdadero si es insert falso si es update
+     * @return [type]         [description]
+     */
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
@@ -182,12 +205,57 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                 while (self::findOne(['token_val' => $key]) != null) {
                     $key = Yii::$app->security->generateRandomString();
                 }
-
+                if ($this->scenario == self::ESCENARIO_CREAR) {
+                    $this->password = Yii::$app->security->generatePasswordHash($this->password);
+                }
                 $this->token_val = $key = Yii::$app->security->generateRandomString();
-                $this->password = Yii::$app->security->generatePasswordHash($this->password);
+            } else {
+                //Actualizar
+                if ($this->scenario == self::ESCENARIO_ACTUALIZAR) {
+                    if ($this->nombre == '') {
+                        $this->nombre = $this->getOldAttribute('nombre');
+                    }
+
+                    if ($this->email == '') {
+                        $this->email = $this->getOldAttribute('email');
+                    }
+
+                    if ($this->email != $this->getOldAttribute('email')) {
+                        $key = Yii::$app->security->generateRandomString();
+
+                        while (self::findOne(['token_val' => $key]) != null) {
+                            $key = Yii::$app->security->generateRandomString();
+                        }
+                        $this->token_val = $key = Yii::$app->security->generateRandomString();
+                        //mandar correo
+                        $this->enviarCorreo();
+                        Yii::$app->user->logout();
+                        Yii::$app->session->setFlash('info', 'Haz cambiado el correo debes validar la cuenta , para ello revise su correo');
+                    }
+
+                    if ($this->password == '') {
+                        $this->password = $this->getOldAttribute('password');
+                    } else {
+                        $this->password = Yii::$app->security->generatePasswordHash($this->password);
+                    }
+                }
             }
+
+
             return true;
         }
         return false;
+    }
+
+    public function enviarCorreo()
+    {
+        return Yii::$app->mailer->compose('validacion', ['token_val' => $this->token_val])
+                ->setFrom(Yii::$app->params['adminEmail'])
+                ->setTo($this->email)
+                ->setSubject('Correo de confirmacion de DruidKuma')
+                ->setTextBody('Hola, bienvenido a DruidKuma ' .
+                Url::to(['usuarios/validar', 'token_val' => $this->token_val], true)
+                . ' Gracias,DruidKuma')
+                ->send();
     }
 }
