@@ -35,7 +35,7 @@ class LoginForm extends Model
                 $usuario = Usuarios::findOne(['nombre' => $this->$attribute]);
 
                 if ($usuario !== null) {
-                    if ($usuario->token_val !== null) {
+                    if ($usuario->token_val !== null || $usuario->soft_delete) {
                         Yii::$app->session->setFlash('error', 'El usuario no está validado, revise su correo');
                         $this->addError($attribute);
                     }

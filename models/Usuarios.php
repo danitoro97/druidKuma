@@ -110,7 +110,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
     /**
-     * Si el usuario es visible.
+     * Si el usuario no es visible.
      * @return bool [description]
      */
     public function isNotVisible()

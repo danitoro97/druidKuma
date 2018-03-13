@@ -64,6 +64,12 @@ $this->registerJs($js, View::POS_READY);
                    'url' => ['site/logout'],
                    'linkOptions' => ['data-method' => 'POST'],
                ],
+               '<li class="divider"></li>',
+               [
+                   'label' => 'Darse de baja',
+                   'url' => ['usuarios/delete'],
+                   'linkOptions' => ['data-method' => 'POST'],
+               ],
            ]
        ];
     }

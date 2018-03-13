@@ -159,15 +159,18 @@ class UsuariosController extends Controller
     /**
      * Deletes an existing Usuarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        /*$this->findModel($id)->delete();
-
-        return $this->redirect(['index']);*/
+        $usuario = Yii::$app->user->identity;
+        $usuario->soft_delete = true;
+        $usuario->save();
+        Yii::$app->user->logout();
+        Yii::$app->session->setFlash('success', 'Usuario dado de baja');
+        return $this->goHome();
     }
 
     /**
