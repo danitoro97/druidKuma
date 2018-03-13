@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use app\models\Noticias;
-use Spatie\Dropbox\Exceptions\BadRequest;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -59,7 +58,7 @@ class NoticiasController extends Controller
                     ->select('noticias.id ,titulo, img, substring(texto from 0 for 50) as texto,creador_id, noticias.created_at')
                     ->joinWith('creador')
                     ->orderBy(['created_at' => SORT_DESC])
-                    ->limit(Noticias::PageSize)
+                    ->limit(Noticias::PAGESIZE)
                     ->offset(0)
                     ->all(),
         ]);
@@ -75,7 +74,7 @@ class NoticiasController extends Controller
                 ->select('noticias.id ,titulo, img, substring(texto from 0 for 50) as texto,creador_id, noticias.created_at')
                 ->joinWith('creador')
                 ->orderBy(['created_at' => SORT_DESC])
-                ->limit(Noticias::PageSize)
+                ->limit(Noticias::PAGESIZE)
                 ->offset($page)
                 ->all();
 
@@ -113,22 +112,9 @@ class NoticiasController extends Controller
         $model = new Noticias();
 
         if ($model->load(Yii::$app->request->post())) {
+            $model->creador_id = Yii::$app->user->identity->id;
             $model->img = UploadedFile::getInstance($model, 'img');
-            if ($model->save() && $model->upload()) {
-                $client = new \Spatie\Dropbox\Client(getenv('Dropbox'));
-                $nombre = $model->id . '.jpg';
-                try {
-                    $client->delete($nombre);
-                } catch (BadRequest $e) {
-                    // No se hace nada
-                }
-                $client->upload($nombre, file_get_contents(Yii::getAlias("@uploads/$nombre")), 'overwrite');
-                $res = $client->createSharedLinkWithSettings($nombre, [
-                    'requested_visibility' => 'public',
-                ]);
-                $url = $res['url'][mb_strlen($res['url']) - 1] = '1';
-                $model->img = $res['url'];
-                $model->save();
+            if ($model->upload() && $model->save()) {
                 return $this->goHome();
             }
         }

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Spatie\Dropbox\Exceptions\BadRequest;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
@@ -21,7 +22,17 @@ use yii\imagine\Image;
  */
 class Noticias extends \yii\db\ActiveRecord
 {
-    public const PageSize = 4;
+    /**
+     * Numeros de noticias por pagina.
+     * @var int
+     */
+    public const PAGESIZE = 4;
+
+    /**
+     * Tamaño con el que se guardaran las imagenes.
+     * @var int
+     */
+    public const TAMANO = 400;
 
     /**
      * {@inheritdoc}
@@ -54,7 +65,7 @@ class Noticias extends \yii\db\ActiveRecord
             [['creador_id'], 'default', 'value' => null],
             [['creador_id'], 'integer'],
             [['titulo'], 'string', 'max' => 255],
-            [['img'], 'file'],
+            [['img'], 'file', 'extensions' => 'jpg'],
             [['creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['creador_id' => 'id']],
             [['creador_id'], function ($attribute, $params, $validator) {
                 if (!$this->creador->isCreador()) {
@@ -63,6 +74,10 @@ class Noticias extends \yii\db\ActiveRecord
             }],
         ];
     }
+    /**
+     * Carga la img en disco y la sube a Dropbox.
+     * @return [type] [description]
+     */
     public function upload()
     {
         if ($this->img === null) {
@@ -71,8 +86,21 @@ class Noticias extends \yii\db\ActiveRecord
         $nombre = Yii::getAlias('@uploads/') . $this->id . '.jpg';
         $res = $this->img->saveAs($nombre);
         if ($res) {
-            Image::thumbnail($nombre, 300, null)->save($nombre);
+            Image::thumbnail($nombre, self::TAMANO, null)->save($nombre);
         }
+        $client = new \Spatie\Dropbox\Client(getenv('Dropbox'));
+        $nombre = $this->id . '.jpg';
+        try {
+            $client->delete($nombre);
+        } catch (BadRequest $e) {
+            // No se hace nada
+        }
+        $client->upload($nombre, file_get_contents(Yii::getAlias("@uploads/$nombre")), 'overwrite');
+        $res = $client->createSharedLinkWithSettings($nombre, [
+            'requested_visibility' => 'public',
+        ]);
+        $url = $res['url'][mb_strlen($res['url']) - 1] = '1';
+        $this->img = $res['url'];
         return $res;
     }
     /**
