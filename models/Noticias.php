@@ -2,8 +2,10 @@
 
 namespace app\models;
 
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\imagine\Image;
 
 /**
  * This is the model class for table "noticias".
@@ -51,17 +53,28 @@ class Noticias extends \yii\db\ActiveRecord
             [['texto'], 'string'],
             [['creador_id'], 'default', 'value' => null],
             [['creador_id'], 'integer'],
-            //[['created_at'], 'safe'],
-            [['titulo', 'img'], 'string', 'max' => 255],
+            [['titulo'], 'string', 'max' => 255],
+            [['img'], 'file'],
             [['creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['creador_id' => 'id']],
             [['creador_id'], function ($attribute, $params, $validator) {
-                if ($this->creador->role->id != Roles::CREADOR) {
+                if (!$this->creador->isCreador()) {
                     $this->addError($attribute, 'Este usuario no puede crear noticias');
                 }
             }],
         ];
     }
-
+    public function upload()
+    {
+        if ($this->img === null) {
+            return true;
+        }
+        $nombre = Yii::getAlias('@uploads/') . $this->id . '.jpg';
+        $res = $this->img->saveAs($nombre);
+        if ($res) {
+            Image::thumbnail($nombre, 300, null)->save($nombre);
+        }
+        return $res;
+    }
     /**
      * {@inheritdoc}
      */

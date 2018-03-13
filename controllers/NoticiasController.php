@@ -3,10 +3,13 @@
 namespace app\controllers;
 
 use app\models\Noticias;
+use Spatie\Dropbox\Exceptions\BadRequest;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 /**
  * NoticiasController implements the CRUD actions for Noticias model.
@@ -23,6 +26,23 @@ class NoticiasController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'matchCallback' => function ($rule, $action) {
+                            if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isCreador()) {
+                                return true;
+                            }
+                            Yii::$app->session->setFlash('error', 'Usted no puede crear noticias');
+                            return false;
+                        },
+                    ],
                 ],
             ],
         ];
@@ -90,15 +110,32 @@ class NoticiasController extends Controller
      */
     public function actionCreate()
     {
-        /*$model = new Noticias();
+        $model = new Noticias();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->img = UploadedFile::getInstance($model, 'img');
+            if ($model->save() && $model->upload()) {
+                $client = new \Spatie\Dropbox\Client(getenv('Dropbox'));
+                $nombre = $model->id . '.jpg';
+                try {
+                    $client->delete($nombre);
+                } catch (BadRequest $e) {
+                    // No se hace nada
+                }
+                $client->upload($nombre, file_get_contents(Yii::getAlias("@uploads/$nombre")), 'overwrite');
+                $res = $client->createSharedLinkWithSettings($nombre, [
+                    'requested_visibility' => 'public',
+                ]);
+                $url = $res['url'][mb_strlen($res['url']) - 1] = '1';
+                $model->img = $res['url'];
+                $model->save();
+                return $this->goHome();
+            }
         }
 
         return $this->render('create', [
             'model' => $model,
-        ]);*/
+        ]);
     }
 
     /**

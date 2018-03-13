@@ -109,6 +109,16 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             'password_repeat' => 'Confirmar contraseña',
         ];
     }
+
+    /**
+     * Devuelve si el usuario puede crear o no.
+     * @return bool [description]
+     */
+    public function isCreador()
+    {
+        return $this->role->id == Roles::CREADOR;
+    }
+
     /**
      * Si el usuario no es visible.
      * @return bool [description]

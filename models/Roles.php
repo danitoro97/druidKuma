@@ -13,8 +13,8 @@ namespace app\models;
 class Roles extends \yii\db\ActiveRecord
 {
     /**
-     * [public description].
-     * @var [type]
+     * Contiene el id de los usarios que pueden crear.
+     * @var int
      */
     public const CREADOR = 2;
     /**
