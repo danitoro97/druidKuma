@@ -48,6 +48,7 @@ DROP TABLE IF EXISTS noticias CASCADE;
 CREATE TABLE noticias (
         id BIGSERIAL PRIMARY KEY
     ,   titulo VARCHAR(255) NOT NULL
+    ,   subtitulo VARCHAR(255)
     ,   texto TEXT NOT NULL
     ,   img     VARCHAR(255)
     ,   creador_id BIGINT REFERENCES usuarios(id)

@@ -13,6 +13,7 @@ use yii\imagine\Image;
  *
  * @property int $id
  * @property string $titulo
+ * @property string $subtitulo
  * @property string $texto
  * @property string $img
  * @property int $creador_id
@@ -22,6 +23,7 @@ use yii\imagine\Image;
  */
 class Noticias extends \yii\db\ActiveRecord
 {
+    public $extension;
     /**
      * Numeros de noticias por pagina.
      * @var int
@@ -61,11 +63,11 @@ class Noticias extends \yii\db\ActiveRecord
     {
         return [
             [['titulo', 'texto'], 'required'],
-            [['texto'], 'string'],
+            [['texto', 'subtitulo'], 'string'],
             [['creador_id'], 'default', 'value' => null],
             [['creador_id'], 'integer'],
             [['titulo'], 'string', 'max' => 255],
-            [['img'], 'file', 'extensions' => 'jpg'],
+            [['img'], 'file'],
             [['creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['creador_id' => 'id']],
             [['creador_id'], function ($attribute, $params, $validator) {
                 if (!$this->creador->isCreador()) {
@@ -83,13 +85,15 @@ class Noticias extends \yii\db\ActiveRecord
         if ($this->img === null) {
             return true;
         }
-        $nombre = Yii::getAlias('@uploads/') . $this->id . '.jpg';
+        $nombre = Yii::getAlias('@uploads/') . "$this->id.$this->extension";
+        var_dump($nombre);
+        //die();
         $res = $this->img->saveAs($nombre);
         if ($res) {
             Image::thumbnail($nombre, self::TAMANO, null)->save($nombre);
         }
         $client = new \Spatie\Dropbox\Client(getenv('Dropbox'));
-        $nombre = $this->id . '.jpg';
+        $nombre = ".$this->extension";
         try {
             $client->delete($nombre);
         } catch (BadRequest $e) {

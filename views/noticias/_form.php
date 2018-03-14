@@ -14,6 +14,7 @@ use dosamigos\ckeditor\CKEditor;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'subtitulo')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'texto')->widget(CKEditor::className(), ['preset' => 'basic']) ?>
 

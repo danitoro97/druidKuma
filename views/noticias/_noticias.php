@@ -17,5 +17,5 @@ use yii\helpers\Html;
             ['usuarios/view', 'id' => $noticia->creador->id])?>
             el día <?=Yii::$app->formatter->asDateTime($noticia->created_at)?></figcaption>
     </figure>
-    <h3><?=$noticia->texto ?></h3>
+    <h3><?=Html::encode($noticia->subtitulo) ?></h3>
 </div>

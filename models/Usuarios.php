@@ -268,13 +268,12 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function enviarCorreo()
     {
+        $enlace = Url::to(['usuarios/validar', 'token_val' => $this->token_val], true);
         return Yii::$app->mailer->compose('validacion', ['token_val' => $this->token_val])
                 ->setFrom(Yii::$app->params['adminEmail'])
                 ->setTo($this->email)
                 ->setSubject('Correo de confirmacion de DruidKuma')
-                ->setTextBody('Hola, bienvenido a DruidKuma ' .
-                Url::to(['usuarios/validar', 'token_val' => $this->token_val], true)
-                . ' Gracias,DruidKuma')
+                ->setTextBody('Hola, bienvenido a DruidKuma ' . $enlace . ' Gracias,DruidKuma')
                 ->send();
     }
 }

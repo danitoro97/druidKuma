@@ -47,7 +47,7 @@ $this->registerJs($js);
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php
-        if (Yii::$app->user->identity->isCreador()):?>
+        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isCreador()):?>
             <?=Html::a('Crear noticia', ['noticias/create'], ['class' => 'btn-lg btn-info crear'])?>
     <?php endif;?>
     <div class="container">

@@ -55,7 +55,7 @@ class NoticiasController extends Controller
     {
         return $this->render('index', [
             'noticias' => Noticias::find()
-                    ->select('noticias.id ,titulo, img, substring(texto from 0 for 50) as texto,creador_id, noticias.created_at')
+                    ->select('noticias.id ,titulo, img, subtitulo,creador_id, noticias.created_at')
                     ->joinWith('creador')
                     ->orderBy(['created_at' => SORT_DESC])
                     ->limit(Noticias::PAGESIZE)
@@ -71,7 +71,7 @@ class NoticiasController extends Controller
     public function actionAjax($page)
     {
         $model = Noticias::find()
-                ->select('noticias.id ,titulo, img, substring(texto from 0 for 50) as texto,creador_id, noticias.created_at')
+                ->select('noticias.id ,titulo, img, subtitulo,creador_id, noticias.created_at')
                 ->joinWith('creador')
                 ->orderBy(['created_at' => SORT_DESC])
                 ->limit(Noticias::PAGESIZE)
@@ -114,6 +114,8 @@ class NoticiasController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->creador_id = Yii::$app->user->identity->id;
             $model->img = UploadedFile::getInstance($model, 'img');
+            $model->extension = $model->img->extension;
+            //die();
             if ($model->upload() && $model->save()) {
                 return $this->goHome();
             }
