@@ -68,6 +68,7 @@ class Noticias extends \yii\db\ActiveRecord
             [['titulo'], 'string', 'max' => 255],
             [['creador_id'], 'required'],
             [['img'], 'file'],
+            [['creador_id'], 'default', 'value' => Yii::$app->user->identity->id],
             [['creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['creador_id' => 'id']],
             [['creador_id'], function ($attribute, $params, $validator) {
                 if (!$this->creador->isCreador()) {

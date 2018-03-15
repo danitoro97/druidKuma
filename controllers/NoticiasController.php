@@ -119,7 +119,7 @@ class NoticiasController extends Controller
                 $model->extension = $model->img->extension;
             }
 
-            //die();
+
             if ($model->upload() && $model->save()) {
                 return $this->goHome();
             }
