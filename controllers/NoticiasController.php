@@ -112,10 +112,13 @@ class NoticiasController extends Controller
         $model = new Noticias();
 
         if ($model->load(Yii::$app->request->post())) {
+            $model->creador_id = Yii::$app->user->identity->id;
             $model->img = UploadedFile::getInstance($model, 'img');
+
             if ($model->img) {
                 $model->extension = $model->img->extension;
             }
+
 
             if ($model->upload() && $model->save()) {
                 return $this->goHome();
