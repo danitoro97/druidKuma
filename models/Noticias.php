@@ -2,14 +2,18 @@
 
 namespace app\models;
 
+use Spatie\Dropbox\Exceptions\BadRequest;
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\imagine\Image;
 
 /**
  * This is the model class for table "noticias".
  *
  * @property int $id
  * @property string $titulo
+ * @property string $subtitulo
  * @property string $texto
  * @property string $img
  * @property int $creador_id
@@ -19,7 +23,18 @@ use yii\db\Expression;
  */
 class Noticias extends \yii\db\ActiveRecord
 {
-    public const PageSize = 4;
+    public $extension;
+    /**
+     * Numeros de noticias por pagina.
+     * @var int
+     */
+    public const PAGESIZE = 4;
+
+    /**
+     * Tamaño con el que se guardaran las imagenes.
+     * @var int
+     */
+    public const TAMANO = 400;
 
     /**
      * {@inheritdoc}
@@ -48,20 +63,51 @@ class Noticias extends \yii\db\ActiveRecord
     {
         return [
             [['titulo', 'texto'], 'required'],
-            [['texto'], 'string'],
+            [['texto', 'subtitulo'], 'string'],
             [['creador_id'], 'default', 'value' => null],
             [['creador_id'], 'integer'],
-            //[['created_at'], 'safe'],
-            [['titulo', 'img'], 'string', 'max' => 255],
+            [['titulo'], 'string', 'max' => 255],
+            [['img'], 'file'],
+            [['creador_id'], 'default', 'value' => Yii::$app->user->identity->id],
             [['creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['creador_id' => 'id']],
             [['creador_id'], function ($attribute, $params, $validator) {
-                if ($this->creador->role->id != Roles::CREADOR) {
+                if (!$this->creador->isCreador()) {
                     $this->addError($attribute, 'Este usuario no puede crear noticias');
                 }
             }],
         ];
     }
-
+    /**
+     * Carga la img en disco y la sube a Dropbox.
+     * @return [type] [description]
+     */
+    public function upload()
+    {
+        if ($this->img === null) {
+            return true;
+        }
+        $nombre = Yii::getAlias('@uploads/') . "$this->id.$this->extension";
+        var_dump($nombre);
+        //die();
+        $res = $this->img->saveAs($nombre);
+        if ($res) {
+            Image::thumbnail($nombre, self::TAMANO, null)->save($nombre);
+        }
+        $client = new \Spatie\Dropbox\Client(getenv('Dropbox'));
+        $nombre = ".$this->extension";
+        try {
+            $client->delete($nombre);
+        } catch (BadRequest $e) {
+            // No se hace nada
+        }
+        $client->upload($nombre, file_get_contents(Yii::getAlias("@uploads/$nombre")), 'overwrite');
+        $res = $client->createSharedLinkWithSettings($nombre, [
+            'requested_visibility' => 'public',
+        ]);
+        $url = $res['url'][mb_strlen($res['url']) - 1] = '1';
+        $this->img = $res['url'];
+        return $res;
+    }
     /**
      * {@inheritdoc}
      */

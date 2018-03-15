@@ -18,8 +18,6 @@ var s = document.body.scrollHeight-800;
 $(window).scroll(function(){
 
     if ($(this).scrollTop() > s) {
-        console.log('peticionAjax');
-
         s =1000000;
 
         $.ajax({
@@ -48,8 +46,13 @@ $this->registerJs($js);
 <div class="noticias-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <?php
+        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isCreador()):?>
+            <?=Html::a('Crear noticia', ['noticias/create'], ['class' => 'btn-lg btn-info crear'])?>
+    <?php endif;?>
     <div class="container">
         <div class="row">
+
             <?php foreach ($noticias as $noticia):
                 echo $this->render('_noticias', ['noticia' => $noticia]);
             endforeach;

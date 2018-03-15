@@ -1,3 +1,7 @@
 .row div {
     border-bottom-style: double;
 }
+
+.crear {
+    float: right;
+}

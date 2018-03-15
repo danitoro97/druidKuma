@@ -4,9 +4,11 @@ namespace app\controllers;
 
 use app\models\Noticias;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 /**
  * NoticiasController implements the CRUD actions for Noticias model.
@@ -25,6 +27,23 @@ class NoticiasController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'matchCallback' => function ($rule, $action) {
+                            if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isCreador()) {
+                                return true;
+                            }
+                            Yii::$app->session->setFlash('error', 'Usted no puede crear noticias');
+                            return false;
+                        },
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -36,10 +55,10 @@ class NoticiasController extends Controller
     {
         return $this->render('index', [
             'noticias' => Noticias::find()
-                    ->select('noticias.id ,titulo, img, substring(texto from 0 for 50) as texto,creador_id, noticias.created_at')
+                    ->select('noticias.id ,titulo, img, subtitulo,creador_id, noticias.created_at')
                     ->joinWith('creador')
                     ->orderBy(['created_at' => SORT_DESC])
-                    ->limit(Noticias::PageSize)
+                    ->limit(Noticias::PAGESIZE)
                     ->offset(0)
                     ->all(),
         ]);
@@ -52,10 +71,10 @@ class NoticiasController extends Controller
     public function actionAjax($page)
     {
         $model = Noticias::find()
-                ->select('noticias.id ,titulo, img, substring(texto from 0 for 50) as texto,creador_id, noticias.created_at')
+                ->select('noticias.id ,titulo, img, subtitulo,creador_id, noticias.created_at')
                 ->joinWith('creador')
                 ->orderBy(['created_at' => SORT_DESC])
-                ->limit(Noticias::PageSize)
+                ->limit(Noticias::PAGESIZE)
                 ->offset($page)
                 ->all();
 
@@ -90,15 +109,22 @@ class NoticiasController extends Controller
      */
     public function actionCreate()
     {
-        /*$model = new Noticias();
+        $model = new Noticias();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->img = UploadedFile::getInstance($model, 'img');
+            if ($model->img) {
+                $model->extension = $model->img->extension;
+            }
+
+            if ($model->upload() && $model->save()) {
+                return $this->goHome();
+            }
         }
 
         return $this->render('create', [
             'model' => $model,
-        ]);*/
+        ]);
     }
 
     /**
