@@ -64,9 +64,9 @@ class Noticias extends \yii\db\ActiveRecord
         return [
             [['titulo', 'texto'], 'required'],
             [['texto', 'subtitulo'], 'string'],
-            [['creador_id'], 'default', 'value' => null],
             [['creador_id'], 'integer'],
             [['titulo'], 'string', 'max' => 255],
+            [['creador_id'], 'required'],
             [['img'], 'file'],
             [['creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['creador_id' => 'id']],
             [['creador_id'], function ($attribute, $params, $validator) {
