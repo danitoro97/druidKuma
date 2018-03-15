@@ -88,12 +88,12 @@ class Noticias extends \yii\db\ActiveRecord
         }
         //    $nombre = Yii::getAlias('uploads/') . "a.$this->extension";
 
-        $res = $this->img->saveAs('@uploads/' . "$this->extension");
+        $res = $this->img->saveAs('@uploads/' . ".$this->extension");
         if ($res) {
             Image::thumbnail($nombre, self::TAMANO, null)->save($nombre);
         }
         $client = new \Spatie\Dropbox\Client(getenv('Dropbox'));
-        $nombre = "a.$this->extension";
+        $nombre = ".$this->extension";
         try {
             $client->delete($nombre);
         } catch (BadRequest $e) {
