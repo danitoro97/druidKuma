@@ -86,7 +86,7 @@ class Noticias extends \yii\db\ActiveRecord
         if ($this->img === null) {
             return true;
         }
-        $nombre = Yii::getAlias('@uploads/') . "$this->extension";
+        $nombre = Yii::getAlias('@uploads/') . ".$this->extension";
 
         $res = $this->img->saveAs($nombre);
         if ($res) {
