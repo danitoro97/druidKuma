@@ -19,7 +19,7 @@ use dosamigos\ckeditor\CKEditor;
 
     <?= $form->field($model, 'texto')->widget(CKEditor::className(), ['preset' => 'basic']) ?>
 
-    <?= $form->field($model, 'img')->fileInput() ?>
+    <?= $form->field($model, 'img')->fileInput(['accept' => 'image/*']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
