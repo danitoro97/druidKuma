@@ -86,9 +86,9 @@ class Noticias extends \yii\db\ActiveRecord
         if ($this->img === null) {
             return true;
         }
-        $nombre = ".$this->extension";
+        $nombre = getenv('Ruta') . '.' . $this->extension;
 
-        $res = $this->img->saveAs(".$this->extension");
+        $res = $this->img->saveAs($nombre);
         if ($res) {
             Image::thumbnail($nombre, self::TAMANO, null)->save($nombre);
         }
