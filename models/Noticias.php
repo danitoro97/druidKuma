@@ -86,14 +86,15 @@ class Noticias extends \yii\db\ActiveRecord
         if ($this->img === null) {
             return true;
         }
-        $nombre = getenv('Ruta') . '.' . $this->extension;
+        $id = self::find()->orderBy('created_at DESC')->one()->id;
+        $nombre = getenv('Ruta') . $id . '.' . $this->extension;
 
         $res = $this->img->saveAs($nombre);
         if ($res) {
             Image::thumbnail($nombre, self::TAMANO, null)->save($nombre);
         }
         $client = new \Spatie\Dropbox\Client(getenv('Dropbox'));
-        //$nombre = ".$this->extension";
+
         try {
             $client->delete($nombre);
         } catch (BadRequest $e) {
