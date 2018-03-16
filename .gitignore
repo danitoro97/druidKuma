@@ -39,4 +39,4 @@ tests/chromedriver
 # local environment variables
 .env
 # imagenes
-web/uploads/
+#web/uploads/*

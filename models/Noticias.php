@@ -86,21 +86,20 @@ class Noticias extends \yii\db\ActiveRecord
         if ($this->img === null) {
             return true;
         }
-        $nombre = Yii::getAlias('@uploads/') . "$this->id.$this->extension";
-        var_dump($nombre);
-        //die();
+        $nombre = getenv('Ruta') . '.' . $this->extension;
+
         $res = $this->img->saveAs($nombre);
         if ($res) {
             Image::thumbnail($nombre, self::TAMANO, null)->save($nombre);
         }
         $client = new \Spatie\Dropbox\Client(getenv('Dropbox'));
-        $nombre = ".$this->extension";
+        //$nombre = ".$this->extension";
         try {
             $client->delete($nombre);
         } catch (BadRequest $e) {
             // No se hace nada
         }
-        $client->upload($nombre, file_get_contents(Yii::getAlias("@uploads/$nombre")), 'overwrite');
+        $client->upload($nombre, file_get_contents(Yii::getAlias($nombre)), 'overwrite');
         $res = $client->createSharedLinkWithSettings($nombre, [
             'requested_visibility' => 'public',
         ]);
