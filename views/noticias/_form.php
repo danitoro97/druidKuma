@@ -17,13 +17,7 @@ use  froala\froalaeditor\FroalaEditorWidget;
     <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'subtitulo')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'texto')->widget(FroalaEditorWidget::className(), [
-        'clientOptions'=>[
-            'toolbarInline'=> false,
-            'theme' =>'gray',//optional: dark, red, gray, royal
-            'language'=>'es' // optional: ar, bs, cs, da, de, en_ca, en_gb, en_us ...
-        ]
-       ]) ?>
+    <?= $form->field($model, 'texto')->widget(CKEditor::className(), ['preset' => 'basic']) ?>
 
     <?= $form->field($model, 'img')->fileInput() ?>
 
