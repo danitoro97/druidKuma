@@ -25,6 +25,7 @@ ratings:
   - "**.js"
   - "**.php"
 exclude_paths:
+- web/plugin/
 - views/
 - tests/
 - docs/
