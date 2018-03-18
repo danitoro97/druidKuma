@@ -15,11 +15,13 @@ $this->registerCssFile('/css/detallesNoticias.css');
 <div class="noticias-view">
     <div class="container">
         <div class="row">
-            <div class="col-md-9 col-md-offset-3">
+            <div class="col-md-9 col-md-offset-3 ">
                 <h1><?= Html::encode($this->title) ?></h1>
+
             </div>
             <div class="col-md-9 col-md-offset-3">
                 <h3><?= Html::encode($model->subtitulo)?></h3>
+                <hr>
             </div>
             <div class="">
                 <?=Html::img($model->img, ['class' => 'centrar img-responsive'])?>
@@ -31,7 +33,8 @@ $this->registerCssFile('/css/detallesNoticias.css');
                     el día <?=Yii::$app->formatter->asDatetime($model->created_at)?>
                 </p>
             </div>
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-8 col-md-offset-2">
+                <hr>
                 <p>
                     <?=EncodeHelper::encode($model->texto) ?>
                 </p>
