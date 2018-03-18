@@ -64,9 +64,9 @@ class Noticias extends \yii\db\ActiveRecord
         return [
             [['titulo', 'texto'], 'required'],
             [['texto', 'subtitulo'], 'string'],
-            [['creador_id'], 'default', 'value' => null],
             [['creador_id'], 'integer'],
             [['titulo'], 'string', 'max' => 255],
+            [['creador_id'], 'required'],
             [['img'], 'file'],
             [['creador_id'], 'default', 'value' => Yii::$app->user->identity->id],
             [['creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['creador_id' => 'id']],
@@ -86,21 +86,21 @@ class Noticias extends \yii\db\ActiveRecord
         if ($this->img === null) {
             return true;
         }
-        $nombre = Yii::getAlias('@uploads/') . "$this->id.$this->extension";
-        var_dump($nombre);
-        //die();
+        $id = self::find()->orderBy('created_at DESC')->one()->id;
+        $nombre = getenv('Ruta') . $id . '.' . $this->extension;
+
         $res = $this->img->saveAs($nombre);
         if ($res) {
             Image::thumbnail($nombre, self::TAMANO, null)->save($nombre);
         }
         $client = new \Spatie\Dropbox\Client(getenv('Dropbox'));
-        $nombre = ".$this->extension";
+
         try {
             $client->delete($nombre);
         } catch (BadRequest $e) {
             // No se hace nada
         }
-        $client->upload($nombre, file_get_contents(Yii::getAlias("@uploads/$nombre")), 'overwrite');
+        $client->upload($nombre, file_get_contents(Yii::getAlias($nombre)), 'overwrite');
         $res = $client->createSharedLinkWithSettings($nombre, [
             'requested_visibility' => 'public',
         ]);

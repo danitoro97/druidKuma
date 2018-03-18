@@ -5,7 +5,6 @@ use yii\web\View;
 use yii\widgets\ActiveForm;
 
 
-
 /* @var $this yii\web\View */
 /* @var $model app\models\Noticias */
 /* @var $form yii\widgets\ActiveForm */
@@ -30,9 +29,11 @@ $this->registerJs($js,View::POS_READY);
     <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'subtitulo')->textInput(['maxlength' => true]) ?>
 
+
     <?= $form->field($model, 'texto')->textarea()?>
 
-    <?= $form->field($model, 'img')->fileInput() ?>
+
+    <?= $form->field($model, 'img')->fileInput(['accept' => 'image/*']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

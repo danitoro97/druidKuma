@@ -51,7 +51,7 @@ CREATE TABLE noticias (
     ,   subtitulo VARCHAR(255)
     ,   texto TEXT NOT NULL
     ,   img     VARCHAR(255)
-    ,   creador_id BIGINT REFERENCES usuarios(id)
+    ,   creador_id BIGINT NOT NULL REFERENCES usuarios(id)
                     ON DELETE NO ACTION
                     ON UPDATE CASCADE
     ,   created_at TIMESTAMP(0)
