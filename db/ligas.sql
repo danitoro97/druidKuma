@@ -1,0 +1,1 @@
+insert into ligas (id,nombre,pais_id,siglas) values('444','Campeonato Brasileiro da Série A','1','BSA'),('445','Premier League 2017/18','2','PL'),('446','Championship 2017/18','2','ELC'),('447','League One 2017/18','2','EL1'),('448','League Two 2017/18','2','EL2'),('449','Eredivisie 2017/18','3','DED');
