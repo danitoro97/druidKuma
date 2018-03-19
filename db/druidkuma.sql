@@ -1,6 +1,8 @@
 ------------------------------
 -- Archivo de base de datos --
 ------------------------------
+--TABLA PAISES
+
 DROP TABLE IF EXISTS paises CASCADE;
 CREATE TABLE paises
 (
@@ -13,8 +15,9 @@ CREATE TABLE paises
 INSERT INTO paises(nombre)
 VALUES('BRASIL'),('INGLATERRA'),('HOLANDA');
 
-DROP TABLE IF EXISTS ligas CASCADE;
+--TABLA LIGAS--
 
+DROP TABLE IF EXISTS ligas CASCADE;
 CREATE TABLE ligas(
         id bigserial PRIMARY KEY
     ,   nombre varchar(255) not null unique
@@ -26,6 +29,7 @@ CREATE TABLE ligas(
 
 );
 
+--TABLA EQUIPOS--
 DROP TABLE IF EXISTS equipos CASCADE;
 
 CREATE TABLE equipos (
@@ -37,7 +41,21 @@ CREATE TABLE equipos (
                             ON UPDATE CASCADE
 );
 
+--TABLA POSICIONES--
+DROP TABLE IF EXISTS posiciones CASCADE;
+CREATE TABLE posiciones
+(
+        id bigserial primary KEY
+    ,   nombre varchar(255) not null UNIQUE
+    ,   siglas varchar(10)
+);
 
+--INSERT POSICIONES--
+INSERT INTO posiciones (nombre,siglas)
+VALUES   ('PORTERO','PT'),
+         ('DEFENSA','DF'),
+         ('MEDIOCENTRO','MD'),
+         ('DELANTERO CENTRO','DC');
 
 --TABLA ROLES --
 DROP TABLE IF EXISTS roles CASCADE;
