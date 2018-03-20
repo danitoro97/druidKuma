@@ -13,7 +13,7 @@ CREATE TABLE paises
 
 --INSERT PAISES --
 INSERT INTO paises(nombre)
-VALUES('BRASIL'),('INGLATERRA'),('HOLANDA');
+VALUES('ESPAÑA'),('INGLATERRA'),('HOLANDA');
 
 --TABLA LIGAS--
 
@@ -56,6 +56,23 @@ VALUES   ('PORTERO','PT'),
          ('DEFENSA','DF'),
          ('MEDIOCENTRO','MD'),
          ('DELANTERO CENTRO','DC');
+
+--TABLA JUGADORES
+DROP TABLE IF EXISTS jugadores CASCADE;
+CREATE TABLE jugadores
+(
+        id bigserial primary KEY
+    ,   nombre varchar(255)   not NULL
+    ,   posicion_id bigint not null references posiciones (id)
+                            ON DELETE NO ACTION
+                            ON UPDATE CASCADE
+    ,   dorsal numeric(5)
+    ,   contrato VARCHAR(255)
+    ,   equipo_id bigint not null references equipos(id)
+                            ON DELETE NO ACTION
+                            ON UPDATE CASCADE
+);
+
 
 --TABLA ROLES --
 DROP TABLE IF EXISTS roles CASCADE;

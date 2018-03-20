@@ -16,13 +16,15 @@ foreach ($sent as $liga) {
     $id = $liga['id'];
     $url = "http://api.football-data.org/v1/teams/$id/players";
     $resultado = conexion($url);
+    //var_dump($resultado);
+    //die();
     foreach ($resultado->players as $jugador) {
         //var_dump($jugador);
         //die();
         $insert .= "('" . $jugador->name . "'," .
-            rand(0, 3) . ",'" .
-            $jugador->jerseyNumber . "','" .
-            $jugador->contractUntil . "'," .
+            rand(0, 3) . ',' .
+            $jugador->jerseyNumber . ",'" .
+            ($jugador->contractUntil) ? $jugador->contractUntil : '' . "'," .
             $id . '),';
     }
 }
