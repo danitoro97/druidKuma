@@ -55,10 +55,18 @@ VALUES ('estandar'),
 
 --TABLA USUARIOS --
 
+DROP TABLE IF EXISTS usuarios_id CASCADE;
+CREATE TABLE usuarios_id
+(
+        id  BIGSERIAL PRIMARY KEY
+);
+INSERT INTO usuarios_id(id)
+VALUES(default),(default);
+
 DROP TABLE IF EXISTS usuarios CASCADE;
 
 CREATE TABLE usuarios (
-        id         BIGSERIAL    PRIMARY KEY
+         id        bigint       PRIMARY KEY REFERENCES usuarios_id (id)
     ,   nombre     VARCHAR(255) NOT NULL UNIQUE
     ,   email      VARCHAR(255) NOT NULL UNIQUE
     ,   password   VARCHAR(255) NOT NULL
@@ -69,14 +77,14 @@ CREATE TABLE usuarios (
                     ON UPDATE CASCADE
     ,   created_at TIMESTAMP(0)
     ,   updated_at TIMESTAMP(0)
-    ,   soft_delete boolean  default false
+
 );
 
 --INSERT USUARIOS --
 
-INSERT INTO usuarios (nombre,email,password,created_at,role_id)
-    VALUES ('toro','danitoni2008@gmail.com',crypt('toro',gen_salt('bf','13')),'2018-03-06',2),
-            ('pepe','pepe@gmail.com',crypt('toro',gen_salt('bf','13')),'2018-03-06',1);
+INSERT INTO usuarios (id,nombre,email,password,created_at,role_id)
+    VALUES (1,'toro','danitoni2008@gmail.com',crypt('toro',gen_salt('bf','13')),'2018-03-06',2),
+            (2,'pepe','pepe@gmail.com',crypt('toro',gen_salt('bf','13')),'2018-03-06',1);
 
 --TABLA NOTICIAS --
 
@@ -88,7 +96,7 @@ CREATE TABLE noticias (
     ,   subtitulo VARCHAR(255)
     ,   texto TEXT NOT NULL
     ,   img     VARCHAR(255)
-    ,   creador_id BIGINT NOT NULL REFERENCES usuarios(id)
+    ,   creador_id BIGINT NOT NULL REFERENCES usuarios_id(id)
                     ON DELETE NO ACTION
                     ON UPDATE CASCADE
     ,   created_at TIMESTAMP(0)

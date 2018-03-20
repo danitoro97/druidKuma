@@ -71,12 +71,6 @@ class UsuariosController extends Controller
      */
     public function actionView($id)
     {
-        $user = Usuarios::findOne($id);
-        if ($user->isNotVisible()) {
-            Yii::$app->session->setFlash('error', 'Este usuario no es visible');
-            return $this->goBack();
-        }
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -166,10 +160,7 @@ class UsuariosController extends Controller
     public function actionDelete()
     {
         $usuario = Yii::$app->user->identity;
-        $usuario->soft_delete = true;
-        $usuario->save();
-        Yii::$app->user->logout();
-        Yii::$app->session->setFlash('success', 'Usuario dado de baja');
+        $usuario->delete();
         return $this->goHome();
     }
 
