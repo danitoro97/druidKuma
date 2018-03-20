@@ -12,9 +12,13 @@ use yii\helpers\Html;
     <h2><?=Html::a(Html::encode($noticia->titulo), ['noticias/view', 'id' => $noticia->id])?></h2>
     <figure>
         <img src="<?=Html::encode($noticia->img)?>" alt="" class="noticia-img img-responsive">
-        <figcaption>Publicado por <?=Html::a(
-            Html::encode($noticia->creador->nombre),
-            ['usuarios/view', 'id' => $noticia->creador->id])?>
+        <figcaption>Publicado por <?php
+            if ($noticia->creador): ?>
+            <?= Html::a(
+                Html::encode($noticia->creador->nombre),
+                ['usuarios/view', 'id' => $noticia->creador->id])
+            ?>
+        <?php endif; ?>
             el día <?=Yii::$app->formatter->asDateTime($noticia->created_at)?></figcaption>
     </figure>
     <h3><?=Html::encode($noticia->subtitulo) ?></h3>

@@ -119,14 +119,6 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->role->id == Roles::CREADOR;
     }
 
-    /**
-     * Si el usuario no es visible.
-     * @return bool [description]
-     */
-    public function isNotVisible()
-    {
-        return $this->soft_delete;
-    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -228,6 +220,10 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                     $this->password = Yii::$app->security->generatePasswordHash($this->password);
                 }
                 $this->token_val = $key = Yii::$app->security->generateRandomString();
+                $id = \Yii::$app->db->createCommand(
+                    'INSERT INTO usuarios_id DEFAULT VALUES RETURNING id'
+                )->queryScalar();
+                $this->id = $id;
             } else {
                 //Actualizar
                 if ($this->scenario == self::ESCENARIO_ACTUALIZAR) {
@@ -275,5 +271,12 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                 ->setSubject('Correo de confirmacion de DruidKuma')
                 ->setTextBody('Hola, bienvenido a DruidKuma ' . $enlace . ' Gracias,DruidKuma')
                 ->send();
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getId0()
+    {
+        return $this->hasOne(UsuariosId::className(), ['id' => 'id'])->inverseOf('usuarios');
     }
 }
