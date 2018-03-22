@@ -51,11 +51,11 @@ CREATE TABLE posiciones
 );
 
 --INSERT POSICIONES--
-INSERT INTO posiciones (nombre,siglas)
-VALUES   ('PORTERO','PT'),
-         ('DEFENSA','DF'),
-         ('MEDIOCENTRO','MD'),
-         ('DELANTERO CENTRO','DC');
+INSERT INTO posiciones (id,nombre,siglas)
+VALUES   (0,'PORTERO','PT'),
+         (1,'DEFENSA','DF'),
+         (2,'MEDIOCENTRO','MD'),
+         (3,'DELANTERO CENTRO','DC');
 
 --TABLA JUGADORES
 DROP TABLE IF EXISTS jugadores CASCADE;
@@ -73,6 +73,22 @@ CREATE TABLE jugadores
                             ON UPDATE CASCADE
 );
 
+--TABLA PARTIDOS--
+DROP TABLE IF EXISTS partidos CASCADE;
+CREATE TABLE partidos
+(
+     id bigserial primary KEY
+    ,fecha date
+    ,local_id bigint not null references equipos(id)
+                            ON DELETE NO ACTION
+                            ON UPDATE CASCADE
+    ,visitante_id bigint not null references equipos(id)
+                            ON DELETE NO ACTION
+                            ON UPDATE CASCADE
+    ,estado VARCHAR(255)
+    ,goles_local numeric(3)
+    ,goles_visitante numeric(3)
+);
 
 --TABLA ROLES --
 DROP TABLE IF EXISTS roles CASCADE;

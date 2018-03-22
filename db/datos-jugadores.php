@@ -11,7 +11,7 @@ $pdo = pdo();
 $sent = $pdo->prepare('select id from equipos');
 $sent->execute();
 var_dump($sent);
-$insert = 'insert into jugadores (nombre,posicion_id,dorsal,contrato,equipo_id) values';
+$insert = 'insert into jugadores (id,nombre,posicion_id,dorsal,equipo_id) values';
 foreach ($sent as $liga) {
     $id = $liga['id'];
     $url = "http://api.football-data.org/v1/teams/$id/players";
@@ -20,12 +20,15 @@ foreach ($sent as $liga) {
     //die();
     foreach ($resultado->players as $jugador) {
         //var_dump($jugador);
-        //die();
-        $insert .= "('" . $jugador->name . "'," .
+
+        $insert .= '(' . $jugador->id . ",'" .
+            $jugador->name . "'," .
             rand(0, 3) . ',' .
-            $jugador->jerseyNumber . ",'" .
-            ($jugador->contractUntil) ? $jugador->contractUntil : '' . "'," .
-            $id . '),';
+            $jugador->jerseyNumber . ',';
+        //$insert .= ($jugador->contractUntil) ? $jugador->contractUntil : '';
+        $insert .= $id . '),';
+        //var_dump($insert);
+        //die();
     }
 }
 
