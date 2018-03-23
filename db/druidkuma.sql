@@ -39,6 +39,7 @@ CREATE TABLE equipos (
     ,   liga_id bigint not null references ligas (id)
                             ON DELETE NO ACTION
                             ON UPDATE CASCADE
+    ,   url                 varchar(255)                                       
 );
 
 --TABLA POSICIONES--

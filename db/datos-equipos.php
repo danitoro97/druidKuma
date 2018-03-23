@@ -7,7 +7,7 @@ $pdo = pdo();
 $sent = $pdo->prepare('select id from ligas');
 $sent->execute();
 
-$insert = 'insert into equipos (id,nombre,liga_id) values';
+$insert = 'insert into equipos (id,nombre,liga_id,url) values';
 foreach ($sent as $liga) {
     $id = $liga['id'];
     $url = "http://api.football-data.org/v1/competitions/$id/leagueTable";
@@ -18,7 +18,8 @@ foreach ($sent as $liga) {
         //    var_dump($equipo);
         //    die();
         $insert .= '(' . $equipo->teamId . ",'" .
-        $equipo->team . "'," . $id . '),';
+        $equipo->team . "'," . $id . ",'" .
+        $equipo->crestURI . "'),";
     }
 }
 

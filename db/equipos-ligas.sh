@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ./load.sh
 ./cargar.sh ligas.sql
 ./cargar.sh equipos.sql
