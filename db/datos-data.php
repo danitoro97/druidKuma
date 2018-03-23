@@ -11,7 +11,7 @@ function conexion($uri)
     //$uri = 'http://api.football-data.org/v1/competitions/?season=2017';
     $reqPrefs['http']['method'] = 'GET';
     $reqPrefs['http']['header'] = 'X-Auth-Token: b6bd8f58d2004677a6149e44be9d1a99';
-
+    $reqPrefs['http']['header'] = 'X-Response-Control: minified';
     $stream_context = stream_context_create($reqPrefs);
     $response = file_get_contents($uri, false, $stream_context);
     return json_decode($response);

@@ -1,6 +1,8 @@
 ------------------------------
 -- Archivo de base de datos --
 ------------------------------
+--TABLA PAISES
+
 DROP TABLE IF EXISTS paises CASCADE;
 CREATE TABLE paises
 (
@@ -11,10 +13,11 @@ CREATE TABLE paises
 
 --INSERT PAISES --
 INSERT INTO paises(nombre)
-VALUES('BRASIL'),('INGLATERRA'),('HOLANDA');
+VALUES('ESPAÑA'),('INGLATERRA'),('HOLANDA');
+
+--TABLA LIGAS--
 
 DROP TABLE IF EXISTS ligas CASCADE;
-
 CREATE TABLE ligas(
         id bigserial PRIMARY KEY
     ,   nombre varchar(255) not null unique
@@ -26,6 +29,7 @@ CREATE TABLE ligas(
 
 );
 
+--TABLA EQUIPOS--
 DROP TABLE IF EXISTS equipos CASCADE;
 
 CREATE TABLE equipos (
@@ -35,9 +39,57 @@ CREATE TABLE equipos (
     ,   liga_id bigint not null references ligas (id)
                             ON DELETE NO ACTION
                             ON UPDATE CASCADE
+    ,   url                 varchar(255)                                       
 );
 
+--TABLA POSICIONES--
+DROP TABLE IF EXISTS posiciones CASCADE;
+CREATE TABLE posiciones
+(
+        id bigserial primary KEY
+    ,   nombre varchar(255) not null UNIQUE
+    ,   siglas varchar(10)
+);
 
+--INSERT POSICIONES--
+INSERT INTO posiciones (id,nombre,siglas)
+VALUES   (0,'PORTERO','PT'),
+         (1,'DEFENSA','DF'),
+         (2,'MEDIOCENTRO','MD'),
+         (3,'DELANTERO CENTRO','DC');
+
+--TABLA JUGADORES
+DROP TABLE IF EXISTS jugadores CASCADE;
+CREATE TABLE jugadores
+(
+        id bigserial primary KEY
+    ,   nombre varchar(255)   not NULL
+    ,   posicion_id bigint not null references posiciones (id)
+                            ON DELETE NO ACTION
+                            ON UPDATE CASCADE
+    ,   dorsal numeric(5)
+    ,   contrato VARCHAR(255)
+    ,   equipo_id bigint not null references equipos(id)
+                            ON DELETE NO ACTION
+                            ON UPDATE CASCADE
+);
+
+--TABLA PARTIDOS--
+DROP TABLE IF EXISTS partidos CASCADE;
+CREATE TABLE partidos
+(
+     id bigserial primary KEY
+    ,fecha date
+    ,local_id bigint not null references equipos(id)
+                            ON DELETE NO ACTION
+                            ON UPDATE CASCADE
+    ,visitante_id bigint not null references equipos(id)
+                            ON DELETE NO ACTION
+                            ON UPDATE CASCADE
+    ,estado VARCHAR(255)
+    ,goles_local numeric(3)
+    ,goles_visitante numeric(3)
+);
 
 --TABLA ROLES --
 DROP TABLE IF EXISTS roles CASCADE;
