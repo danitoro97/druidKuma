@@ -14,6 +14,7 @@ use Yii;
  *
  * @property Equipos[] $equipos
  * @property Paises $pais
+ * @property Partidos[] $partidos
  */
 class Ligas extends \yii\db\ActiveRecord
 {
@@ -67,5 +68,13 @@ class Ligas extends \yii\db\ActiveRecord
     public function getPais()
     {
         return $this->hasOne(Paises::className(), ['id' => 'pais_id'])->inverseOf('ligas');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPartidos()
+    {
+        return $this->hasMany(Partidos::className(), ['liga_id' => 'id'])->inverseOf('liga');
     }
 }

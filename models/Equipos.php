@@ -86,12 +86,12 @@ class Equipos extends \yii\db\ActiveRecord
 
     public function getPartidosJugadosLocal()
     {
-        return $this->getPartidos()->where(['estado' => 'FINISHED'])->count();
+        return $this->getPartidos()->where(['estado' => 'TERMINADO'])->count();
     }
 
     public function getPartidosJugadosVisitante()
     {
-        return $this->getPartidos0()->where(['estado' => 'FINISHED'])->count();
+        return $this->getPartidos0()->where(['estado' => 'TERMINADO'])->count();
     }
 
     public function getPartidosJugados()
@@ -159,10 +159,14 @@ class Equipos extends \yii\db\ActiveRecord
         return $this->golesContraLocal + $this->golesContraVisitante;
     }
 
+    public function getEmpates()
+    {
+        return ($this->partidosJugados - $this->victorias) - $this->derrotas;
+    }
+
     public function getPuntos()
     {
-        $empates = ($this->partidosJugados - $this->victorias) - $this->derrotas;
-        return $this->victorias * 3 + $empates;
+        return $this->victorias * 3 + $this->empates;
     }
 
     public function getDiff()

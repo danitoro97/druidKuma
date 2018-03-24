@@ -5,3 +5,4 @@
 ./cargar.sh equipos.sql
 ./cargar.sh jugadores.sql
 ./cargar.sh partidos.sql
+./cargar.sh noticias.sql

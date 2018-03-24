@@ -11,7 +11,7 @@ $pdo = pdo();
 $sent = $pdo->prepare('select id from ligas');
 $sent->execute();
 
-$insert = 'insert into partidos (fecha,local_id,visitante_id,estado,goles_local,goles_visitante) values';
+$insert = 'insert into partidos (fecha,local_id,visitante_id,estado,goles_local,goles_visitante,liga_id) values';
 foreach ($sent as $liga) {
     $id = $liga['id'];
     $url = "http://api.football-data.org/v1/competitions/$id/fixtures";
@@ -27,7 +27,8 @@ foreach ($sent as $liga) {
         $partido->awayTeamId . ",'" .
         $partido->status . "',";
         $insert .= ($partido->result->goalsHomeTeam) ? $partido->result->goalsHomeTeam . ',' : 'null,';
-        $insert .= ($partido->result->goalsAwayTeam) ? $partido->result->goalsAwayTeam . '),' : 'null),';
+        $insert .= ($partido->result->goalsAwayTeam) ? $partido->result->goalsAwayTeam . ',' : 'null,';
+        $insert .= $id . '),';
         //var_dump($insert);
         //die();
     }
