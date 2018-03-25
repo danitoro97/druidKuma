@@ -2,12 +2,12 @@
 
 namespace app\controllers;
 
+use app\components\Clasificacion;
 use app\models\Ligas;
 use app\models\Partidos;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\VerbFilter;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -55,39 +55,8 @@ class LigasController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $clasificacion = [];
-        foreach ($model->equipos as $equipo) {
-            // code...
+        $clasificacion = Clasificacion::clasificacion($model->equipos, $id);
 
-            $clasificacion[] = [
-                'pj' => $equipo->partidosJugados,
-                'pg' => $equipo->victorias,
-                'pe' => $equipo->empates,
-                'pp' => $equipo->derrotas,
-                'gf' => $equipo->golesFavor,
-                'gc' => $equipo->golesContra,
-                'dif' => $equipo->diff,
-                'pts' => $equipo->puntos,
-                'nombre' => $equipo->nombre,
-                'id' => $equipo->id,
-            ];
-        }
-        //$clasificacion = ArrayHelper::index($clasificacion, 'pts');
-        //arsort($clasificacion);
-        usort($clasificacion, function ($a, $b) {
-            $ida = Partidos::find()->where(['local_id' => $a['id'], 'visitante_id' => $b['id']]);
-            var_dump($ida);
-            die();
-            if ($a['pts'] == $b['pts']) {
-                if ($a['gf'] > $b['gf']) {
-                    return -1;
-                }
-                return 1;
-            }
-            return ($a['pts'] > $b['pts']) ? -1 : 1;
-        });
-        print_r($clasificacion);
-        die();
         return $this->render('view', [
             'model' => $model,
             'partidos' => new ActiveDataProvider([
@@ -96,9 +65,9 @@ class LigasController extends Controller
                     'pageSize' => 10,
                 ],
             ]),
-            /*'partidos' => new ArrayDataProvider([
-                'allModels' => $model->getPartidos()->orderBy('fecha DESC')->limit(10)->all(),
-            ]),*/
+            'clasificacion' => new ArrayDataProvider([
+                'allModels' => $clasificacion,
+            ]),
         ]);
     }
 

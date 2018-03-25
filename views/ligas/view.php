@@ -18,19 +18,27 @@ $this->params['breadcrumbs'][] = $this->title;
          de <?=Html::encode(ucwords(mb_strtolower($model->pais->nombre)))?>
 
     </h1>
-    <h2>Clasificacion</h2>
-    <h2>Ultimos partidos jugados</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <h2>Proximos partidos</h2>
+            </div>
+            <?php echo $this->render('_clasificacion', ['clasificacion' => $clasificacion, 'equipo' => false]); ?>
+            
+        </div>
 
-    <?=GridView::widget([
-        'dataProvider' => $partidos,
-        'columns' => [
-            'fecha:date',
-            'estado',
-            'local.nombre',
-            'goles_local',
-            'visitante.nombre',
-            'goles_visitante',
-         ],
-        ]) ?>
+        <h2>Ultimos partidos jugados</h2>
 
+        <?=GridView::widget([
+            'dataProvider' => $partidos,
+            'columns' => [
+                'fecha:date',
+                'estado',
+                'local.nombre',
+                'goles_local',
+                'visitante.nombre',
+                'goles_visitante',
+             ],
+            ]) ?>
+    </div>
 </div>

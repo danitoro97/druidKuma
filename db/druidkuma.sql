@@ -40,6 +40,7 @@ CREATE TABLE equipos (
                             ON DELETE NO ACTION
                             ON UPDATE CASCADE
     ,   url                 varchar(255)
+    ,   Unique (nombre,lida_id)
 );
 
 --TABLA POSICIONES--
