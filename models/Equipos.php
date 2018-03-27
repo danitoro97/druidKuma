@@ -99,34 +99,19 @@ class Equipos extends \yii\db\ActiveRecord
         return $this->getPartidosJugadosLocal() + $this->getPartidosJugadosVisitante();
     }
 
-    public function getGolesLocal()
-    {
-        return $this->getPartidos()->sum('goles_local');
-    }
-
-    public function getGolesVisitante()
-    {
-        return $this->getPartidos0()->sum('goles_visitante');
-    }
-
     public function getGolesFavor()
     {
-        return $this->golesLocal + $this->golesVisitante;
-    }
-
-    public function getVictoriasLocal()
-    {
-        return $this->getPartidos()->where('coalesce(goles_local,0) > coalesce(goles_visitante,0)')->count();
-    }
-
-    public function getVictoriasVisitante()
-    {
-        return $this->getPartidos0()->where('coalesce(goles_local,0)< coalesce(goles_visitante,0)')->count();
+        return $this->getPartidos()->sum('goles_local') + $this->getPartidos0()->sum('goles_visitante');
     }
 
     public function getVictorias()
     {
-        return $this->victoriasLocal + $this->victoriasVisitante;
+        return $this->getPartidos()
+                ->where('coalesce(goles_local,0) > coalesce(goles_visitante,0)')
+                ->count() +
+                $this->getPartidos0()
+                ->where('coalesce(goles_local,0)< coalesce(goles_visitante,0)')
+                ->count();
     }
 
     public function getDerrotasLocal()
