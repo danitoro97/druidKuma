@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\components\Calendar;
 use app\models\Partidos;
+use yii\helpers\Url;
 use yii\web\Response;
 
 class PartidosController extends \yii\web\Controller
@@ -29,7 +30,9 @@ class PartidosController extends \yii\web\Controller
 
             $a = new Calendar([
                 'title' => $partido->local->nombre . '-' . $partido->visitante->nombre,
-                'start' => $partido->fecha, ]);
+                'start' => $partido->fecha,
+                'url' => Url::to(['partidos/view', 'id' => $partido->id], true),
+            ]);
             $b[] = $a->toArray();
         }
         return $b;

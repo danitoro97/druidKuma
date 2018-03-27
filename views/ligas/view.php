@@ -33,6 +33,12 @@ $js=<<<EOT
         ],
         defaultView: 'month',
         navLinks: true,
+        eventClick: function(event) {
+           if (event.url) {
+             window.open(event.url,'Partidos',"width=700,height=500");
+             return false;
+           }
+        },
     });
 EOT;
 
