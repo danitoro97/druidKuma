@@ -24,16 +24,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h2>Proximos partidos</h2>
             </div>
             <?php echo $this->render('_clasificacion', ['clasificacion' => $clasificacion, 'equipo' => false]); ?>
-            
+
         </div>
 
         <h2>Ultimos partidos jugados</h2>
 
         <?=GridView::widget([
             'dataProvider' => $partidos,
+            'formatter' => ['class' => 'yii\i18n\Formatter','nullDisplay' => '0'],
             'columns' => [
                 'fecha:date',
-                'estado',
                 'local.nombre',
                 'goles_local',
                 'visitante.nombre',

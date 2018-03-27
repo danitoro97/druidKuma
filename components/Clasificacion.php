@@ -30,6 +30,7 @@ class Clasificacion
                 'nombre' => $equipo->nombre,
                 'id' => $equipo->id,
                 'liga_id' => $liga_id,
+                'url' => $equipo->url,
             ];
         }
 

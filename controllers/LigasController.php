@@ -60,7 +60,7 @@ class LigasController extends Controller
         return $this->render('view', [
             'model' => $model,
             'partidos' => new ActiveDataProvider([
-                'query' => Partidos::find()->where(['liga_id' => $model->id])->orderBy('fecha DESC'),
+                'query' => Partidos::find()->where(['liga_id' => $model->id, 'estado' => 'TERMINADO'])->orderBy('fecha DESC'),
                 'pagination' => [
                     'pageSize' => 10,
                 ],

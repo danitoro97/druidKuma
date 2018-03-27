@@ -9,10 +9,20 @@ use yii\helpers\Html;
 /* @var $clasificacion Array de equipos */
 /* @var $equipo Id con el equipo que estar mirando*/
 Yii::$app->params['equipo'] = $equipo;
+
+$css= <<<EOT
+    .equipo {
+        width: 20px;
+        height: 20px;
+    }
+EOT;
+
+$this->registerCss($css);
+
 ?>
 
 <div class="clasificacion">
-    <div class="col-md-5">
+    <div class="col-md-7">
         <h2>Clasificacion</h2>
         <?= GridView::widget([
             'dataProvider' => $clasificacion,
@@ -25,14 +35,14 @@ Yii::$app->params['equipo'] = $equipo;
             'columns' => [
                 [
                     'class' => 'yii\grid\SerialColumn',
-                    'header' => 'Posicion',
+                    'header' => 'Pos',
 
                 ],
                 [
                     'attribute'=> 'nombre',
                     'value' => function ($data) {
-
-                        return Html::a(Html::encode($data['nombre']), ['equipos/view', 'id' => $data['id']]);
+                        $img = Html::img($data['url'], ['class' => 'equipo']);
+                        return $img . Html::a(Html::encode($data['nombre']), ['equipos/view', 'id' => $data['id']]);
                     },
                     'format' => 'html',
                 ],
