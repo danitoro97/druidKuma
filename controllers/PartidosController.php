@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\components\Calendar;
 use app\models\Partidos;
 use yii\helpers\Url;
 use yii\web\Response;
@@ -24,16 +23,22 @@ class PartidosController extends \yii\web\Controller
         ->all();
         \Yii::$app->response->format = Response::FORMAT_JSON;
         $b = [];
+        $now = date('Y-m-d');
 
         foreach ($partidos as $partido) {
-            // code...
-
-            $a = new Calendar([
-                'title' => $partido->local->nombre . '-' . $partido->visitante->nombre,
+            $a = ' - ';
+            if ($now > $partido->fecha) {
+                $p = $partido->goles_local ?? '0';
+                $p2 = $partido->goles_visitante ?? '0';
+                $a = ' ' . $p . ' - ' . $p2 . ' ';
+            }
+            $b[] = [
+                'title' => $partido->local->nombre .
+                $a .
+                $partido->visitante->nombre,
                 'start' => $partido->fecha,
                 'url' => Url::to(['partidos/view', 'id' => $partido->id], true),
-            ]);
-            $b[] = $a->toArray();
+            ];
         }
         return $b;
     }

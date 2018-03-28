@@ -22,7 +22,7 @@ $this->registerCss($css);
 ?>
 
 <div class="clasificacion">
-    <div class="col-md-7">
+    <div class="col-md-offset-2 col-md-7">
         <h2>Clasificacion</h2>
         <?= GridView::widget([
             'dataProvider' => $clasificacion,
