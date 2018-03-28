@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use app\models\Ligas;
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -44,12 +45,21 @@ $this->registerJs($js, View::POS_READY);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+
+    $ligas = Ligas::find()->all();
+    foreach ($ligas as $liga) {
+
+        $i[] = [
+            'label' => $liga->nombre,
+            'url' => ['ligas/view', 'id' => $liga->id],
+        ];
+        
+
+    }
     $item = [
             ['label' => 'Inicio', 'url' => ['/noticias/index']],
-            //['label' => 'Noticias', 'url' => ['/noticias/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']]
-        ];
+            ['label' => 'Ligas', 'items' => $i],
+    ];
 
     if (Yii::$app->user->isGuest) {
         $item[] = ['label' => 'Iniciar sesión' , 'url' => ['/site/login']];

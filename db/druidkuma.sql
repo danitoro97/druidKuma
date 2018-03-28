@@ -13,7 +13,7 @@ CREATE TABLE paises
 
 --INSERT PAISES --
 INSERT INTO paises(nombre)
-VALUES('ESPAÑA'),('INGLATERRA'),('HOLANDA');
+VALUES('ESPAÑA'),('INGLATERRA'),('ALEMANIA'),('ITALIA');
 
 --TABLA LIGAS--
 
@@ -39,7 +39,8 @@ CREATE TABLE equipos (
     ,   liga_id bigint not null references ligas (id)
                             ON DELETE NO ACTION
                             ON UPDATE CASCADE
-    ,   url                 varchar(255)                                       
+    ,   url                 varchar(255)
+    ,   Unique (nombre,liga_id)
 );
 
 --TABLA POSICIONES--
@@ -84,6 +85,9 @@ CREATE TABLE partidos
                             ON DELETE NO ACTION
                             ON UPDATE CASCADE
     ,visitante_id bigint not null references equipos(id)
+                            ON DELETE NO ACTION
+                            ON UPDATE CASCADE
+    ,liga_id bigint not null references ligas(id)
                             ON DELETE NO ACTION
                             ON UPDATE CASCADE
     ,estado VARCHAR(255)

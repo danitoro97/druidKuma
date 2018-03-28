@@ -17,6 +17,7 @@ namespace app\models;
  */
 class Equipos extends \yii\db\ActiveRecord
 {
+    public const FINALIZADO = 'TERMINADO';
     /**
      * {@inheritdoc}
      */
@@ -84,87 +85,82 @@ class Equipos extends \yii\db\ActiveRecord
         return $this->hasMany(Partidos::className(), ['visitante_id' => 'id'])->inverseOf('visitante');
     }
 
-    public function getPartidosJugadosLocal()
-    {
-        return $this->getPartidos()->where(['estado' => 'FINISHED'])->count();
-    }
 
-    public function getPartidosJugadosVisitante()
-    {
-        return $this->getPartidos0()->where(['estado' => 'FINISHED'])->count();
-    }
-
+    /**
+     * Devuelve la cantidad de partidos jugados hasta ahora.
+     * @return [type] [description]
+     */
     public function getPartidosJugados()
     {
-        return $this->getPartidosJugadosLocal() + $this->getPartidosJugadosVisitante();
+        return $this->getPartidos()->where(['estado' => self::FINALIZADO])->count()
+        + $this->getPartidos0()->where(['estado' => self::FINALIZADO])->count();
     }
 
-    public function getGolesLocal()
-    {
-        return $this->getPartidos()->sum('goles_local');
-    }
-
-    public function getGolesVisitante()
-    {
-        return $this->getPartidos0()->sum('goles_visitante');
-    }
-
+    /**
+     * Devuelve la cantidad de goles metidos por el equipo.
+     * @return [type] [description]
+     */
     public function getGolesFavor()
     {
-        return $this->golesLocal + $this->golesVisitante;
+        return $this->getPartidos()->sum('goles_local')
+        + $this->getPartidos0()->sum('goles_visitante');
     }
 
-    public function getVictoriasLocal()
-    {
-        return $this->getPartidos()->where('coalesce(goles_local,0) > coalesce(goles_visitante,0)')->count();
-    }
-
-    public function getVictoriasVisitante()
-    {
-        return $this->getPartidos0()->where('coalesce(goles_local,0)< coalesce(goles_visitante,0)')->count();
-    }
-
+    /**
+     * Devuelve la cantidad de partidos ganados.
+     * @return [type] [description]
+     */
     public function getVictorias()
     {
-        return $this->victoriasLocal + $this->victoriasVisitante;
+        return $this->getPartidos()
+                ->where('coalesce(goles_local,0) > coalesce(goles_visitante,0)')
+                ->count() +
+                $this->getPartidos0()
+                ->where('coalesce(goles_local,0)< coalesce(goles_visitante,0)')
+                ->count();
     }
-
-    public function getDerrotasLocal()
-    {
-        return $this->getPartidos()->where('coalesce(goles_local,0) < coalesce(goles_visitante,0)')->count();
-    }
-
-    public function getDerrotasVisitante()
-    {
-        return $this->getPartidos0()->where('coalesce(goles_local,0) > coalesce(goles_visitante,0)')->count();
-    }
-
+    /**
+     * Devuelve la cantidad de partidos perdidos.
+     * @return [type] [description]
+     */
     public function getDerrotas()
     {
-        return $this->derrotasLocal + $this->derrotasVisitante;
+        return $this->getPartidos()->where('coalesce(goles_local,0) < coalesce(goles_visitante,0)')->count()
+        + $this->getPartidos0()->where('coalesce(goles_local,0) > coalesce(goles_visitante,0)')->count();
     }
 
-    public function getGolesContraLocal()
-    {
-        return $this->getPartidos0()->sum('goles_local');
-    }
-
-    public function getGolesContraVisitante()
-    {
-        return $this->getPartidos()->sum('goles_visitante');
-    }
-
+    /**
+     * Devuelve la cantidad de goles encajado por el equipo.
+     * @return [type] [description]
+     */
     public function getGolesContra()
     {
-        return $this->golesContraLocal + $this->golesContraVisitante;
+        return $this->getPartidos0()->sum('goles_local')
+        + $this->getPartidos()->sum('goles_visitante');
     }
 
+    /**
+     * Devuelve la cantidad de partidos empatados.
+     * @return [type] [description]
+     */
+    public function getEmpates()
+    {
+        return ($this->partidosJugados - $this->victorias) - $this->derrotas;
+    }
+
+    /**
+     * Devuelve la cantidad de puntos ganados por el equipo.
+     * @return [type] [description]
+     */
     public function getPuntos()
     {
-        $empates = ($this->partidosJugados - $this->victorias) - $this->derrotas;
-        return $this->victorias * 3 + $empates;
+        return $this->victorias * 3 + $this->empates;
     }
 
+    /**
+     * Devuelve la diferencia entre goles a favor y en contra.
+     * @return [type] [description]
+     */
     public function getDiff()
     {
         return $this->golesFavor - $this->golesContra;
