@@ -13,16 +13,15 @@ class PartidosController extends \yii\web\Controller
      * @param  [type] $liga  Liga a la que pertenecen los partidos
      * @param  [type] $start Inicio rango de fecha
      * @param  [type] $end   Fin de rango de fecha
-     * @param  [type] $_     [description]
      * @return [type]        Devuelve un array
      */
-    public function actionPartidos($liga, $start, $end, $_ = null)
+    public function actionPartidos($liga, $start, $end)
     {
         $partidos = Partidos::find()->where(['between', 'fecha', $start, $end])
         ->andWhere(['liga_id' => $liga])
         ->all();
         \Yii::$app->response->format = Response::FORMAT_JSON;
-        $b = [];
+        $eventos = [];
         $now = date('Y-m-d');
 
         foreach ($partidos as $partido) {
@@ -32,7 +31,7 @@ class PartidosController extends \yii\web\Controller
                 $p2 = $partido->goles_visitante ?? '0';
                 $a = ' ' . $p . ' - ' . $p2 . ' ';
             }
-            $b[] = [
+            $eventos[] = [
                 'title' => $partido->local->nombre .
                 $a .
                 $partido->visitante->nombre,
@@ -40,6 +39,6 @@ class PartidosController extends \yii\web\Controller
                 'url' => Url::to(['partidos/view', 'id' => $partido->id], true),
             ];
         }
-        return $b;
+        return $eventos;
     }
 }
