@@ -16,7 +16,7 @@ $this->registerJsFile('plugin/fullcalendar/lib/moment.min.js',['depends' => [\yi
 $this->registerJsFile('plugin/fullcalendar/fullcalendar.min.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('plugin/fullcalendar/locale/es.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerCssFile('plugin/fullcalendar/fullcalendar.min.css');
-$ruta = Url::to(['partidos/partidos'],true);
+$ruta = Url::to(['partidos/partidos'],'https');
 $js=<<<EOT
 
     $('#calendar').fullCalendar({
@@ -26,7 +26,7 @@ $js=<<<EOT
             {
                 url:'$ruta',
                 data: {
-                    
+
                     liga:'$model->id',
                 }
             }
