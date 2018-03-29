@@ -33,10 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModelJugadores,
         'formatter' => ['class' => 'yii\i18n\Formatter','nullDisplay' => ''],
         'columns' => [
-            'posicion.nombre',
+            [
+                'attribute' => 'posicion',
+                'value' => 'posicion.nombre',
+            ],
             'nombre',
             'dorsal',
-            'contrato',
+            
         ],
     ]); ?>
 

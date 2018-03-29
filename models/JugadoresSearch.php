@@ -10,14 +10,15 @@ use yii\data\ActiveDataProvider;
  */
 class JugadoresSearch extends Jugadores
 {
+    public $posicion;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'posicion_id', 'equipo_id'], 'integer'],
-            [['nombre', 'contrato'], 'safe'],
+            [['id', 'equipo_id'], 'integer'],
+            [['nombre', 'posicion', 'contrato'], 'safe'],
             [['dorsal'], 'number'],
         ];
     }
@@ -41,12 +42,15 @@ class JugadoresSearch extends Jugadores
      */
     public function search($params, $equipoId)
     {
-        $query = Jugadores::find()->where(['equipo_id' => $equipoId]);
+        $query = Jugadores::find()
+        ->joinWith(['posicion'])
+        ->where(['equipo_id' => $equipoId]);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['defaultOrder' => ['posicion_id' => SORT_ASC]],
         ]);
 
         $this->load($params);
@@ -57,10 +61,17 @@ class JugadoresSearch extends Jugadores
             return $dataProvider;
         }
 
+        $dataProvider->sort->attributes['posicion'] = [
+        // The tables are the ones our relation are configured to
+        // in my case they are prefixed with "tbl_"
+        'asc' => ['posiciones.nombre' => SORT_ASC],
+        'desc' => ['posiciones.nombre' => SORT_DESC],
+        ];
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'posicion_id' => $this->posicion_id,
+            'posiciones.nombre' => $this->posicion,
             'dorsal' => $this->dorsal,
             'equipo_id' => $this->equipo_id,
         ]);
