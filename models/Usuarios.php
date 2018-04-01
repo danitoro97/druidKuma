@@ -210,16 +210,18 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                 while (self::findOne(['auth_key' => $key]) != null) {
                     $key = Yii::$app->security->generateRandomString();
                 }
-                $this->auth_key = $key = Yii::$app->security->generateRandomString();
+                $this->auth_key = $key;
                 $key = Yii::$app->security->generateRandomString();
 
                 while (self::findOne(['token_val' => $key]) != null) {
                     $key = Yii::$app->security->generateRandomString();
                 }
+                $this->token_val = $key;
+
                 if ($this->scenario == self::ESCENARIO_CREAR) {
                     $this->password = Yii::$app->security->generatePasswordHash($this->password);
                 }
-                $this->token_val = $key = Yii::$app->security->generateRandomString();
+
                 $id = \Yii::$app->db->createCommand(
                     'INSERT INTO usuarios_id DEFAULT VALUES RETURNING id'
                 )->queryScalar();
@@ -241,7 +243,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                         while (self::findOne(['token_val' => $key]) != null) {
                             $key = Yii::$app->security->generateRandomString();
                         }
-                        $this->token_val = $key = Yii::$app->security->generateRandomString();
+                        $this->token_val = $key;
                         //mandar correo
                         $this->enviarCorreo();
                         Yii::$app->user->logout();
