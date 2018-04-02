@@ -17,7 +17,7 @@ namespace app\models;
  */
 class Equipos extends \yii\db\ActiveRecord
 {
-    public const FINALIZADO = 'TERMINADO';
+    public const FINALIZADO = 'FINISHED';
     /**
      * {@inheritdoc}
      */

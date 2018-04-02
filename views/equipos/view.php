@@ -8,6 +8,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Equipos */
 
 $this->title = $model->nombre;
+$this->registerCssFile('/css/equipo.css');
 $this->params['breadcrumbs'][] = ['label' => 'Equipos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -22,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="row">
             <div class="col-md-2 col-md-offset-1">
-                <?=Html::img($model->url, ['class' => 'img-responsive'])?>
+                <?=Html::img($model->url, ['class' => 'img-equipo'])?>
             </div>
             <?php echo $this->render('/ligas/_clasificacion', ['clasificacion' => $clasificacion, 'equipo' => $model->id]); ?>
         </div>
@@ -37,9 +38,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'posicion',
                 'value' => 'posicion.nombre',
             ],
-            'nombre',
+            [
+                'attribute' => 'nombre',
+                'value' => function ($data) {
+                    return Html::a(Html::encode($data->nombre), ['/jugadores/view', 'id' => $data->id]);
+                },
+                'format' => 'html',
+            ],
+
             'dorsal',
-            
+
         ],
     ]); ?>
 
