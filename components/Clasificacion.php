@@ -15,6 +15,7 @@ class Clasificacion
     public static function clasificacion($equipos, $ligaId)
     {
         $clasificacion = [];
+
         foreach ($equipos as $equipo) {
             $clasificacion[] = [
                 'pj' => $equipo->partidosJugados,

@@ -120,7 +120,7 @@ class NoticiasController extends Controller
             }
 
 
-            if ($model->upload() && $model->validate() && $model->save(false)) {
+            if ($model->upload() && $model->save()) {
                 return $this->goHome();
             }
         }
