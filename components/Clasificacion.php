@@ -41,13 +41,14 @@ class Clasificacion
                 $golesA = $ida->goles_local + $vuelta->goles_visitante;
                 $golesB = $ida->goles_visitante + $vuelta->goles_local;
 
+                $orden = ($golesA > $golesB) ? -1 : 1;
                 if ($golesA == $golesB) {
                     if ($vuelta->goles_visitante == $ida->goles_visitante) {
-                        return ($local['gf'] >= $visitante['gf']) ? -1 : 1;
+                        $orden = ($local['gf'] >= $visitante['gf']) ? -1 : 1;
                     }
-                    return ($vuelta->goles_visitante > $ida->goles_visitante) ? -1 : 1;
+                    $orden = ($vuelta->goles_visitante > $ida->goles_visitante) ? -1 : 1;
                 }
-                return ($golesA > $golesB) ? -1 : 1;
+                return $orden;
             }
             return ($local['pts'] > $visitante['pts']) ? -1 : 1;
         });
