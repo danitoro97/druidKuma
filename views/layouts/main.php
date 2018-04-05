@@ -53,9 +53,10 @@ $this->registerJs($js, View::POS_READY);
             'label' => $liga->nombre,
             'url' => ['ligas/view', 'id' => $liga->id],
         ];
-        
+
 
     }
+    
     $item = [
             ['label' => 'Inicio', 'url' => ['/noticias/index']],
             ['label' => 'Ligas', 'items' => $i],

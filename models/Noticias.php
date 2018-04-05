@@ -132,4 +132,12 @@ class Noticias extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Usuarios::className(), ['id' => 'creador_id'])->inverseOf('noticias');
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComentarios()
+    {
+        return $this->hasMany(Comentarios::className(), ['noticia_id' => 'id'])->inverseOf('noticia');
+    }
 }
