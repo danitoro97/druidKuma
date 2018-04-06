@@ -172,6 +172,9 @@ CREATE TABLE comentarios
         , usuario_id BIGINT NOT NULL REFERENCES usuarios_id(id)
                         ON DELETE NO ACTION
                         ON UPDATE CASCADE
+        , padre_id BIGINT REFERENCES comentarios(id)
+                        ON DELETE NO ACTION
+                        ON UPDATE CASCADE
         ,   created_at TIMESTAMP(0)
         ,   updated_at TIMESTAMP(0)
 );

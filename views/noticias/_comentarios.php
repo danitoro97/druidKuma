@@ -1,6 +1,8 @@
 <?php
 
+use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
+use yii\widgets\ListView;
 /* @var app\models\Comentarios */
 $this->registerCssFile('/css/comentarios.css');
 ?>
@@ -21,5 +23,19 @@ $this->registerCssFile('/css/comentarios.css');
             <?=Html::encode($model->comentario)?>
         </p>
     </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-2 comentario">
+            <?php if ($model->comentarios) {
+                echo ListView::widget([
+                        'dataProvider' => new ActiveDataProvider([
+                            'query' => $model->getComentarios()->orderBy('created_at ASC'),
+                        ]),
+                        'itemView' => '_comentarios',
+                        'summary' =>''
+                ]);
+            } ?>
+        </div>
+    </div>
+
 
 </div>

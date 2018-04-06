@@ -103,7 +103,7 @@ class NoticiasController extends Controller
         return $this->render('view', [
             'model' => $model,
             'comentarios' => new ActiveDataProvider([
-                'query' => $model->getComentarios()->orderBy('created_at ASC'),
+                'query' => $model->getComentarios()->orderBy('created_at ASC')->where('padre_id is null'),
             ]),
         ]);
     }

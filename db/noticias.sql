@@ -54,5 +54,6 @@ Cras libero elit, posuere sed suscipit ut, tincidunt sed nisi. Nulla vel odio ve
 
 --INSERT COMENTARIOS --
 
-INSERT INTO comentarios (comentario,usuario_id,noticia_id)
-values ('cierto muy cierto',1,1);
+INSERT INTO comentarios (comentario,usuario_id,noticia_id,padre_id)
+values ('cierto muy cierto',1,1,null),
+       ('jie',2,1,1);
