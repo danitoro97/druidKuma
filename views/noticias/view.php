@@ -81,9 +81,11 @@ $this->registerJs($js);
             </div>
 
         <?php endif;
+            echo '<h3>Comentarios</h3>';
             echo ListView::widget([
                     'dataProvider' => $comentarios,
                     'itemView' => '_comentarios',
+                    'summary' =>''
             ]);
 
         ?>

@@ -13,14 +13,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
-$js = <<<EOT
-$('#gotop').gotop({
-  customHtml: '<span class="glyphicon glyphicon-menu-up"></span>',
 
-});
-EOT;
-
-$this->registerJs($js, View::POS_READY);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -56,7 +49,7 @@ $this->registerJs($js, View::POS_READY);
 
 
     }
-    
+
     $item = [
             ['label' => 'Inicio', 'url' => ['/noticias/index']],
             ['label' => 'Ligas', 'items' => $i],

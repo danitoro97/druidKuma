@@ -99,11 +99,12 @@ class NoticiasController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
             'comentarios' => new ActiveDataProvider([
-                'query' => Comentarios::find()->where(['noticia_id' => $id]),
-                ]),
+                'query' => $model->getComentarios()->orderBy('created_at ASC'),
+            ]),
         ]);
     }
 

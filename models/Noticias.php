@@ -100,7 +100,8 @@ class Noticias extends \yii\db\ActiveRecord
         } catch (BadRequest $e) {
             // No se hace nada
         }
-        $client->upload($nombre, file_get_contents(Yii::getAlias($nombre)), 'overwrite');
+        $client->upload($nombre, file_get_contents($nombre, 'overwrite'));
+
         $res = $client->createSharedLinkWithSettings($nombre, [
             'requested_visibility' => 'public',
         ]);

@@ -116,3 +116,12 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.up {
+    position: fixed;
+    display: block;
+    bottom: 80px;
+    right: 20px;
+    height: 38px;
+    width: 38px;
+}

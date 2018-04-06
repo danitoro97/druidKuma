@@ -1,0 +1,16 @@
+.comentario {
+        border-bottom: 1px solid #d8d8d8;
+}
+
+.nombre_usuario {
+    font-family: "robotoBold",Arial,helvetica;
+    font-size: 17px;
+}
+
+.fecha {
+    font-size: 11px;
+}
+
+.comentario p:last-child {
+        margin-left: 50px;
+}
