@@ -16,28 +16,18 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->registerCssFile('/css/detallesNoticias.css');
 $ruta = Url::to(['comentarios/create']);
 $js= <<<EOT
-    $('#botonComentario').on('click', function(event){
-        event.preventDefault();
-        var textarea = $(this).prev();
-        var comentario = textarea.val();
+$('.responder').on('click', function(event) {
+    $(this).after($('<textarea>'));
+    var boton = $('<button>');
+    boton.text('Enviar');
+    boton.addClass('btn btn-xs btn-info enviar');
+    
+    aa(boton,'$ruta','$model->id');
 
-        if (comentario != ''){
-            $.ajax({
-                url: '$ruta',
-                type: 'post',
-                data: {
-                    comentario: comentario,
-                    noticia: '$model->id',
-                },
-                success: function(data){
-                    //Añadir comentario al div
-                    textarea.val('');
-                },
-                dataType : 'json',
-            });
-        }
+    $(this).after(boton);
+    $(this).remove();
 
-    });
+});
 EOT;
 
 $this->registerJs($js);
