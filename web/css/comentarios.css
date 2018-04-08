@@ -1,5 +1,5 @@
 .comentario {
-        border: 1px solid #d8d8d8;
+        border-bottom: 1px solid #d8d8d8;
 }
 
 .nombre_usuario {
@@ -13,4 +13,8 @@
 
 .comentario p:last-child {
         margin-left: 50px;
+}
+.comentario p:nth-child(2) {
+    margin-left: 30px;
+    font-size: 20px;
 }

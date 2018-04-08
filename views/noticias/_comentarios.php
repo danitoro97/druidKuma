@@ -12,15 +12,23 @@ use yii\widgets\ListView;
     <div class="col-md-5 col-md-offset-2 comentario" data-padre_id = <?=$model->id?>>
         <p class="usuario">
             <span class="nombre_usuario">
-                <?=($model->usuario->usuarios) ? Html::a(
+            <?php
+                $nombre = ($model->usuario->usuarios) ? Html::a(
                     Html::encode($model->usuario->usuarios->nombre), ['usuarios/view', 'id' => $model->usuario_id])
-                 : 'anonimo'?>
+                 : 'anonimo';
+            ?>
+                <?=$nombre?>
             </span>
             <span class="fecha">
                 <?=Yii::$app->formatter->asDatetime($model->created_at)?>
             </span>
         </p>
         <p>
+            <?php
+                if ($model->padre_id!=null){
+                    echo '#' . $nombre;
+                }
+            ?>
             <?=Html::encode($model->comentario)?>
         </p>
         <?php if(!Yii::$app->user->isGuest) : ?>
@@ -28,7 +36,7 @@ use yii\widgets\ListView;
         <?php endif;?>
     </div>
     <div class="row">
-        <div class="col-md-10 col-md-offset-2 comentario">
+        <div class="col-md-10 col-md-offset-1 comentario">
             <?php if ($model->comentarios) {
                 echo ListView::widget([
                         'dataProvider' => new ActiveDataProvider([

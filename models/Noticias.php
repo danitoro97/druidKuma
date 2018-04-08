@@ -44,6 +44,10 @@ class Noticias extends \yii\db\ActiveRecord
         return 'noticias';
     }
 
+    /**
+     * Comportamiento para añadir hora de creacion y modifiacion.
+     * @return [type] [description]
+     */
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [

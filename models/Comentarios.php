@@ -2,7 +2,8 @@
 
 namespace app\models;
 
-use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "comentarios".
@@ -41,10 +42,26 @@ class Comentarios extends \yii\db\ActiveRecord
             [['noticia_id', 'usuario_id', 'padre_id'], 'default', 'value' => null],
             [['noticia_id', 'usuario_id', 'padre_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['padre_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comentarios::className(), 'targetAttribute' => ['padre_id' => 'id']],
+            [['padre_id'], 'exist', 'skipOnError' => true, 'targetClass' => self::className(), 'targetAttribute' => ['padre_id' => 'id']],
             [['noticia_id'], 'exist', 'skipOnError' => true, 'targetClass' => Noticias::className(), 'targetAttribute' => ['noticia_id' => 'id']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => UsuariosId::className(), 'targetAttribute' => ['usuario_id' => 'id']],
         ];
+    }
+
+    /**
+     * Comportamiento para añadir hora de creacion y modifiacion.
+     * @return [type] [description]
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            [
+            'class' => TimestampBehavior::className(),
+            'createdAtAttribute' => 'created_at',
+            'updatedAtAttribute' => 'updated_at',
+            'value' => new Expression('NOW()'),
+            ],
+        ]);
     }
 
     /**
@@ -68,7 +85,7 @@ class Comentarios extends \yii\db\ActiveRecord
      */
     public function getPadre()
     {
-        return $this->hasOne(Comentarios::className(), ['id' => 'padre_id']);
+        return $this->hasOne(self::className(), ['id' => 'padre_id']);
     }
 
     /**
@@ -76,7 +93,7 @@ class Comentarios extends \yii\db\ActiveRecord
      */
     public function getComentarios()
     {
-        return $this->hasMany(Comentarios::className(), ['padre_id' => 'id']);
+        return $this->hasMany(self::className(), ['padre_id' => 'id']);
     }
 
     /**
