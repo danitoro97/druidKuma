@@ -1,14 +1,14 @@
 <?php
 
 use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 /* @var app\models\Comentarios */
-$this->registerCssFile('/css/comentarios.css');
-$this->registerJsFile('/js/comentarios.js',['depends' => [\yii\web\JqueryAsset::className()]]);
+
 ?>
 
-<div class="row">
+<div class="row" >
     <div class="col-md-5 col-md-offset-2 comentario" data-padre_id = <?=$model->id?>>
         <p class="usuario">
             <span class="nombre_usuario">
@@ -23,7 +23,9 @@ $this->registerJsFile('/js/comentarios.js',['depends' => [\yii\web\JqueryAsset::
         <p>
             <?=Html::encode($model->comentario)?>
         </p>
-        <?=Html::button('Responder', ['class' => 'btn-xs btn-info responder']) ?>
+        <?php if(!Yii::$app->user->isGuest) : ?>
+            <?=Html::button('Responder', ['class' => 'btn-xs btn-info responder']) ?>
+        <?php endif;?>
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-2 comentario">

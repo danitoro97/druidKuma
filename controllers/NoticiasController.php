@@ -2,10 +2,8 @@
 
 namespace app\controllers;
 
-use app\models\Comentarios;
 use app\models\Noticias;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -102,9 +100,6 @@ class NoticiasController extends Controller
         $model = $this->findModel($id);
         return $this->render('view', [
             'model' => $model,
-            'comentarios' => new ActiveDataProvider([
-                'query' => $model->getComentarios()->orderBy('created_at ASC')->where('padre_id is null'),
-            ]),
         ]);
     }
 

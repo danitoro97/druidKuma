@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Comentarios;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\web\NotFoundHttpException;
 use yii\widgets\ListView;
 
 class ComentariosController extends \yii\web\Controller
@@ -34,5 +35,39 @@ class ComentariosController extends \yii\web\Controller
             }
             return false;
         }
+    }
+
+    public function actionView($id)
+    {
+        if (Yii::$app->request->isAjax) {
+            $model = $this->findModel($id);
+            return ListView::widget([
+                    'dataProvider' => new ActiveDataProvider([
+                        'query' => Comentarios::find()
+                                    ->orderBy('created_at ASC')
+                                    ->where('padre_id is null')
+                                    ->andWhere(['noticia_id' => $id]),
+                    ]),
+                    'itemView' => '/noticias/_comentarios',
+                    'summary' => '',
+            ]);
+        }
+    }
+
+
+    /**
+     * Finds the Noticias model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param int $id
+     * @return Comentarios the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Comentarios::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

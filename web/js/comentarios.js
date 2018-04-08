@@ -1,6 +1,7 @@
-function aa(boton,ruta,id) {
+function comentar(boton,ruta,id) {
     $(boton).on('click',function(event) {
         var textarea = $(this).next();
+        var enviar = $(this);
         var mensaje = textarea.val();
         var padre = $(this).parent().data('padre_id');
         var div = $(this).parent();
@@ -24,11 +25,24 @@ function aa(boton,ruta,id) {
                     div.after(div2);
 
                     textarea.remove();
-                    $(this).remove();
-                    /*var boton = $('button');
-                    boton.text('Responder');
-                    boton.addClass('btn btn-xs btn-info responder');
-                    console.log(div);*/
+                    enviar.remove();
+                    var nboton = $('<button></button>');
+
+                    nboton.text('Responder');
+                    nboton.addClass('btn btn-xs btn-info responder');
+                    nboton.on('click',function(){
+                        $(this).after($('<textarea>'));
+                        var boton = $('<button>');
+                        boton.text('Enviar');
+                        boton.addClass('btn btn-xs btn-info enviar');
+
+                        comentar(boton,ruta,id);
+
+                        $(this).after(boton);
+                        $(this).remove();
+                    });
+                    div.append(nboton);
+
                 }
             })
         }
