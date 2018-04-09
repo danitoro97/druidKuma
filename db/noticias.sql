@@ -50,3 +50,10 @@ Praesent finibus purus at massa ultricies vulputate. Etiam pellentesque, dui nec
 Nulla hendrerit et diam eu facilisis. Aliquam justo ipsum, consectetur ac faucibus quis, dictum placerat tellus. Praesent ullamcorper bibendum orci, nec hendrerit dolor efficitur pellentesque. Duis at mollis est. Nullam laoreet bibendum hendrerit. Vivamus congue rhoncus mauris, eu sodales lorem congue non. Aliquam massa leo, euismod bibendum ornare vel, tincidunt eu metus. Maecenas in nisl et ipsum scelerisque aliquet. Integer consectetur sem non enim blandit fermentum.
 
 Cras libero elit, posuere sed suscipit ut, tincidunt sed nisi. Nulla vel odio vestibulum, cursus sapien id, commodo nulla. Donec vulputate aliquam libero, vitae aliquet ipsum dignissim quis. Nullam consectetur egestas nibh, vitae pretium urna varius quis. Ut quis tincidunt erat. Nam tempus, sem at accumsan sagittis, massa massa hendrerit metus, vitae venenatis nunc ligula semper enim. Proin condimentum, mi nec ultricies porta, est odio scelerisque sem, et facilisis ipsum velit eu dolor. Donec porta enim at interdum laoreet. Cras bibendum libero arcu, sed lacinia ligula vehicula posuere. Aenean eget euismod magna, at maximus mauris. Vestibulum semper, eros eu placerat porttitor, magna odio tincidunt ligula, id tincidunt ipsum erat at diam. Nunc fermentum dui in tellus hendrerit, a ultrices ligula venenatis. Sed in risus a massa dictum feugiat. Aliquam erat volutpat. ', 'https://www.dropbox.com/s/oeqfye2gh9pmhdu/descarga.png?dl=1', '2018-03-06',1,'viva er betis shiquillo');
+
+
+--INSERT COMENTARIOS --
+
+INSERT INTO comentarios (comentario,usuario_id,noticia_id,padre_id)
+values ('cierto muy cierto',1,1,null),
+       ('jie',2,1,1);

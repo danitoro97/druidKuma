@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Partidos;
 use yii\helpers\Url;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 class PartidosController extends \yii\web\Controller
@@ -40,5 +41,36 @@ class PartidosController extends \yii\web\Controller
             ];
         }
         return $eventos;
+    }
+
+
+    /**
+     * Displays a single Partidos model.
+     * @param int $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+           'model' => $this->findModel($id),
+        ]);
+    }
+
+
+    /**
+     * Finds the Noticias model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param int $id
+     * @return Partidos the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Partidos::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

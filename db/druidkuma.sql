@@ -159,4 +159,22 @@ CREATE TABLE noticias (
     ,   updated_at TIMESTAMP(0)
 );
 
---Insert noticias , es un fichero aparte--
+--Comentarios----
+DROP TABLE IF EXISTS comentarios CASCADE;
+
+CREATE TABLE comentarios
+(
+         id bigserial primary KEY
+        , comentario text
+        , noticia_id BIGINT NOT NULL REFERENCES noticias(id)
+                        ON DELETE NO ACTION
+                        ON UPDATE CASCADE
+        , usuario_id BIGINT NOT NULL REFERENCES usuarios_id(id)
+                        ON DELETE NO ACTION
+                        ON UPDATE CASCADE
+        , padre_id BIGINT REFERENCES comentarios(id)
+                        ON DELETE NO ACTION
+                        ON UPDATE CASCADE
+        ,   created_at TIMESTAMP(0)
+        ,   updated_at TIMESTAMP(0)
+);

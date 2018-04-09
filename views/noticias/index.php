@@ -39,13 +39,21 @@ $(window).scroll(function(){
         })
     }
 });
+
+$('.up').on('click',function(e){
+    e.preventDefault();
+    var ancla = '#top';
+    $('body,html').stop(true,true).animate({
+        scrollTop: $(ancla).offset().top
+    },1000);
+});
 EOT;
 
 $this->registerJs($js);
 ?>
 <div class="noticias-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 id='top'><?= Html::encode($this->title) ?></h1>
     <?php
         if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isCreador()):?>
             <?=Html::a('Crear noticia', ['noticias/create'], ['class' => 'btn-lg btn-info crear'])?>
@@ -60,5 +68,5 @@ $this->registerJs($js);
         </div>
     </div>
 
-
+    <a href="#top"><?=Html::img('up.png', ['class' => 'up'])?></a>
 </div>

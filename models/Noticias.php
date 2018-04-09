@@ -44,6 +44,10 @@ class Noticias extends \yii\db\ActiveRecord
         return 'noticias';
     }
 
+    /**
+     * Comportamiento para añadir hora de creacion y modifiacion.
+     * @return [type] [description]
+     */
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [
@@ -100,7 +104,8 @@ class Noticias extends \yii\db\ActiveRecord
         } catch (BadRequest $e) {
             // No se hace nada
         }
-        $client->upload($nombre, file_get_contents(Yii::getAlias($nombre)), 'overwrite');
+        $client->upload($nombre, file_get_contents($nombre, 'overwrite'));
+
         $res = $client->createSharedLinkWithSettings($nombre, [
             'requested_visibility' => 'public',
         ]);
@@ -131,5 +136,13 @@ class Noticias extends \yii\db\ActiveRecord
     public function getCreador()
     {
         return $this->hasOne(Usuarios::className(), ['id' => 'creador_id'])->inverseOf('noticias');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComentarios()
+    {
+        return $this->hasMany(Comentarios::className(), ['noticia_id' => 'id'])->inverseOf('noticia');
     }
 }
