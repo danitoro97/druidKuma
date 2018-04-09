@@ -26,10 +26,11 @@ $this->registerCss($css);
 <div class="partidos-view">
 
     <div class="row">
-        <div class="col-xs-2 col-xs-offset-1">
-            <?= Html::img($model->local->url, ['class' => 'img-responsive escudo']) ?>
+        <div class="col-xs-12 col-sm-2 col-sm-offset-1">
+            <?php $logo = $model->local->url == null ? Equipos::LOGO_DEFAULT : $model->local->url?>
+            <?= Html::img($logo, ['class' => 'img-responsive escudo']) ?>
         </div>
-        <div class="col-xs-4 col-xs-offset-1">
+        <div class="col-xs-12 col-sm-4 col-sm-offset-1">
             <?php
                 if ($model->estado == Equipos::FINALIZADO): ?>
                  <h2><?=$model->goles_local ?? '0'?> - <?=$model->goles_visitante ?? '0' ?></h2>
@@ -42,8 +43,9 @@ $this->registerCss($css);
             <h3><?=Yii::$app->formatter->asDate($model->fecha)?></h3>
             <h3><?=$model->liga->nombre?></h3>
         </div>
-        <div class="col-xs-2">
-            <?= Html::img($model->visitante->url, ['class' => 'img-responsive escudo']) ?>
+        <div class="col-xs-12 col-sm-2">
+            <?php $logo = $model->visitante->url == null ? Equipos::LOGO_DEFAULT : $model->visitante->url?>
+            <?= Html::img($logo, ['class' => 'img-responsive escudo']) ?>
         </div>
     </div>
 

@@ -17,7 +17,17 @@ namespace app\models;
  */
 class Equipos extends \yii\db\ActiveRecord
 {
+    /**
+     * String que determina que el partido ha acabado.
+     * @var string
+     */
     public const FINALIZADO = 'FINISHED';
+
+    /**
+     * Logo del escudo por defecto si no tiene escudo.
+     * @var [type]
+     */
+    public const LOGO_DEFAULT = 'https://www.dropbox.com/s/uqlc8squt8newci/shield-308943_960_720.png?dl=1';
     /**
      * {@inheritdoc}
      */

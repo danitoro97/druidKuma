@@ -16,7 +16,7 @@ $this->registerJsFile('plugin/fullcalendar/lib/moment.min.js',['depends' => [\yi
 $this->registerJsFile('plugin/fullcalendar/fullcalendar.min.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('plugin/fullcalendar/locale/es.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerCssFile('plugin/fullcalendar/fullcalendar.min.css');
-$ruta = Url::to(['partidos/partidos'],true);
+$ruta = Url::to(['partidos/partidos'], getenv('esquema'));
 $js=<<<EOT
 
     $('#calendar').fullCalendar({
@@ -35,10 +35,10 @@ $js=<<<EOT
         defaultView: 'month',
         eventClick: function(event) {
 
-            var y=parseInt((window.screen.height/2)-250);
-            var x=parseInt((window.screen.width/2)-350);
+            var y=parseInt((window.screen.height/2)-375);
+            var x=parseInt((window.screen.width/2)-500);
            if (event.url) {
-             window.open(event.url,'Partidos',"width=700,height=500, top="+y+",left="+x);
+             window.open(event.url,'Partidos',"width=1000,height=750, top="+y+",left="+x);
              return false;
            }
         },
