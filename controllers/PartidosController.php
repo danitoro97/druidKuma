@@ -54,7 +54,7 @@ class PartidosController extends \yii\web\Controller
     {
         return $this->render('view', [
            'model' => $this->findModel($id),
-       ]);
+        ]);
     }
 
 
@@ -62,7 +62,7 @@ class PartidosController extends \yii\web\Controller
      * Finds the Noticias model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id
-     * @return Comentarios the loaded model
+     * @return Partidos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)

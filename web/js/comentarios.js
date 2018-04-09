@@ -5,8 +5,6 @@ function comentar(boton,ruta,id) {
         var mensaje = textarea.val();
         var padre = $(this).parent().data('padre_id');
         var div = $(this).parent();
-        console.log(padre);
-        console.log('enviar')
         if (mensaje != '') {
             //peticion ajax
             $.ajax({
@@ -18,10 +16,8 @@ function comentar(boton,ruta,id) {
                     comentario: mensaje
                 },
                 success: function (data) {
-                    console.log('enviado')
                     var div2 = $('<div>');
                     div2.html(data);
-                    console.log(div);
                     div.after(div2);
 
                     textarea.remove();

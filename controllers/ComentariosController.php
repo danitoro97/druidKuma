@@ -10,37 +10,41 @@ use yii\widgets\ListView;
 
 class ComentariosController extends \yii\web\Controller
 {
+    /**
+     * Crear un comentario de una noticia.
+     * @return [type] [description]
+     */
     public function actionCreate()
     {
-        if (Yii::$app->request->isAjax) {
-            //Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if (Yii::$app->request->isAjax && Yii::$app->request->post()) {
+            $model = new Comentarios();
+            $model->comentario = Yii::$app->request->post('comentario');
+            $model->noticia_id = Yii::$app->request->post('noticia');
+            $model->padre_id = Yii::$app->request->post('padre_id');
+            $model->usuario_id = Yii::$app->user->identity->id;
 
-            if (Yii::$app->request->post() != null) {
-                $model = new Comentarios();
-                $model->comentario = Yii::$app->request->post('comentario');
-                $model->noticia_id = Yii::$app->request->post('noticia');
-                $model->padre_id = Yii::$app->request->post('padre_id');
-                $model->usuario_id = Yii::$app->user->identity->id;
-
-                if ($model->save()) {
-                    $model->refresh();
-                    return ListView::widget([
-                            'dataProvider' => new ActiveDataProvider([
-                                'query' => Comentarios::find()->where(['id' => $model->id]),
-                            ]),
-                            'itemView' => '/noticias/_comentarios',
-                            'summary' => '',
-                    ]);
-                }
+            if ($model->save()) {
+                $model->refresh();
+                return ListView::widget([
+                        'dataProvider' => new ActiveDataProvider([
+                            'query' => Comentarios::find()->where(['id' => $model->id]),
+                        ]),
+                        'itemView' => '/noticias/_comentarios',
+                        'summary' => '',
+                ]);
             }
+
             return false;
         }
     }
-
+    /**
+     * Devuelve una vista con los comentarios de la noticia.
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function actionView($id)
     {
         if (Yii::$app->request->isAjax) {
-            $model = $this->findModel($id);
             return ListView::widget([
                     'dataProvider' => new ActiveDataProvider([
                         'query' => Comentarios::find()
