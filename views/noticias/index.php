@@ -39,6 +39,14 @@ $(window).scroll(function(){
         })
     }
 });
+
+$('.up').on('click',function(e){
+    e.preventDefault();
+    var ancla = '#top';
+    $('body,html').stop(true,true).animate({
+        scrollTop: $(ancla).offset().top
+    },1000);
+});
 EOT;
 
 $this->registerJs($js);
