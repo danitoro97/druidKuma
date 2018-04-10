@@ -1,0 +1,4 @@
+El creador es el unico que puede mandar invitaciones
+El creador es el unico que puede eliminar el equipo
+Un participante del equipo debe aceptar la invitacion para estar en el equipo
+Un usuario puede estar en varios equipos y ser el creador de varios equipos

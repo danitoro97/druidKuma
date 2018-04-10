@@ -178,3 +178,40 @@ CREATE TABLE comentarios
         ,   created_at TIMESTAMP(0)
         ,   updated_at TIMESTAMP(0)
 );
+
+--Create tabla equipos_usuarios --
+
+DROP TABLE IF EXISTS equipos_usuarios CASCADE;
+CREATE TABLE equipos_usuarios
+(
+         id bigserial primary key
+        ,nombre varchar(255) UNIQUE
+        ,creador_id bigint not null references usuarios_id(id)
+                    on delete no ACTION
+                    on update cascade
+        ,created_at TIMESTAMP(0)
+        ,updated_at TIMESTAMP(0)
+);
+--el creador es el que manda si se borra el equipo se borra los participantes--
+--Inser equipos_usuarios---
+INSERT INTO equipos_usuarios (nombre,creador_id)
+VALUES ('pRUEBA EQUIPO',1);
+
+--Create tabla participantes---
+
+DROP TABLE IF EXISTS participantes CASCADE;
+CREATE TABLE participantes
+(
+    equipo_id bigint references equipos_usuarios(id)
+                    on delete cascade
+                    on update CASCADE
+    ,usuario_id bigint references usuarios_id(id)
+                        on delete no action
+                        on update CASCADE
+    ,aceptar bool default false
+    ,CONSTRAINT pk_equipo_usuario primary key(equipo_id,usuario_id)
+);
+
+--insert participantes --
+INSERT INTO participantes (equipo_id,usuario_id)
+values (1,1),(1,2);
