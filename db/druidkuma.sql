@@ -73,6 +73,7 @@ CREATE TABLE jugadores
     ,   equipo_id bigint not null references equipos(id)
                             ON DELETE NO ACTION
                             ON UPDATE CASCADE
+    ,   url      varchar(255)                  
 );
 
 --TABLA PARTIDOS--

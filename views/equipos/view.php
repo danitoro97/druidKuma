@@ -11,6 +11,8 @@ $this->title = $model->nombre;
 $this->registerCssFile('/css/equipo.css');
 $this->params['breadcrumbs'][] = ['label' => 'Equipos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerJsFile('/js/carrousel.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 <div class="equipos-view">
     <div class="container">
@@ -29,26 +31,32 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProviderJugadores,
-        'filterModel' => $searchModelJugadores,
-        'formatter' => ['class' => 'yii\i18n\Formatter','nullDisplay' => ''],
-        'columns' => [
-            [
-                'attribute' => 'posicion',
-                'value' => 'posicion.nombre',
-            ],
-            [
-                'attribute' => 'nombre',
-                'value' => function ($data) {
-                    return Html::a(Html::encode($data->nombre), ['/jugadores/view', 'id' => $data->id]);
-                },
-                'format' => 'html',
-            ],
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
 
-            'dorsal',
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+          <?= $this->render('/jugadores/_carrousel', [
+              'jugadores' => $jugadores,
+              'contador' => 0,
+          ]) ?>
 
-        ],
-    ]); ?>
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a id='next' class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+      </a>
+  </div>
 
 </div>

@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\components\Clasificacion;
 use app\models\Equipos;
-use app\models\JugadoresSearch;
+use app\models\Jugadores;
 use app\models\Ligas;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
@@ -59,17 +59,16 @@ class EquiposController extends Controller
         $liga = Ligas::findOne($model->liga_id);
         $clasificacion = Clasificacion::clasificacion($liga->equipos, $model->liga_id);
 
-        $searchModel = new JugadoresSearch();
-        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams, $id);
-
+        $jugadores = Jugadores::find()
+        ->where(['equipo_id' => $id])
+        ->orderBy('posicion_id ASC')->limit(3)->all();
 
         return $this->render('view', [
             'model' => $model,
             'clasificacion' => new ArrayDataProvider([
                 'allModels' => $clasificacion,
             ]),
-            'dataProviderJugadores' => $dataProvider,
-            'searchModelJugadores' => $searchModel,
+            'jugadores' => $jugadores,
         ]);
     }
 

@@ -57,6 +57,17 @@ class JugadoresController extends Controller
         ]);
     }
 
+
+    public function actionCarrousel($numero, $equipo_id)
+    {
+        if (Yii::$app->request->isAjax) {
+            $jugadores = Jugadores::find()
+                        ->where(['equipo_id' => $equipo_id])
+                        ->offset($numero)
+                        ->limit(Jugadores::CARROUSEL);
+        }
+    }
+
     /**
      * Finds the Jugadores model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
