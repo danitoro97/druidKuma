@@ -3,7 +3,7 @@ use yii\helpers\Html;
 
 /* $contador */
 /* $jugadores */
-
+$contador = 0;
 foreach ($jugadores as $jugador): ?>
     <?php
       $activo = $contador == 0 ? 'active' : '';
@@ -13,7 +13,7 @@ foreach ($jugadores as $jugador): ?>
       <?=Html::img($jugador->foto)?>
       <div class="carousel-caption">
             <h3><?= $jugador->nombre ?> </h3>
-            <p><?= $jugador->posicion->nombre?></p>
+            <p>Dorsal <?= $jugador->dorsal?></p>
         </div>
     </div>
 <?php endforeach; ?>
