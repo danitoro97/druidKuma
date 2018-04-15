@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJsFile('/js/carrousel.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 
-$ruta = Url::to(['/equipos/view'],true);
+$ruta = Url::to(['/equipos/view'], getenv('esquema'));
 $js = <<<EOT
     $('#myCarousel').carousel('pause');
     carrousel('$ruta', '$model->id');
