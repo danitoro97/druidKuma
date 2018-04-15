@@ -17,7 +17,18 @@ namespace app\models;
  */
 class Jugadores extends \yii\db\ActiveRecord
 {
+    /**
+     * Numero de jugadores que se veran en el carusel.
+     * @var string
+     */
     const CARROUSEL = '3';
+
+    /**
+     * foto que se mostrara si no tiene.
+     * @var string
+     */
+    const FOTO = '@web/futbolista.png';
+
     /**
      * {@inheritdoc}
      */
@@ -57,9 +68,13 @@ class Jugadores extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Obtener la foto del jugador.
+     * @return [type] [description]
+     */
     public function getFoto()
     {
-        return $this->url == null ? '@web/futbolista.png' : $this->url;
+        return $this->url == null ? self::FOTO : $this->url;
     }
 
     /**

@@ -27,8 +27,7 @@ $this->registerCss($css);
 
     <div class="row">
         <div class="col-xs-12 col-sm-2 col-sm-offset-1">
-            <?php $logo = $model->local->url == null ? Equipos::LOGO_DEFAULT : $model->local->url?>
-            <?= Html::img($logo, ['class' => 'img-responsive escudo']) ?>
+            <?= Html::img($model->local->escudo, ['class' => 'img-responsive escudo']) ?>
         </div>
         <div class="col-xs-12 col-sm-4 col-sm-offset-1">
             <?php
@@ -44,8 +43,7 @@ $this->registerCss($css);
             <h3><?=$model->liga->nombre?></h3>
         </div>
         <div class="col-xs-12 col-sm-2">
-            <?php $logo = $model->visitante->url == null ? Equipos::LOGO_DEFAULT : $model->visitante->url?>
-            <?= Html::img($logo, ['class' => 'img-responsive escudo']) ?>
+            <?= Html::img($model->visitante->escudo, ['class' => 'img-responsive escudo']) ?>
         </div>
     </div>
 

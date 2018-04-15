@@ -24,10 +24,10 @@ class Equipos extends \yii\db\ActiveRecord
     public const FINALIZADO = 'FINISHED';
 
     /**
-     * Logo del escudo por defecto si no tiene escudo.
+     * Escudo por defecto si no tiene.
      * @var [type]
      */
-    public const LOGO_DEFAULT = 'https://www.dropbox.com/s/uqlc8squt8newci/shield-308943_960_720.png?dl=1';
+    public const ESCUDO = '@web/escudo.jpg';
     /**
      * {@inheritdoc}
      */
@@ -61,6 +61,15 @@ class Equipos extends \yii\db\ActiveRecord
             'alias' => 'Alias',
             'liga_id' => 'Liga ID',
         ];
+    }
+
+    /**
+     * Obtener el escudo del equipo.
+     * @return [type] [description]
+     */
+    public function getEscudo()
+    {
+        return $this->url == null ? self::ESCUDO : $this->url;
     }
 
     /**
