@@ -50,15 +50,12 @@ class EquiposController extends Controller
     }
 
     /**
-     * Displays a single Equipos model.
-     * @param int $id
-     * @param mixed $page
-     * @param mixed $contador
-     * @param mixed $numero
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * Muestra el equipo y sus jugadores.
+     * @param  [type]  $id     [description]
+     * @param  int $numero [description]
+     * @return [type]          [description]
      */
-    public function actionView($id, $numero = 6)
+    public function actionView($id, $numero = 0)
     {
         $model = $this->findModel($id);
         $liga = Ligas::findOne($model->liga_id);
@@ -66,7 +63,7 @@ class EquiposController extends Controller
 
         $jugadores = Jugadores::find()
         ->where(['equipo_id' => $id])
-        ->orderBy('posicion_id ASC')
+        ->orderBy('posicion_id,nombre ASC')
         ->offset($numero)
         ->limit(Jugadores::CARROUSEL)
         ->all();
@@ -77,6 +74,7 @@ class EquiposController extends Controller
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return array_merge($jugadores, [
                 'url' => Url::to('@web/futbolista.png', true),
+                'length' => Jugadores::CARROUSEL,
             ]);
         }
 

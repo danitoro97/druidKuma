@@ -1,7 +1,6 @@
 
-
 function carrousel (ruta, id) {
-    console.log(ruta);
+
     $('#next').on('click',{ruta:ruta, id:id}, function (event){
         var ruta = event.data.ruta;
         var id = event.data.id;
@@ -10,16 +9,14 @@ function carrousel (ruta, id) {
 
         if (div.hasClass('active')) {
             $('#myCarousel').carousel('pause');
+            $(this).addClass('disabled');
 
-            //div.removeClass('active');
-
-            console.log('ajax');
             var numeroJugadores = $('.carousel-inner > div').length;
-
+            
             $.get(ruta, {numero:numeroJugadores,id:id}, function(data){
                 var urlDefault = data.url;
 
-                for (var i = 0; i < 3; i++) {
+                for (var i = 0; i < data.length; i++) {
                     var div = $('<div>');
                     div.addClass('item');
                     var img = $('<img></img>');
@@ -47,7 +44,7 @@ function carrousel (ruta, id) {
                     $('.carousel-indicators').append(li);
                 }
 
-
+                $('#next').removeClass('disabled');
             });
 
         }
