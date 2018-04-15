@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "jugadores".
  *
@@ -19,6 +17,7 @@ use Yii;
  */
 class Jugadores extends \yii\db\ActiveRecord
 {
+    const CARROUSEL = '3';
     /**
      * {@inheritdoc}
      */
@@ -56,6 +55,11 @@ class Jugadores extends \yii\db\ActiveRecord
             'contrato' => 'Contrato',
             'equipo_id' => 'Equipo ID',
         ];
+    }
+
+    public function getFoto()
+    {
+        return $this->url == null ? '@web/futbolista.png' : $this->url;
     }
 
     /**

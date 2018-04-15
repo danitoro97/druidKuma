@@ -13,7 +13,8 @@ function comentar(boton,ruta,id) {
                 data: {
                     padre_id: padre ,
                     noticia: id,
-                    comentario: mensaje
+                    comentario: mensaje,
+                    escenario: 'padre',
                 },
                 success: function (data) {
                     var div2 = $('<div>');

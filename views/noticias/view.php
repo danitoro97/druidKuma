@@ -21,6 +21,24 @@ $ruta = Url::to(['comentarios/create']);
 $comentarios = Url::to(['comentarios/view']);
 $js= <<<EOT
 
+$('#botonComentario').on('click', function(){
+    var textarea = $(this).prev();
+    var texto = textarea.val();
+
+    $.ajax({
+        url: '$ruta',
+        type:'post',
+        data: {
+            escenario: 'noticia',
+            comentario: texto,
+            noticia: '$model->id',
+        },
+        success: function (data){
+            textarea.val(null);
+            $('#comentario').html(data);
+        }
+    })
+})
 $('.noticias-view').on('click','.responder',responder);
 
 function responder (){
@@ -36,6 +54,7 @@ function responder (){
 }
 
 $('#bComentarios').on('click',function(){
+    $(this).hide();
     var strAncla='#comentario'
     $.ajax({
         url:'$comentarios',
@@ -90,9 +109,7 @@ $this->registerJs($js);
                 </p>
             </div>
         </div>
-        <div id="comentario">
 
-        </div>
         <?php
          if (!Yii::$app->user->isGuest) : ?>
             <div class="row">
@@ -104,6 +121,8 @@ $this->registerJs($js);
             </div>
 
         <?php endif; ?>
+        <div id="comentario">
 
+        </div>
     </div>
 </div>

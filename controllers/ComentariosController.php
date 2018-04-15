@@ -5,11 +5,32 @@ namespace app\controllers;
 use app\models\Comentarios;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\widgets\ListView;
 
 class ComentariosController extends \yii\web\Controller
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     /**
      * Crear un comentario de una noticia.
      * @return [type] [description]
@@ -21,6 +42,14 @@ class ComentariosController extends \yii\web\Controller
             $model->comentario = Yii::$app->request->post('comentario');
             $model->noticia_id = Yii::$app->request->post('noticia');
             $model->padre_id = Yii::$app->request->post('padre_id');
+            if (Yii::$app->request->post('escenario') == Comentarios::ESCENARIO_NOTICIA) {
+                $model->scenario = Comentarios::ESCENARIO_NOTICIA;
+            }
+
+            if (Yii::$app->request->post('escenario') == Comentarios::ESCENARIO_PADRE) {
+                $model->scenario = Comentarios::ESCENARIO_PADRE;
+            }
+
             $model->usuario_id = Yii::$app->user->identity->id;
 
             if ($model->save()) {

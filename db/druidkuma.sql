@@ -73,6 +73,7 @@ CREATE TABLE jugadores
     ,   equipo_id bigint not null references equipos(id)
                             ON DELETE NO ACTION
                             ON UPDATE CASCADE
+    ,   url      varchar(255)                  
 );
 
 --TABLA PARTIDOS--
@@ -166,7 +167,7 @@ CREATE TABLE comentarios
 (
          id bigserial primary KEY
         , comentario text
-        , noticia_id BIGINT NOT NULL REFERENCES noticias(id)
+        , noticia_id BIGINT REFERENCES noticias(id)
                         ON DELETE NO ACTION
                         ON UPDATE CASCADE
         , usuario_id BIGINT NOT NULL REFERENCES usuarios_id(id)
@@ -175,8 +176,8 @@ CREATE TABLE comentarios
         , padre_id BIGINT REFERENCES comentarios(id)
                         ON DELETE NO ACTION
                         ON UPDATE CASCADE
-        ,   created_at TIMESTAMP(0)
-        ,   updated_at TIMESTAMP(0)
+        , created_at TIMESTAMP(0)
+        , updated_at TIMESTAMP(0)
 );
 
 --Create tabla equipos_usuarios --
@@ -215,3 +216,41 @@ CREATE TABLE participantes
 --insert participantes --
 INSERT INTO participantes (equipo_id,usuario_id)
 values (1,1),(1,2);
+
+--CREAR TABLA POSTS
+DROP TABLE IF EXISTS posts CASCADE;
+CREATE TABLE posts
+(
+         id bigserial primary key
+        ,creador_id bigint not null references usuarios_id(id)
+                            on delete no action
+                            on update cascade
+        ,equipo_usuario_id bigint references equipos_usuarios(id)
+                            on delete cascade
+                            on update cascade
+        ,texto text
+        ,img varchar(255)
+        CONSTRAINT  ck_null_text_img CHECK (texto is not null or img is not null)
+
+);
+
+---insert POSTS
+INSERT INTO posts (creador_id,equipo_usuario_id,texto)
+values (1,1,'prueba posts');
+
+--create respuestas --
+DROP TABLE IF EXISTS respuestas CASCADE;
+CREATE TABLE respuestas
+(
+         id bigserial primary KEY
+        ,texto text not null
+        ,post_id bigint references posts(id)
+                    on delete cascade
+                    on update CASCADE
+        ,padre_id bigint references respuestas(id)
+                    ON DELETE cascade
+                    ON UPDATE CASCADE
+);
+
+insert into respuestas (texto,post_id)
+values ('asdasd',1);

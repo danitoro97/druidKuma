@@ -4,11 +4,13 @@ namespace app\controllers;
 
 use app\components\Clasificacion;
 use app\models\Equipos;
-use app\models\JugadoresSearch;
+use app\models\Jugadores;
 use app\models\Ligas;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -48,19 +50,34 @@ class EquiposController extends Controller
     }
 
     /**
-     * Displays a single Equipos model.
-     * @param int $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * Muestra el equipo y sus jugadores. Si la peticion es ajax te devolvera
+     * los jugadores que toquen.
+     * @param  [type]  $id     [description]
+     * @param  int $numero [description]
+     * @return [type]          [description]
      */
-    public function actionView($id)
+    public function actionView($id, $numero = 0)
     {
         $model = $this->findModel($id);
         $liga = Ligas::findOne($model->liga_id);
         $clasificacion = Clasificacion::clasificacion($liga->equipos, $model->liga_id);
 
-        $searchModel = new JugadoresSearch();
-        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams, $id);
+        $jugadores = Jugadores::find()
+        ->where(['equipo_id' => $id])
+        ->orderBy('posicion_id,nombre ASC')
+        ->offset($numero)
+        ->limit(Jugadores::CARROUSEL)
+        ->all();
+
+
+        if (Yii::$app->request->isAjax) {
+            //la vista
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return array_merge($jugadores, [
+                'url' => Url::to('@web/futbolista.png', true),
+                'length' => Jugadores::CARROUSEL,
+            ]);
+        }
 
 
         return $this->render('view', [
@@ -68,8 +85,7 @@ class EquiposController extends Controller
             'clasificacion' => new ArrayDataProvider([
                 'allModels' => $clasificacion,
             ]),
-            'dataProviderJugadores' => $dataProvider,
-            'searchModelJugadores' => $searchModel,
+            'jugadores' => $jugadores,
         ]);
     }
 

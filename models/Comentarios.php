@@ -24,6 +24,16 @@ use yii\db\Expression;
 class Comentarios extends \yii\db\ActiveRecord
 {
     /**
+     * Escenario para un comentario de una noticia directamente.
+     * @var string
+     */
+    const ESCENARIO_NOTICIA = 'noticia';
+    /**
+     * Escenario para un comentario de un comentario.
+     * @var string
+     */
+    const ESCENARIO_PADRE = 'padre';
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
@@ -38,7 +48,9 @@ class Comentarios extends \yii\db\ActiveRecord
     {
         return [
             [['comentario'], 'string'],
-            [['noticia_id', 'usuario_id'], 'required'],
+            [['usuario_id'], 'required'],
+            [['noticia_id'], 'required', 'on' => self::ESCENARIO_NOTICIA],
+            [['padre_id'], 'required', 'on' => self::ESCENARIO_PADRE],
             [['noticia_id', 'usuario_id', 'padre_id'], 'default', 'value' => null],
             [['noticia_id', 'usuario_id', 'padre_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
