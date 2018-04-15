@@ -50,7 +50,8 @@ class EquiposController extends Controller
     }
 
     /**
-     * Muestra el equipo y sus jugadores.
+     * Muestra el equipo y sus jugadores. Si la peticion es ajax te devolvera
+     * los jugadores que toquen.
      * @param  [type]  $id     [description]
      * @param  int $numero [description]
      * @return [type]          [description]
