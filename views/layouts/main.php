@@ -56,8 +56,10 @@ AppAsset::register($this);
     ];
 
     if (Yii::$app->user->isGuest) {
+
         $item[] = ['label' => 'Iniciar sesión' , 'url' => ['/site/login']];
     }  else {
+        $item[] = ['label' => 'Mis Equipos', 'url' => ['/equipos-usuarios']];
         $item[] = [
            'label' => 'Usuarios (' . Yii::$app->user->identity->nombre . ')',
            'items' => [

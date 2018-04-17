@@ -24,7 +24,8 @@
         "kartik-v/yii2-detail-view": "dev-master",
         "yiisoft/yii2-imagine": "^2.1",
         "2amigos/yii2-ckeditor-widget": "~1.0",
-        "froala/yii2-froala-editor": "*"
+        "froala/yii2-froala-editor": "*",
+        "kartik-v/yii2-widgets": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
