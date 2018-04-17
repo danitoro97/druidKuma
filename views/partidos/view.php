@@ -34,8 +34,20 @@ $this->registerCss($css);
                 if ($model->estado == Equipos::FINALIZADO): ?>
                  <h2><?=$model->goles_local ?? '0'?> - <?=$model->goles_visitante ?? '0' ?></h2>
                  <h3>FINALIZADO</h3>
+                 <?php
+                 foreach ($model->detalles as $key) : ?>
+                     <h4>
+                        <?= $key->jugador->nombre; ?>
+                        <?= ($key->roja) ? 'roja' : '' ?>
+                        <?= ($key->amarilla) ? 'amarilla' : '' ?>
+                        <?= ($key->gol) ? 'gol' : '' ?>
+                        <?= ($key->autogol) ? 'gol en propia' : ''?>
+                        <?= $key->minuto . '\'' ?>
+                    </h4>
+                 <?php endforeach ; ?>
 
             <?php else : ?>
+
                 <h3>POR JUGAR</h3>
             <?php endif; ?>
 

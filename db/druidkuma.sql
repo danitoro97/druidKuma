@@ -73,7 +73,7 @@ CREATE TABLE jugadores
     ,   equipo_id bigint not null references equipos(id)
                             ON DELETE NO ACTION
                             ON UPDATE CASCADE
-    ,   url      varchar(255)                  
+    ,   url      varchar(255)
 );
 
 --TABLA PARTIDOS--
@@ -95,6 +95,28 @@ CREATE TABLE partidos
     ,goles_local numeric(3)
     ,goles_visitante numeric(3)
 );
+
+--TABLA DEtalles_PARTIDOS --
+DROP TABLE IF EXISTS detalles_partidos CASCADE;
+CREATE TABLE detalles_partidos
+(
+        id bigserial primary key
+        , partido_id bigint not null references partidos(id)
+                                ON DELETE NO ACTION
+                                ON UPDATE CASCADE
+        , equipo_id bigint not null references equipos (id)
+                            ON DELETE NO ACTION
+                            ON UPDATE CASCADE
+        , minuto varchar(255) not null
+        , jugador_id bigint not null references jugadores(id)
+                            ON DELETE NO ACTION
+                            ON UPDATE CASCADE
+        , roja boolean default false
+        , amarilla boolean default false
+        , gol boolean default false
+        , autogol boolean default false
+);
+
 
 --TABLA ROLES --
 DROP TABLE IF EXISTS roles CASCADE;
