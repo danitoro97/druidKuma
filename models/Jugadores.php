@@ -92,4 +92,12 @@ class Jugadores extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Posiciones::className(), ['id' => 'posicion_id'])->inverseOf('jugadores');
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDetallesPartidos()
+    {
+        return $this->hasMany(DetallesPartidos::className(), ['jugador_id' => 'id'])->inverseOf('jugador');
+    }
 }

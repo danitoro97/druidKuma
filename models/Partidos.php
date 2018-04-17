@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "partidos".
  *
@@ -87,5 +85,18 @@ class Partidos extends \yii\db\ActiveRecord
     public function getLiga()
     {
         return $this->hasOne(Ligas::className(), ['id' => 'liga_id'])->inverseOf('partidos');
+    }
+
+    public function getDetalles()
+    {
+        return $this->getDetallesPartidos()->orderBy('minuto ASC')->all();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDetallesPartidos()
+    {
+        return $this->hasMany(DetallesPartidos::className(), ['partido_id' => 'id'])->inverseOf('partido');
     }
 }
