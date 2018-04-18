@@ -11,9 +11,9 @@ namespace app\models;
  * @property string $created_at
  * @property string $updated_at
  *
- * @property UsuariosId $creador
+ * @property Usuarios $creador
  * @property Participantes[] $participantes
- * @property UsuariosId[] $usuarios
+ * @property Usuarios[] $usuarios
  */
 class EquiposUsuarios extends \yii\db\ActiveRecord
 {
@@ -37,7 +37,7 @@ class EquiposUsuarios extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['nombre'], 'string', 'max' => 255],
             [['nombre'], 'unique'],
-            [['creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => UsuariosId::className(), 'targetAttribute' => ['creador_id' => 'id']],
+            [['creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['creador_id' => 'id']],
         ];
     }
 
@@ -60,7 +60,7 @@ class EquiposUsuarios extends \yii\db\ActiveRecord
      */
     public function getCreador()
     {
-        return $this->hasOne(UsuariosId::className(), ['id' => 'creador_id'])->inverseOf('equiposUsuarios');
+        return $this->hasOne(Usuarios::className(), ['id' => 'creador_id'])->inverseOf('equiposUsuarios');
     }
 
     /**
@@ -76,7 +76,7 @@ class EquiposUsuarios extends \yii\db\ActiveRecord
      */
     public function getUsuarios()
     {
-        return $this->hasMany(UsuariosId::className(), ['id' => 'usuario_id'])->viaTable('participantes', ['equipo_id' => 'id']);
+        return $this->hasMany(Usuarios::className(), ['id' => 'usuario_id'])->viaTable('participantes', ['equipo_id' => 'id']);
     }
 
     /**

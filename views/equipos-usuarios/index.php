@@ -23,12 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h2>Mis equipos</h2>
     <?php foreach ($model as $m) : ?>
-        <?= DetailView::widget([
-            'model' => $m,
-            'attributes' => [
-                'nombre'
-            ]
-        ]) ?>
+        <?php
+            $ruta = ($m->aceptar) ? '_equiposDisponibles' : '_equiposInvitaciones';
+        ?>
+        <?= $this->render($ruta,['model' => $m]) ?>
     <?php endforeach; ?>
 
 </div>

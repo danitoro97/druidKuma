@@ -40,6 +40,7 @@ AppAsset::register($this);
     ]);
 
     $ligas = Ligas::find()->all();
+    $i = [];
     foreach ($ligas as $liga) {
 
         $i[] = [

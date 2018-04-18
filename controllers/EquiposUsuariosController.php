@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\EquiposUsuarios;
+use app\models\Participantes;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -47,8 +48,8 @@ class EquiposUsuariosController extends Controller
     public function actionIndex()
     {
         return $this->render('index', [
-            'model' => EquiposUsuarios::find()
-            ->where(['creador_id' => Yii::$app->user->identity->id])
+            'model' => Participantes::find()
+            ->where(['usuario_id' => Yii::$app->user->identity->id])
             ->all(),
         ]);
     }
