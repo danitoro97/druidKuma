@@ -2,12 +2,12 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\Participantes;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ParticipantesController implements the CRUD actions for Participantes model.
@@ -46,8 +46,8 @@ class ParticipantesController extends Controller
 
     /**
      * Displays a single Participantes model.
-     * @param integer $equipo_id
-     * @param integer $usuario_id
+     * @param int $equipo_id
+     * @param int $usuario_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -79,8 +79,8 @@ class ParticipantesController extends Controller
     /**
      * Updates an existing Participantes model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $equipo_id
-     * @param integer $usuario_id
+     * @param int $equipo_id
+     * @param int $usuario_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -100,23 +100,37 @@ class ParticipantesController extends Controller
     /**
      * Deletes an existing Participantes model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $equipo_id
-     * @param integer $usuario_id
+     * @param int $equipo_id
+     * @param int $usuario_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($equipo_id, $usuario_id)
     {
-        $this->findModel($equipo_id, $usuario_id)->delete();
+        if (Yii::$app->request->isAjax()) {
+            return $this->findModel($equipo_id, $usuario_id)->delete();
+        }
+    }
 
-        return $this->redirect(['index']);
+    /**
+     * Action para poder entrar en un equipò.
+     * @param  [type] $equipo_id [description]
+     * @return [type]            [description]
+     */
+    public function actionAceptarPeticion($equipo_id)
+    {
+        if (Yii::$app->request->isAjax()) {
+            $model = $this->findModel($equipo_id, Yii::$app->user->identity->id);
+            $model->aceptar = true;
+            return $model->save();
+        }
     }
 
     /**
      * Finds the Participantes model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $equipo_id
-     * @param integer $usuario_id
+     * @param int $equipo_id
+     * @param int $usuario_id
      * @return Participantes the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
