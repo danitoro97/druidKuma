@@ -14,21 +14,13 @@ use kartik\widgets\Select2;
 <div class="participantes-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    <?php
 
-    $data = Usuarios::find()->all();
-    $data = ArrayHelper::map($data,'id','nombre');
+    <?= $form->field($model, 'usuario_id[]')->textInput()?>
 
-
-    ?>
-    <?= $form->field($model, 'usuario_id')->dropDownList($data, [
-        'prompt'=>'- Selecciona un usuario -'
-        ])?>
-        <button id='mas'> Añadir mas participantes</button>
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Invitar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
+    <button id='mas'> Añadir mas participantes</button>
 </div>

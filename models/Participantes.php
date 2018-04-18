@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "participantes".
  *
@@ -29,9 +27,8 @@ class Participantes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['equipo_id', 'usuario_id'], 'required'],
+            [['equipo_id'], 'required'],
             [['equipo_id', 'usuario_id'], 'default', 'value' => null],
-            [['equipo_id', 'usuario_id'], 'integer'],
             [['equipo_id', 'usuario_id'], 'unique', 'targetAttribute' => ['equipo_id', 'usuario_id']],
             [['equipo_id'], 'exist', 'skipOnError' => true, 'targetClass' => EquiposUsuarios::className(), 'targetAttribute' => ['equipo_id' => 'id']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => UsuariosId::className(), 'targetAttribute' => ['usuario_id' => 'id']],

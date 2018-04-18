@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use app\models\EquiposUsuarios;
-use app\models\Participantes;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -77,9 +76,10 @@ class EquiposUsuariosController extends Controller
         $model = new EquiposUsuarios();
         $model->creador_id = Yii::$app->user->identity->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->render('/participantes/create', [
-                'equipo' => $model,
-                'model' => new Participantes(),
+            return $this->render('index', [
+                'model' => EquiposUsuarios::find()
+                ->where(['creador_id' => Yii::$app->user->identity->id])
+                ->all(),
             ]);
         }
 
