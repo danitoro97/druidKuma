@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -19,5 +20,15 @@ $this->params['breadcrumbs'][] = $this->title;
             echo $this->render('_guia');
         }
     ?>
+
+    <h2>Mis equipos</h2>
+    <?php foreach ($model as $m) : ?>
+        <?= DetailView::widget([
+            'model' => $m,
+            'attributes' => [
+                'nombre'
+            ]
+        ]) ?>
+    <?php endforeach; ?>
 
 </div>
