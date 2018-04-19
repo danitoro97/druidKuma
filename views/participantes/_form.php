@@ -15,7 +15,7 @@ use kartik\widgets\Select2;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'usuario_id[]')->textInput()?>
+    <?= $form->field($model, 'usuarios[]')->textInput()?>
 
     <div class="form-group">
         <?= Html::submitButton('Invitar', ['class' => 'btn btn-success']) ?>
