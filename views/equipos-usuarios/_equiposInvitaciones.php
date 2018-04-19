@@ -2,10 +2,11 @@
 
 use yii\helpers\Html;
 
+$this->registerJsFile('/js/invitaciones.js' ,['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-7" data-id='<?=$model->equipo->id?>'>
         El equipo <?=Html::encode($model->equipo->nombre)?> le ha invitado a participar
     </div>
     <div class="col-md-2">

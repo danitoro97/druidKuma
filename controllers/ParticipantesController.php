@@ -17,7 +17,7 @@ class ParticipantesController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'verbs' => [
@@ -27,7 +27,7 @@ class ParticipantesController extends Controller
                 ],
             ],
         ];
-    }
+    }*/
 
     /**
      * Lists all Participantes models.
@@ -101,14 +101,14 @@ class ParticipantesController extends Controller
      * Deletes an existing Participantes model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $equipo_id
-     * @param int $usuario_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($equipo_id, $usuario_id)
+    public function actionDelete()
     {
-        if (Yii::$app->request->isAjax()) {
-            return $this->findModel($equipo_id, $usuario_id)->delete();
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $equipo_id = Yii::$app->request->post('equipo_id');
+            return $this->findModel($equipo_id, Yii::$app->user->identity->id)->delete();
         }
     }
 
@@ -117,12 +117,17 @@ class ParticipantesController extends Controller
      * @param  [type] $equipo_id [description]
      * @return [type]            [description]
      */
-    public function actionAceptarPeticion($equipo_id)
+    public function actionAceptarPeticion()
     {
-        if (Yii::$app->request->isAjax()) {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $equipo_id = Yii::$app->request->post('equipo_id');
             $model = $this->findModel($equipo_id, Yii::$app->user->identity->id);
             $model->aceptar = true;
-            return $model->save();
+            if ($model->save()) {
+                return $this->renderPartial('/equipos-usuarios/_equiposDisponibles', [
+                    'model' => $model,
+                ]);
+            }
         }
     }
 

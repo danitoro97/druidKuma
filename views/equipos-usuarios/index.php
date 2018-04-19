@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\DetailView;
@@ -9,6 +10,47 @@ use yii\widgets\DetailView;
 
 $this->title = 'Mis Equipos';
 $this->params['breadcrumbs'][] = $this->title;
+$rutaAceptar = Url::to(['/participantes/aceptar-peticion']);
+$rutaRechazar = Url::to(['/participantes/delete']);
+$js = <<<EOT
+
+$('.glyphicon-ok').parent().on('click', function(){
+    var id = $(this).parent().prev().data('id');
+    var div = $(this).parent().parent();
+
+    $.ajax({
+        url:'$rutaAceptar',
+        type:'post',
+        data: {
+            equipo_id:id
+        },
+        success: function (data) {
+            aceptar(data,div);
+        }
+    });
+})
+
+$('.glyphicon-remove').parent().on('click', function(){
+    var id = $(this).parent().prev().prev().data('id');
+    var div = $(this).parent().parent();
+
+    $.ajax({
+        url:'$rutaRechazar',
+        type:'post',
+        data: {
+            equipo_id:id
+        },
+        success: function (data) {
+            if (data) {
+                rechazar(div);
+            }
+        }
+    });
+})
+
+EOT;
+
+$this->registerJs($js);
 ?>
 <div class="equipos-usuarios-index">
 
@@ -21,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
         }
     ?>
 
-    <h2>Mis equipos</h2>
+
     <?php foreach ($model as $m) : ?>
         <?php
             $ruta = ($m->aceptar) ? '_equiposDisponibles' : '_equiposInvitaciones';

@@ -101,6 +101,7 @@ class EquiposUsuarios extends \yii\db\ActiveRecord
             $participante = new Participantes();
             $participante->usuario_id = $this->creador_id;
             $participante->equipo_id = $this->id;
+            $participante->aceptar = true;
             return $participante->save();
         }
     }
