@@ -119,6 +119,29 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->role->id == Roles::CREADOR;
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEquiposUsuarios()
+    {
+        return $this->hasMany(EquiposUsuarios::className(), ['creador_id' => 'id'])->inverseOf('creador');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getParticipantes()
+    {
+        return $this->hasMany(Participantes::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEquipos()
+    {
+        return $this->hasMany(EquiposUsuarios::className(), ['id' => 'equipo_id'])->viaTable('participantes', ['usuario_id' => 'id']);
+    }
 
     /**
      * @return \yii\db\ActiveQuery

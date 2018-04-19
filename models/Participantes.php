@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "participantes".
  *
@@ -11,7 +9,7 @@ use Yii;
  * @property int $usuario_id
  *
  * @property EquiposUsuarios $equipo
- * @property UsuariosId $usuario
+ * @property Usuarios $usuario
  */
 class Participantes extends \yii\db\ActiveRecord
 {
@@ -29,12 +27,11 @@ class Participantes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['equipo_id', 'usuario_id'], 'required'],
+            [['equipo_id'], 'required'],
             [['equipo_id', 'usuario_id'], 'default', 'value' => null],
-            [['equipo_id', 'usuario_id'], 'integer'],
             [['equipo_id', 'usuario_id'], 'unique', 'targetAttribute' => ['equipo_id', 'usuario_id']],
             [['equipo_id'], 'exist', 'skipOnError' => true, 'targetClass' => EquiposUsuarios::className(), 'targetAttribute' => ['equipo_id' => 'id']],
-            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => UsuariosId::className(), 'targetAttribute' => ['usuario_id' => 'id']],
+            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
         ];
     }
 
@@ -62,6 +59,6 @@ class Participantes extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(UsuariosId::className(), ['id' => 'usuario_id'])->inverseOf('participantes');
+        return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id'])->inverseOf('participantes');
     }
 }

@@ -209,8 +209,8 @@ CREATE TABLE equipos_usuarios
 (
          id bigserial primary key
         ,nombre varchar(255) UNIQUE
-        ,creador_id bigint not null references usuarios_id(id)
-                    on delete no ACTION
+        ,creador_id bigint not null references usuarios(id)
+                    on delete cascade
                     on update cascade
         ,created_at TIMESTAMP(0)
         ,updated_at TIMESTAMP(0)
@@ -228,8 +228,8 @@ CREATE TABLE participantes
     equipo_id bigint references equipos_usuarios(id)
                     on delete cascade
                     on update CASCADE
-    ,usuario_id bigint references usuarios_id(id)
-                        on delete no action
+    ,usuario_id bigint references usuarios(id)
+                        on delete cascade
                         on update CASCADE
     ,aceptar bool default false
     ,CONSTRAINT pk_equipo_usuario primary key(equipo_id,usuario_id)
