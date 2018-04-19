@@ -17,7 +17,7 @@ class ParticipantesController extends Controller
     /**
      * {@inheritdoc}
      */
-    /*public function behaviors()
+    public function behaviors()
     {
         return [
             'verbs' => [
@@ -27,7 +27,7 @@ class ParticipantesController extends Controller
                 ],
             ],
         ];
-    }*/
+    }
 
     /**
      * Lists all Participantes models.
@@ -100,7 +100,6 @@ class ParticipantesController extends Controller
     /**
      * Deletes an existing Participantes model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $equipo_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -114,7 +113,6 @@ class ParticipantesController extends Controller
 
     /**
      * Action para poder entrar en un equipò.
-     * @param  [type] $equipo_id [description]
      * @return [type]            [description]
      */
     public function actionAceptarPeticion()

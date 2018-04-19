@@ -1,5 +1,5 @@
 function aceptar (data,div) {
-    console.log('aceptar');
+    
     div.remove();
     var div = $('<div>');
     div.html(data);
