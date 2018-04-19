@@ -46,15 +46,15 @@ class ParticipantesController extends Controller
 
     /**
      * Displays a single Participantes model.
-     * @param int $equipo_id
-     * @param int $usuario_id
+     * @param int $equipoId
+     * @param int $usuarioId
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($equipo_id, $usuario_id)
+    public function actionView($equipoId, $usuarioId)
     {
         return $this->render('view', [
-            'model' => $this->findModel($equipo_id, $usuario_id),
+            'model' => $this->findModel($equipoId, $usuarioId),
         ]);
     }
 
@@ -79,14 +79,14 @@ class ParticipantesController extends Controller
     /**
      * Updates an existing Participantes model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $equipo_id
-     * @param int $usuario_id
+     * @param int $equipoId
+     * @param int $usuarioId
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($equipo_id, $usuario_id)
+    public function actionUpdate($equipoId, $usuarioId)
     {
-        $model = $this->findModel($equipo_id, $usuario_id);
+        $model = $this->findModel($equipoId, $usuarioId);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'equipo_id' => $model->equipo_id, 'usuario_id' => $model->usuario_id]);
@@ -106,8 +106,8 @@ class ParticipantesController extends Controller
     public function actionDelete()
     {
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            $equipo_id = Yii::$app->request->post('equipo_id');
-            return $this->findModel($equipo_id, Yii::$app->user->identity->id)->delete();
+            $equipoId = Yii::$app->request->post('equipo_id');
+            return $this->findModel($equipoId, Yii::$app->user->identity->id)->delete();
         }
     }
 
@@ -118,8 +118,8 @@ class ParticipantesController extends Controller
     public function actionAceptarPeticion()
     {
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            $equipo_id = Yii::$app->request->post('equipo_id');
-            $model = $this->findModel($equipo_id, Yii::$app->user->identity->id);
+            $equipoId = Yii::$app->request->post('equipo_id');
+            $model = $this->findModel($equipoId, Yii::$app->user->identity->id);
             $model->aceptar = true;
             if ($model->save()) {
                 return $this->renderPartial('/equipos-usuarios/_equiposDisponibles', [
@@ -132,14 +132,14 @@ class ParticipantesController extends Controller
     /**
      * Finds the Participantes model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $equipo_id
-     * @param int $usuario_id
+     * @param int $equipoId
+     * @param int $usuarioId
      * @return Participantes the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($equipo_id, $usuario_id)
+    protected function findModel($equipoId, $usuarioId)
     {
-        if (($model = Participantes::findOne(['equipo_id' => $equipo_id, 'usuario_id' => $usuario_id])) !== null) {
+        if (($model = Participantes::findOne(['equipo_id' => $equipoId, 'usuario_id' => $usuarioId])) !== null) {
             return $model;
         }
 
