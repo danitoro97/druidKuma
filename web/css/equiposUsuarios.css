@@ -1,0 +1,24 @@
+.equipos-usuarios-index .container {
+    border: 2px solid black;
+
+}
+.row div {
+    padding-bottom: 10px;
+}
+hr {
+    border-color: red !important;
+}
+
+@font-face {
+    font-family: 'Equipos'; /*a name to be used later*/
+    src: url('fonts/AllerDisplay.ttf'); /*URL to font*/
+}
+
+.equipos-usuarios-index h3 {
+    font-family: Equipos !important;
+
+}
+
+.boton {
+    margin-top: 25px;
+}
