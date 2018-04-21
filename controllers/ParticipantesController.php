@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\EquiposUsuarios;
 use app\models\Participantes;
+use app\models\Usuarios;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -26,14 +29,26 @@ class ParticipantesController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['delete', 'create', 'aceptar-peticion'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['delete', 'create', 'aceptar-peticion'],
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
         ];
     }
 
     /**
      * Lists all Participantes models.
      * @return mixed
+     * @param mixed $equipoId
      */
-    public function actionIndex()
+    /*public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Participantes::find(),
@@ -42,7 +57,7 @@ class ParticipantesController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-    }
+    }*/
 
     /**
      * Displays a single Participantes model.
@@ -51,28 +66,48 @@ class ParticipantesController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($equipoId, $usuarioId)
+    /*public function actionView($equipoId, $usuarioId)
     {
         return $this->render('view', [
             'model' => $this->findModel($equipoId, $usuarioId),
         ]);
-    }
+    }*/
 
     /**
      * Creates a new Participantes model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @param mixed $equipoId
      */
-    public function actionCreate()
+    public function actionCreate($equipoId)
     {
-        $model = new Participantes();
+        $equipo = EquiposUsuarios::findOne(['id' => $equipoId]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'equipo_id' => $model->equipo_id, 'usuario_id' => $model->usuario_id]);
+        if ($equipo == null || $equipo->creador_id != Yii::$app->user->identity->id) {
+            //Yii::$app->session->setFlash('error', 'No existe ese equipo');
+            return $this->goBack();
+        }
+
+
+        $model = new Participantes();
+        $model->equipo_id = $equipo->id;
+
+        if ($model->load(Yii::$app->request->post())) {
+            foreach ($model->usuarios as $usuario) {
+                $user = Usuarios::findOne(['nombre' => $usuario]);
+
+                if ($user != null) {
+                    $model->usuario_id = $user->id;
+                    $model->save();
+                }
+            }
+
+            return $this->redirect(['/equipos-usuarios/index']);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'equipo' => $equipo,
         ]);
     }
 
@@ -84,19 +119,19 @@ class ParticipantesController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($equipoId, $usuarioId)
-    {
-        $model = $this->findModel($equipoId, $usuarioId);
+    /*    public function actionUpdate($equipoId, $usuarioId)
+        {
+            $model = $this->findModel($equipoId, $usuarioId);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'equipo_id' => $model->equipo_id, 'usuario_id' => $model->usuario_id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'equipo_id' => $model->equipo_id, 'usuario_id' => $model->usuario_id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
+    */
     /**
      * Deletes an existing Participantes model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

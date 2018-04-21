@@ -108,13 +108,15 @@ class EquiposUsuariosController extends Controller
     /**
      * Deletes an existing EquiposUsuarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        $this->findModel($id)->delete();
+        if (Yii::$app->request->isPost) {
+            $this->findModel(Yii::$app->request->post('id'))->delete();
+        }
+
 
         return $this->redirect(['index']);
     }
