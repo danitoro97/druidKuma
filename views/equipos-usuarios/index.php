@@ -62,7 +62,7 @@ $this->registerCssFile('/css/equiposUsuarios.css');
                 if ($model == null) {
                     echo $this->render('_guia');
                 } else {
-                    echo Html::a('Crear equipo', '/equipos-usuarios/create', ['class' => 'col-xs-offset-9 btn btn-success']);
+                    echo Html::a('Crear equipo', ['/equipos-usuarios/create'], ['class' => 'col-xs-offset-9 btn btn-success']);
                 }
             ?>
         </div>
