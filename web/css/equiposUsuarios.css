@@ -16,9 +16,13 @@ hr {
 
 .equipos-usuarios-index h3 {
     font-family: Equipos !important;
-
+    padding-left: 30px;
 }
 
 .boton {
+    margin-top: 25px;
+}
+
+.invitacion span {
     margin-top: 25px;
 }

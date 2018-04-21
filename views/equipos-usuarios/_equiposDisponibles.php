@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 
-
 ?>
 
 <div class="row ">
@@ -18,6 +17,7 @@ use yii\helpers\Html;
                 <?=Html::a('Añadir participantes', ['/participantes/create', 'equipoId' => $model->equipo_id], ['class' => 'btn btn-xs btn-info'])?>
         <?php endif; ?>
     </div>
-
+    <div class="col-xs-12">
+        <hr>
+    </div>
 </div>
-<hr>
