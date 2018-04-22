@@ -2,8 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\EquiposUsuarios;
+use app\models\Participantes;
 use app\models\Posts;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -25,31 +28,52 @@ class PostsController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'create'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'create'],
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
         ];
     }
 
     /**
      * Lists all Posts models.
      * @return mixed
-     * @param mixed $id
+     * @param mixed $id Representa el identificador del equipo
      */
     public function actionIndex($id)
     {
+        if (!$this->isParticipante($id)) {
+            return $this->goBack();
+        }
+
         return $this->render('index', [
             'model' => Posts::find()->where(['equipo_usuario_id' => $id])->all(),
+            'equipo' => $this->findEquipo($id),
         ]);
     }
 
     /**
      * Displays a single Posts model.
-     * @param int $id
+     * @param mixed $id Representa el identificador del equipo
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
+        if (!$this->isParticipante($id)) {
+            return $this->goBack();
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'equipo' => $this->findEquipo($id),
         ]);
     }
 
@@ -57,9 +81,14 @@ class PostsController extends Controller
      * Creates a new Posts model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @param mixed $id Representa el identificador del equipo
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
+        if (!$this->isParticipante($id)) {
+            return $this->goBack();
+        }
+
         $model = new Posts();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -68,6 +97,7 @@ class PostsController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'equipo' => $this->findEquipo($id),
         ]);
     }
 
@@ -78,7 +108,7 @@ class PostsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    /*public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
@@ -89,7 +119,7 @@ class PostsController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
+    }*/
 
     /**
      * Deletes an existing Posts model.
@@ -98,13 +128,13 @@ class PostsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    /*public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
-
+*/
     /**
      * Finds the Posts model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -119,5 +149,23 @@ class PostsController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function findEquipo($id)
+    {
+        if (($model = EquiposUsuarios::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function isParticipante($id)
+    {
+        return Participantes::find()
+                    ->where(['equipo_id' => $id])
+                    ->andFilterWhere(['usuario_id' => Yii::$app->user->identity->id])
+                    ->andFilterWhere(['aceptar' => true])
+                    ->exists();
     }
 }

@@ -236,8 +236,8 @@ CREATE TABLE participantes
 );
 
 --insert participantes --
-INSERT INTO participantes (equipo_id,usuario_id)
-values (1,1),(1,2);
+INSERT INTO participantes (equipo_id,usuario_id,aceptar)
+values (1,1,true),(1,2,false);
 
 --CREAR TABLA POSTS
 DROP TABLE IF EXISTS posts CASCADE;

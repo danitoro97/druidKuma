@@ -14,10 +14,10 @@ $this->registerCssFile('/css/equiposUsuarios.css');
     <div class="container col-md-8 col-md-offset-2">
         <div class="row">
             <div class="text-center">
-                <h3>Posts <?= Html::encode($model[0]->equipoUsuario->nombre) ?></h3>
+                <h3>Equipo <?= Html::encode($equipo->nombre) ?></h3>
 
                 <p>
-                    <?= Html::a('Create Posts', ['create'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('Create Posts', ['create', 'id' => $equipo->id], ['class' => 'btn btn-success']) ?>
                 </p>
             </div>
         </div>

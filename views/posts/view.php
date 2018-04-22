@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Posts */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index', 'id' => $equipo->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="posts-view">
