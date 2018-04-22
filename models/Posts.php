@@ -9,6 +9,7 @@ namespace app\models;
  * @property int $creador_id
  * @property int $equipo_usuario_id
  * @property string $texto
+ * @property string $titulo
  * @property string $img
  *
  * @property EquiposUsuarios $equipoUsuario
@@ -43,7 +44,7 @@ class Posts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['creador_id'], 'required'],
+            [['creador_id', 'titulo'], 'required'],
             [['equipo_usuario_id'], 'required', 'on' => self::ESCENARIO_EQUIPO],
             [['creador_id'], function ($attributes, $params, $validador) {
                 if (Participantes::find()

@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "usuarios_id".
  *
@@ -90,5 +88,13 @@ class UsuariosId extends \yii\db\ActiveRecord
     public function getUsuarios()
     {
         return $this->hasOne(Usuarios::className(), ['id' => 'id'])->inverseOf('id0');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPosts()
+    {
+        return $this->hasMany(Posts::className(), ['creador_id' => 'id'])->inverseOf('creador');
     }
 }

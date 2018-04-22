@@ -105,4 +105,12 @@ class EquiposUsuarios extends \yii\db\ActiveRecord
             return $participante->save();
         }
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPosts()
+    {
+        return $this->hasMany(Posts::className(), ['equipo_usuario_id' => 'id'])->inverseOf('equipoUsuario');
+    }
 }
