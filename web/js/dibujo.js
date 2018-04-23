@@ -8,6 +8,7 @@
 //console.log(canvas.toDataURL({format:'png'}))
 var canvas;
 function circulo (options, config = []) {
+    config = configuracion();
     var circle = new fabric.Circle({
       radius: config.radius,
       fill: config.fill,
@@ -19,10 +20,11 @@ function circulo (options, config = []) {
 }
 
 function cruz (options,config = []) {
+    config = configuracion();
     var triangle = new fabric.Triangle({
         width: config.width,
         height: config.height,
-        fill: confg.fill,
+        fill: config.fill,
         left: options.e.layerX,
         top: options.e.layerY,
     });
@@ -31,7 +33,7 @@ function cruz (options,config = []) {
 }
 
 function cuadrado(options, config = []) {
-
+    config = configuracion();
     var cuadrado = new fabric.Rect({
         top: options.e.layerY,
         left: options.e.layerX,
@@ -71,12 +73,19 @@ function colocarBotones(id) {
     var canvas = $('#' + id);
     var botones = ['Circulo','Cuadrado','Cruz'];
     var div = canvas.parent().parent().parent();
+
     for (var i = 0; i < botones.length; i++) {
-        var boton = $('<button>');
-        boton.text(botones[i]);
+        var boton = $('<input>');
+        var label = $('<label>');
+        label.text(botones[i]);
+        label.attr('for',botones[i]);
+        boton.attr('type','radio');
+        boton.attr('name', 'figura');
+        boton.attr('id', botones[i]);
         boton.attr('data-figura', botones[i].toLowerCase());
+        div.append(label);
         div.append(boton);
-        boton.on('click',function(){
+        boton.on('change',function(){
             //entonces db debe cambiar
             eventos($(this).data('figura'));
         })
@@ -104,3 +113,13 @@ function eventos (figura){
 }
 
 crearLienzo('myCanvas');
+
+function configuracion()
+{
+    return {
+            width:100,
+            height:100,
+            fill:'green',
+            radius:20,
+    };
+}
