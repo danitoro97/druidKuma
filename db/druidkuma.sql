@@ -236,8 +236,8 @@ CREATE TABLE participantes
 );
 
 --insert participantes --
-INSERT INTO participantes (equipo_id,usuario_id)
-values (1,1),(1,2);
+INSERT INTO participantes (equipo_id,usuario_id,aceptar)
+values (1,1,true),(1,2,false);
 
 --CREAR TABLA POSTS
 DROP TABLE IF EXISTS posts CASCADE;
@@ -250,6 +250,7 @@ CREATE TABLE posts
         ,equipo_usuario_id bigint references equipos_usuarios(id)
                             on delete cascade
                             on update cascade
+        ,titulo  varchar(255)
         ,texto text
         ,img varchar(255)
         CONSTRAINT  ck_null_text_img CHECK (texto is not null or img is not null)
@@ -257,8 +258,8 @@ CREATE TABLE posts
 );
 
 ---insert POSTS
-INSERT INTO posts (creador_id,equipo_usuario_id,texto)
-values (1,1,'prueba posts');
+INSERT INTO posts (creador_id,equipo_usuario_id,texto,titulo)
+values (1,1,'prueba posts','titulo');
 
 --create respuestas --
 DROP TABLE IF EXISTS respuestas CASCADE;
