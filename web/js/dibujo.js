@@ -7,24 +7,39 @@
 }));*/
 //console.log(canvas.toDataURL({format:'png'}))
 var canvas;
-function circulo (options) {
+function circulo (options, config = []) {
     var circle = new fabric.Circle({
-      radius: 20, fill: 'green', left: options.e.layerX, top: options.e.layerY
+      radius: config.radius,
+      fill: config.fill,
+      left: options.e.layerX,
+      top: options.e.layerY
     });
     //var circle = new fabric.Line([10,10]);
     canvas.add(circle);
 }
 
-function cruz (options) {
+function cruz (options,config = []) {
     var triangle = new fabric.Triangle({
-        width: 20, height: 30, fill: 'blue', left: 50, top: 50
+        width: config.width,
+        height: config.height,
+        fill: confg.fill,
+        left: options.e.layerX,
+        top: options.e.layerY,
     });
     //var circle = new fabric.Line([10,10]);
     canvas.add(triangle);
 }
 
-function cuadrado(options) {
-    var cuadrado = new fabric.Rect({ top: 100, left: 100, width: 50, height: 50, fill: '#f55' });
+function cuadrado(options, config = []) {
+
+    var cuadrado = new fabric.Rect({
+        top: options.e.layerY,
+        left: options.e.layerX,
+        width : config.width,
+        fill: config.fill,
+    });
+    //cuadrado.width = config.width;
+    cuadrado.height = config.height;
     canvas.add(cuadrado);
 }
 
@@ -78,7 +93,9 @@ function eventos (figura){
             canvas.on('mouse:dblclick', circulo);
         break;
         case 'cuadrado':
-            canvas.on('mouse:dblclick',cuadrado);
+            canvas.on('mouse:dblclick',function(e){
+                cuadrado(e,{width:100,height:200,fill:'black'});
+            });
         break;
         case 'cruz':
             canvas.on('mouse:dblclick',cruz);
