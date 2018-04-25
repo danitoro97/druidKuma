@@ -123,3 +123,8 @@ function configuracion()
             radius:20,
     };
 }
+
+$('#posts-form').on('beforeValidate', function (e) {
+    $('#posts-canvas').val(canvas.toDataURL());
+    
+});

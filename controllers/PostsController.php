@@ -90,8 +90,11 @@ class PostsController extends Controller
         }
 
         $model = new Posts();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model->creador_id = Yii::$app->user->identity->id;
+        $model->equipo_usuario_id = $id;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->upload();
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
