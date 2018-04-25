@@ -1,12 +1,5 @@
-/*canvas.on('mouse:dblclick', function(options) {
-   //console.log(options);
-
-});*/
-/*  fabric.log('', canvas.toDataURL({
-       format: 'png',
-}));*/
-//console.log(canvas.toDataURL({format:'png'}))
 var canvas;
+
 function circulo (options, config = []) {
     config = configuracion();
     var circle = new fabric.Circle({
@@ -15,8 +8,8 @@ function circulo (options, config = []) {
       left: options.e.layerX,
       top: options.e.layerY
     });
-    //var circle = new fabric.Line([10,10]);
-    canvas.add(circle);
+
+    return circle;
 }
 
 function cruz (options,config = []) {
@@ -28,8 +21,8 @@ function cruz (options,config = []) {
         left: options.e.layerX,
         top: options.e.layerY,
     });
-    //var circle = new fabric.Line([10,10]);
-    canvas.add(triangle);
+
+    return triangle;
 }
 
 function cuadrado(options, config = []) {
@@ -42,37 +35,29 @@ function cuadrado(options, config = []) {
     });
     //cuadrado.width = config.width;
     cuadrado.height = config.height;
-    canvas.add(cuadrado);
+    return cuadrado;
 }
 
 function crearLienzo(id) {
     canvas = new fabric.Canvas(id,{
        width: 500, height: 500,
     });
-    // console.log(canvas);
-           // create a rectangle object
-    /*var rect = new fabric.Rect({
-       left: 100,
-       top: 100,
-       fill: 'red',
-       width: 20,
-       height: 20
-    });*/
-
     // "add" rectangle onto canvas
     // canvas.add(rect).setActiveObject;
     // canvas.isDrawingMode= true;
     var imgElement = document.getElementById('futbol');
     var imgInstance = new fabric.Image(imgElement);
     canvas.add(imgInstance);
+    canvas.centerObject(imgInstance);
     imgInstance.set('selectable', false);
     colocarBotones(id);
+    canvas.on('mouse:dblclick', eventos);
 }
 
 function colocarBotones(id) {
     var canvas = $('#' + id);
     var botones = ['Circulo','Cuadrado','Cruz'];
-    var div = canvas.parent().parent().parent();
+    var div = $('.figura');
 
     for (var i = 0; i < botones.length; i++) {
         var boton = $('<input>');
@@ -85,34 +70,36 @@ function colocarBotones(id) {
         boton.attr('data-figura', botones[i].toLowerCase());
         div.append(label);
         div.append(boton);
-        boton.on('change',function(){
+        div.append($('<br>'));
+        /*boton.on('change',function(){
             //entonces db debe cambiar
             eventos($(this).data('figura'));
-        })
+        })*/
     }
 
 }
 
-function eventos (figura){
-    console.log(figura);
-    canvas.off();
+function eventos (options){
+    var figura = figuras();
+    objecto = circulo(options);
     switch (figura) {
         case 'circulo':
-            //canvas.on('mouse:dblclick',circulo);
-            canvas.on('mouse:dblclick', circulo);
+            objecto = circulo(options);
         break;
         case 'cuadrado':
-            canvas.on('mouse:dblclick',function(e){
-                cuadrado(e,{width:100,height:200,fill:'black'});
-            });
+            objecto = cuadrado(options);
         break;
         case 'cruz':
-            canvas.on('mouse:dblclick',cruz);
+            objecto = cruz(options);
         break;
     }
+
+    canvas.add(objecto).setActiveObject();
 }
 
-crearLienzo('myCanvas');
+function figuras() {
+    return $('input[name="figura"]:checked').data('figura');
+}
 
 function configuracion()
 {
@@ -126,5 +113,12 @@ function configuracion()
 
 $('#posts-form').on('beforeValidate', function (e) {
     $('#posts-canvas').val(canvas.toDataURL());
-    
+
 });
+
+$(function() {
+    $('input[type="radio"]').checkboxradio();
+});
+
+
+crearLienzo('myCanvas');
