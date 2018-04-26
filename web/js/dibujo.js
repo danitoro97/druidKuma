@@ -50,12 +50,38 @@ function crearLienzo(id) {
     canvas.add(imgInstance);
     canvas.centerObject(imgInstance);
     imgInstance.set('selectable', false);
-    colocarBotones(id);
+    colocarBotones();
+    botonesConfiguracion();
     canvas.on('mouse:dblclick', eventos);
 }
 
-function colocarBotones(id) {
-    var canvas = $('#' + id);
+function modoLibre(div)
+{
+    var input = $('<input>');
+    var label = $('<label>');
+    label.text('Modo libre');
+    label.attr('for','libre');
+    input.attr('type','checkbox');
+    input.attr('id','libre');
+    input.attr('name','libre');
+    div.append(label);
+    label.append(input);
+    input.on('click',function(){
+        if ($(this).prop('checked')) {
+            canvas.isDrawingMode= true;
+            canvas.freeDrawingBrush.width = 20;
+            canvas.freeDrawingBrush.color = color();
+
+        }
+        else {
+            canvas.isDrawingMode= false;
+
+        }
+    })
+
+}
+
+function colocarBotones() {
     var botones = ['Circulo','Cuadrado','Cruz'];
     var div = $('.figura');
 
@@ -76,6 +102,27 @@ function colocarBotones(id) {
             eventos($(this).data('figura'));
         })*/
     }
+    modoLibre(div);
+}
+
+function botonesConfiguracion (){
+    var div = $('.configuracion');
+
+    var propiedades = ['width','height','radius','fill'];
+    var plabel = ['ancho','alto','radio','color'];
+    for (var i = 0; i < propiedades.length; i++) {
+        var label = $('<label>');
+        label.text(plabel[i]);
+        var boton = $('<input>');
+        boton.attr('type','number');
+        if (propiedades[i] == 'fill') {
+            boton.attr('type','color');
+        }
+        boton.attr('data-configuracion', propiedades[i]);
+        div.append(label);
+        div.append(boton);
+    }
+
 
 }
 
@@ -103,12 +150,27 @@ function figuras() {
 
 function configuracion()
 {
-    return {
-            width:100,
-            height:100,
-            fill:'green',
-            radius:20,
+    var predefinido = {
+        width:50,
+        height:50,
+        fill:color(),
+        radius:5,
     };
+    var config = {};
+    var input = $('.configuracion').find('input');
+
+    input.each(function(i,elemento){
+        var data = $(this).data('configuracion');
+        config[data] = $(this).val();
+
+    });
+
+    return $.extend({},config,predefinido);
+}
+
+function color()
+{
+    return $('input[type="color"]').val();
 }
 
 $('#posts-form').on('beforeValidate', function (e) {
@@ -118,6 +180,7 @@ $('#posts-form').on('beforeValidate', function (e) {
 
 $(function() {
     $('input[type="radio"]').checkboxradio();
+
 });
 
 

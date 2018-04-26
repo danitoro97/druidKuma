@@ -29,6 +29,9 @@ $this->registerCssFile('@web/css/dibujar.css');
         <div class="col-md-6">
                 <canvas id="myCanvas"><?=Html::img('@web/futbolista.png', ['id'=>'futbol'])?></canvas>
         </div>
+        <div class="col-md-2 configuracion">
+
+        </div>
     </div>
 
     <?= $form->field($model,'canvas')->hiddenInput()->label(false) ?>
