@@ -110,7 +110,7 @@ class Posts extends \yii\db\ActiveRecord
         $res = $client->createSharedLinkWithSettings($filepath, [
             'requested_visibility' => 'public',
         ]);
-        $url = $res['url'][mb_strlen($res['url']) - 1] = '1';
+        //$url = $res['url'][mb_strlen($res['url']) - 1] = '1';
         $this->img = $res['url'];
 
         return $res;
