@@ -133,12 +133,12 @@ class EquiposUsuariosController extends Controller
             $model = $this->findModel($id);
 
             if (Yii::$app->user->identity->id == $model->creador_id) {
-                $participante_id = Yii::$app->request->post('participante_id');
-                if ($participante_id == $model->creador_id) {
+                $participanteId = Yii::$app->request->post('participante_id');
+                if ($participanteId == $model->creador_id) {
                     return false;
                 }
                 $modelP = Participantes::find()->where(['equipo_id' => $id])
-                ->andWhere(['usuario_id' => $participante_id])->one();
+                ->andWhere(['usuario_id' => $participanteId])->one();
                 return $modelP->delete();
             }
             return false;
