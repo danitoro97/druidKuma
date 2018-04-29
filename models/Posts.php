@@ -2,6 +2,9 @@
 
 namespace app\models;
 
+use Spatie\Dropbox\Exceptions\BadRequest;
+use yii\imagine\Image;
+
 /**
  * This is the model class for table "posts".
  *
@@ -18,6 +21,11 @@ namespace app\models;
  */
 class Posts extends \yii\db\ActiveRecord
 {
+    /**
+     * Varaible que almacenara el canvas en base 64.
+     * @var [type]
+     */
+    public $canvas;
     /**
      * Escenario que se usara cuando el posts sea para un equipo.
      * @var string
@@ -44,7 +52,7 @@ class Posts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['creador_id', 'titulo'], 'required'],
+            [['creador_id', 'titulo', 'canvas'], 'required'],
             [['equipo_usuario_id'], 'required', 'on' => self::ESCENARIO_EQUIPO],
             [['creador_id'], function ($attributes, $params, $validador) {
                 if (Participantes::find()
@@ -74,6 +82,38 @@ class Posts extends \yii\db\ActiveRecord
             'texto' => 'Texto',
             'img' => 'Img',
         ];
+    }
+
+    /**
+     * Carga la img en disco y la sube a Dropbox.
+     * @return [type] [description]
+     */
+    public function upload()
+    {
+        $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $this->canvas));
+        $id = self::find()->orderBy('id DESC')->one()->id;
+        $filepath = getenv('RutaPosts') . $id . '.png'; // or image.jpg
+
+        // Save the image in a defined path
+        file_put_contents($filepath, $data);
+
+        $client = new \Spatie\Dropbox\Client(getenv('Dropbox'));
+
+        try {
+            $client->delete($filepath);
+        } catch (BadRequest $e) {
+            // No se hace nada
+        }
+
+        $client->upload($filepath, file_get_contents($filepath, 'overwrite'));
+
+        $res = $client->createSharedLinkWithSettings($filepath, [
+            'requested_visibility' => 'public',
+        ]);
+        //$url = $res['url'][mb_strlen($res['url']) - 1] = '1';
+        $this->img = $res['url'];
+
+        return $res;
     }
 
     /**

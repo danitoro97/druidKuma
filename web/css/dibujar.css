@@ -1,0 +1,13 @@
+#myCanvas img {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.figura {
+    text-align: right;
+}
+
+canvas {
+    border: 2px solid black;
+}
