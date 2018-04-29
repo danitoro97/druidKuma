@@ -122,6 +122,30 @@ class EquiposUsuariosController extends Controller
     }
 
     /**
+     * Action para eliminar a un participante de un equipo.
+     * @return [type] [description]
+     */
+    public function actionEliminarParticipante()
+    {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $id = Yii::$app->request->post('id');
+
+            $model = $this->findModel($id);
+
+            if (Yii::$app->user->identity->id == $model->creador_id) {
+                $participante_id = Yii::$app->request->post('participante_id');
+                if ($participante_id == $model->creador_id) {
+                    return false;
+                }
+                $modelP = Participantes::find()->where(['equipo_id' => $id])
+                ->andWhere(['usuario_id' => $participante_id])->one();
+                return $modelP->delete();
+            }
+            return false;
+        }
+    }
+
+    /**
      * Finds the EquiposUsuarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id
