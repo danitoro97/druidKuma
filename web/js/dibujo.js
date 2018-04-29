@@ -1,5 +1,9 @@
 var canvas;
 
+function downColor (options){
+    canvas.freeDrawingBrush.color = color();
+}
+
 function circulo (options, config = []) {
     config = configuracion();
     var circle = new fabric.Circle({
@@ -53,6 +57,7 @@ function crearLienzo(id) {
     colocarBotones();
     botonesConfiguracion();
     canvas.on('mouse:dblclick', eventos);
+    canvas.on('mouse:down', downColor);
 }
 
 function modoLibre(div)
@@ -103,6 +108,7 @@ function colocarBotones() {
         })*/
     }
     modoLibre(div);
+    insertarTexto(div);
 }
 
 function botonesConfiguracion (){
@@ -171,6 +177,17 @@ function configuracion()
 function color()
 {
     return $('input[type="color"]').val();
+}
+
+function insertarTexto(div) {
+    var boton = $('<button>');
+    boton.attr('id','texto');
+    boton.text('insertar texto');
+    div.append(boton);
+    boton.on('click',function(){
+        var text = new fabric.Text(prompt('Introduzca el texto'));
+        canvas.add(text);
+    });
 }
 
 $('#posts-form').on('beforeValidate', function (e) {
