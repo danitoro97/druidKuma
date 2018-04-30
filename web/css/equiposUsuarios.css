@@ -1,8 +1,4 @@
-.equipos-usuarios-index .container {
-    border: 2px solid black;
-}
-
-.posts-index .container {
+.posts-index .container, .equipos-usuarios-index .container {
     border: 2px solid black;
 }
 
@@ -22,6 +18,11 @@ hr {
     font-family: Equipos !important;
     padding-left: 30px;
 }
+
+ .row p , .row h5 {
+    font-family: Equipos !important;
+}
+
 
 .boton {
     margin-top: 25px;

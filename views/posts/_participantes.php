@@ -31,7 +31,7 @@ $this->registerJs($js);
 
 <div class="row">
     <div class="col-xs-8 text-center">
-        <h3><?=Html::encode($model->usuario->nombre)?></h3>
+        <p><?=Html::encode($model->usuario->nombre)?></p>
     </div>
     <div class="col-xs-4 ">
         <?php if ($model->equipo->creador_id == Yii::$app->user->identity->id): ?>

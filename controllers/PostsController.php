@@ -95,7 +95,7 @@ class PostsController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->upload();
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $id]);
         }
 
         return $this->render('create', [
