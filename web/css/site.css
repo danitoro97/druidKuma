@@ -128,9 +128,9 @@ a.desc:after {
 
 @font-face {
     font-family: 'Equipos'; /*a name to be used later*/
-    src: url('@web/css/fonts/AllerDisplay.ttf'); /*URL to font*/
+    src: url('fonts/AllerDisplay.ttf'); /*URL to font*/
 }
 
 h1 ,h2,h3,h4,h5,h6,p,a {
-    font-family: Equipos !important, "Times New Roman", Arial;
+    font-family: Equipos , Arial;
 }
