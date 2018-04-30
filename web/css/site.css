@@ -125,3 +125,12 @@ a.desc:after {
     height: 38px;
     width: 38px;
 }
+
+@font-face {
+    font-family: 'Equipos'; /*a name to be used later*/
+    src: url('fonts/AllerDisplay.ttf'); /*URL to font*/
+}
+
+h1 ,h2,h3,h4,h5,h6,p,a {
+    font-family: Equipos !important, "Times New Roman", Arial;
+}

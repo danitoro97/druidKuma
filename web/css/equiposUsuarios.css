@@ -9,21 +9,6 @@ hr {
     border-color: red !important;
 }
 
-@font-face {
-    font-family: 'Equipos'; /*a name to be used later*/
-    src: url('fonts/AllerDisplay.ttf'); /*URL to font*/
-}
-
-.row h3 {
-    font-family: Equipos !important;
-    padding-left: 30px;
-}
-
- .row p , .row h5 {
-    font-family: Equipos !important;
-}
-
-
 .boton {
     margin-top: 25px;
 }
