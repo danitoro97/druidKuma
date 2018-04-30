@@ -21,6 +21,14 @@ use yii\helpers\Html;
 class Respuestas extends \yii\db\ActiveRecord
 {
     /**
+     * Escenario para cuando se responda al post de un equipo.
+     * @var [type]
+     */
+    public const ESCENARIO_EQUIPO = 'equipo';
+
+    public const ESCENARIO_EQUIPO_PADRE = 'padre';
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
@@ -34,10 +42,23 @@ class Respuestas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['texto', 'creador_id'], 'required'],
+            [['texto', 'creador_id', 'post_id'], 'required'],
+            [['padre_id'], 'required', 'on' => self::ESCENARIO_EQUIPO_PADRE],
             [['texto'], 'string'],
             [['creador_id', 'post_id', 'padre_id'], 'default', 'value' => null],
             [['creador_id', 'post_id', 'padre_id'], 'integer'],
+            [['creador_id'], function ($attributes) {
+                $post = Posts::findOne($this->post_id);
+
+                $participante = Participantes::find()
+                                ->where(['equipo_id' => $post->equipo_usuario_id])
+                                ->andWhere(['usuario_id' => $this->creador_id])
+                                ->exists();
+
+                if (!$participante) {
+                    $this->addError('creador_id', ' Usuario no valido');
+                }
+            }, 'on' => [self::ESCENARIO_EQUIPO, self::ESCENARIO_EQUIPO_PADRE]],
             [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => Posts::className(), 'targetAttribute' => ['post_id' => 'id']],
             [['padre_id'], 'exist', 'skipOnError' => true, 'targetClass' => self::className(), 'targetAttribute' => ['padre_id' => 'id']],
             [['creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => UsuariosId::className(), 'targetAttribute' => ['creador_id' => 'id']],

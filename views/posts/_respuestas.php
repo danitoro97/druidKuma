@@ -7,6 +7,7 @@ use yii\widgets\ListView;
 /* @var app\models\Comentarios */
 $this->registerCssFile('/css/comentarios.css');
 
+
 ?>
 
 <div class="row" >

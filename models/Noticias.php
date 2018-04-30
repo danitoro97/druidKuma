@@ -90,7 +90,7 @@ class Noticias extends \yii\db\ActiveRecord
         if ($this->img === null) {
             return true;
         }
-        $id = self::find()->orderBy('created_at DESC')->one()->id;
+        $id = self::find()->orderBy('created_at DESC')->one()->id ?? 1;
         $nombre = getenv('Ruta') . $id . '.' . $this->extension;
 
         $res = $this->img->saveAs($nombre);

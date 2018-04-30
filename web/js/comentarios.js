@@ -4,6 +4,7 @@ function comentar(boton,ruta,id) {
         var enviar = $(this);
         var mensaje = textarea.val();
         var padre = $(this).parent().data('padre_id');
+        console.log(padre);
         var div = $(this).parent();
         if (mensaje != '') {
             //peticion ajax
