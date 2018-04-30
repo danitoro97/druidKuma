@@ -252,6 +252,8 @@ CREATE TABLE posts
                             on update cascade
         ,titulo  varchar(255)
         ,texto text
+        ,created_at TIMESTAMP(0)
+        ,updated_at TIMESTAMP(0)
         ,img varchar(255)
         CONSTRAINT  ck_null_text_img CHECK (texto is not null or img is not null)
 
@@ -267,13 +269,18 @@ CREATE TABLE respuestas
 (
          id bigserial primary KEY
         ,texto text not null
+        ,creador_id bigint not null references usuarios_id(id)
+                            on delete no action
+                            on update cascade
         ,post_id bigint references posts(id)
                     on delete cascade
                     on update CASCADE
+        ,created_at TIMESTAMP(0)
+        ,updated_at TIMESTAMP(0)
         ,padre_id bigint references respuestas(id)
                     ON DELETE cascade
                     ON UPDATE CASCADE
 );
 
-insert into respuestas (texto,post_id)
-values ('asdasd',1);
+insert into respuestas (texto,post_id,creador_id)
+values ('asdasd',1,1);
