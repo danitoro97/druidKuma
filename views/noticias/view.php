@@ -35,7 +35,7 @@ $('#botonComentario').on('click', function(){
         },
         success: function (data){
             textarea.val(null);
-            $('#comentario').html(data);
+            $('#comentario').append(data);
         }
     })
 })
@@ -65,6 +65,7 @@ $('#bComentarios').on('click',function(){
         success: function (data) {
             var div = $('<div>');
             div.html(data);
+            $('#comentario').html(null);
             $('.noticias-view').append(div);
 
             $('body,html').stop(true,true).animate({

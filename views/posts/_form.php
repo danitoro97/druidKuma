@@ -27,7 +27,7 @@ $this->registerCssFile('@web/css/dibujar.css');
 
         </div>
         <div class="col-md-6">
-                <canvas id="myCanvas"><?=Html::img('@web/futbolista.png', ['id'=>'futbol'])?></canvas>
+                <canvas id="myCanvas"><?=Html::img('@web/pizarra.png', ['id'=>'futbol'])?></canvas>
         </div>
         <div class="col-md-2 configuracion">
 

@@ -31,6 +31,7 @@ function cruz (options,config = []) {
 
 function cuadrado(options, config = []) {
     config = configuracion();
+
     var cuadrado = new fabric.Rect({
         top: options.e.layerY,
         left: options.e.layerX,
@@ -44,7 +45,7 @@ function cuadrado(options, config = []) {
 
 function crearLienzo(id) {
     canvas = new fabric.Canvas(id,{
-       width: 500, height: 500,
+       
     });
     // "add" rectangle onto canvas
     // canvas.add(rect).setActiveObject;
@@ -134,7 +135,8 @@ function botonesConfiguracion (){
 
 function eventos (options){
     var figura = figuras();
-    objecto = circulo(options);
+
+
     switch (figura) {
         case 'circulo':
             objecto = circulo(options);
@@ -167,11 +169,14 @@ function configuracion()
 
     input.each(function(i,elemento){
         var data = $(this).data('configuracion');
-        config[data] = $(this).val();
+        if ($(this).val() != '') {
+            config[data] = $(this).val();
+        }
+
 
     });
 
-    return $.extend({},config,predefinido);
+    return $.extend(predefinido,config);
 }
 
 function color()
