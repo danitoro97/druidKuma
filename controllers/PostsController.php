@@ -31,11 +31,11 @@ class PostsController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'create'],
+                'only' => ['index', 'create', 'view'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'create'],
+                        'actions' => ['index', 'create', 'view'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -68,13 +68,13 @@ class PostsController extends Controller
      */
     public function actionView($id)
     {
-        if (!$this->isParticipante($id)) {
+        /*if (!$this->isParticipante($id)) {
             return $this->goBack();
-        }
+        }*/
 
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'equipo' => $this->findEquipo($id),
+            //'equipo' => $this->findEquipo($id),
         ]);
     }
 
@@ -153,7 +153,7 @@ class PostsController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('The requested page does not exist dasds.');
     }
 
     public function findEquipo($id)

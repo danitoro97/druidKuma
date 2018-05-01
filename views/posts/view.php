@@ -11,8 +11,8 @@ use yii\widgets\ListView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Posts */
 
-$this->title = $model->titulo;
-$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index', 'id' => $equipo->id]];
+$this->title = $model->titulo . 'asdas';
+$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = $this->title;
 
 $rutaPadre = Url::to(['/respuestas/create-padre']);
@@ -66,7 +66,7 @@ $this->registerJs($js);
             <h3><?=Html::encode($model->titulo)?></h3>
         </div>
         <div class="row">
-            <div class="col-md-8 col-md-offset-4">
+            <div class="col-md-8 col-md-offset-2">
                 <?=Html::img($model->img)?>
             </div>
         </div>

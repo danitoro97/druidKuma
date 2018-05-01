@@ -9,7 +9,7 @@ use yii\helpers\Html;
         <h3><?=Html::encode($model->titulo)?></h3>
     </div>
     <div class="col-xs-4 boton">
-        <?=Html::a('Ver detalles', ['posts/view', 'id' => $model->equipo_usuario_id], ['class' => 'btn btn-xs btn-info'])?>
+        <?=Html::a('Ver detalles', ['posts/view', 'id' => $model->id], ['class' => 'btn btn-xs btn-info'])?>
     </div>
     <div class="col-sm-3 col-xs-4 boton">
         <?= Html::encode($model->creador->usuarios->nombre)?>
