@@ -42,6 +42,6 @@ class Plantilla extends \yii\db\ActiveRecord
 
     public function getRuta()
     {
-        return '@web/plantilla/' . $this->id . '.' . $this->extension;
+        return 'plantilla/' . $this->id . '.' . $this->extension;
     }
 }

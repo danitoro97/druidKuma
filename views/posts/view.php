@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $rutaPadre = Url::to(['/respuestas/create-padre']);
 $ruta = Url::to(['respuestas/create']);
+
 $js=<<<EOT
 
 $('#botonComentario').on('click', function(){
