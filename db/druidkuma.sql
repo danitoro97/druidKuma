@@ -284,3 +284,15 @@ CREATE TABLE respuestas
 
 insert into respuestas (texto,post_id,creador_id)
 values ('asdasd',1,1);
+
+
+--create imagenes predefinias --
+DROP TABLE IF EXISTS plantilla CASCADE;
+CREATE TABLE plantilla
+(
+        id bigserial primary key,
+        extension varchar(255) not null
+);
+
+INSERT INTO plantilla(extension)
+VALUES ('jpg'),('png');
