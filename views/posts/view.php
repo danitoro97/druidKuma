@@ -35,7 +35,7 @@ $('#botonComentario').on('click', function(){
             console.log(data)
             console.log($('#comentario'))
             textarea.val(null);
-            $('#respuestas').append(data);
+            $('#respuesta').append(data);
         }
     })
 })

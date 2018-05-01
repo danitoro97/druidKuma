@@ -45,7 +45,7 @@ function cuadrado(options, config = []) {
 
 function crearLienzo(id) {
     canvas = new fabric.Canvas(id,{
-       width: 500, height: 500,
+       
     });
     // "add" rectangle onto canvas
     // canvas.add(rect).setActiveObject;
