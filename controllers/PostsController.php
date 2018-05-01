@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\EquiposUsuarios;
 use app\models\Participantes;
+use app\models\Plantilla;
 use app\models\Posts;
 use Yii;
 use yii\filters\AccessControl;
@@ -101,6 +102,7 @@ class PostsController extends Controller
         return $this->render('create', [
             'model' => $model,
             'equipo' => $this->findEquipo($id),
+            'imagenes' => Plantilla::find()->all(),
         ]);
     }
 

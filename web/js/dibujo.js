@@ -45,20 +45,11 @@ function cuadrado(options, config = []) {
 
 function crearLienzo(id) {
     canvas = new fabric.Canvas(id,{
-       
+        height:500,
+        width:500,
     });
-    // "add" rectangle onto canvas
-    // canvas.add(rect).setActiveObject;
-    // canvas.isDrawingMode= true;
-    var imgElement = document.getElementById('futbol');
-    var imgInstance = new fabric.Image(imgElement);
-    canvas.add(imgInstance);
-    canvas.centerObject(imgInstance);
-    imgInstance.set('selectable', false);
-    colocarBotones();
-    botonesConfiguracion();
-    canvas.on('mouse:dblclick', eventos);
-    canvas.on('mouse:down', downColor);
+
+
 }
 
 function modoLibre(div)
@@ -135,7 +126,7 @@ function botonesConfiguracion (){
 
 function eventos (options){
     var figura = figuras();
-
+    objecto = circulo(options);
 
     switch (figura) {
         case 'circulo':
@@ -207,3 +198,7 @@ $(function() {
 
 
 crearLienzo('myCanvas');
+colocarBotones();
+botonesConfiguracion();
+canvas.on('mouse:dblclick', eventos);
+canvas.on('mouse:down', downColor);
