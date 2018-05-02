@@ -181,8 +181,22 @@ function insertarTexto(div) {
     boton.text('insertar texto');
     div.append(boton);
     boton.on('click',function(){
-        var text = new fabric.Text(prompt('Introduzca el texto'));
-        canvas.add(text);
+        dialog.prompt({
+			title: "Texto a añadir",
+			button: "Insertar",
+			required: false,
+			position: "absolute",
+			animation: "slide",
+			input: {
+				type: "text",
+
+			},
+			callback: function(value){
+				var text = new fabric.Text(value);
+                canvas.add(text);
+			}
+		});
+        return false;
     });
 }
 

@@ -11,8 +11,10 @@ use yii\widgets\ActiveForm;
 $this->registerJsFile('@web/plugin/fabric.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('@web/js/dibujo.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('@web/plugin/jquery-ui.js',['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('@web/plugin/jquery.dialog.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerCssFile('@web/css/jquery-ui.css');
 $this->registerCssFile('@web/css/dibujar.css');
+$this->registerCssFile('@web/css/jquery.dialog.css');
 $this->registerJsFile(
     '@web/plugin/ddslick.js',
     ['depends' => [\yii\web\JqueryAsset::className()]]
