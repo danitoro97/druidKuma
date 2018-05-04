@@ -296,3 +296,14 @@ CREATE TABLE plantilla
 
 INSERT INTO plantilla(extension)
 VALUES ('jpg'),('png');
+
+--plantilla usuario --
+DROP TABLE IF EXISTS plantilla_usuario CASCADE;
+CREATE TABLE plantilla_usuario
+(
+     id bigserial primary key
+    ,usuario_id bigint not null references usuarios(id)
+                        on delete cascade
+                        on update cascade
+    ,url varchar(255)
+);

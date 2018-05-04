@@ -90,9 +90,10 @@ class Noticias extends \yii\db\ActiveRecord
         if ($this->img === null) {
             return true;
         }
-        $id = self::find()->orderBy('created_at DESC')->one()->id ?? 1;
+        $id = self::find()->orderBy('created_at DESC')->one()->id + 1;
         $nombre = getenv('Ruta') . $id . '.' . $this->extension;
-
+        var_dump($nombre);
+        die();
         $res = $this->img->saveAs($nombre);
         if ($res) {
             Image::thumbnail($nombre, self::TAMANO, null)->save($nombre);

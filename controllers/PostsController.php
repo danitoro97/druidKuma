@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\EquiposUsuarios;
 use app\models\Participantes;
 use app\models\Plantilla;
+use app\models\PlantillaUsuario;
 use app\models\Posts;
 use Yii;
 use yii\filters\AccessControl;
@@ -98,11 +99,14 @@ class PostsController extends Controller
             $model->save();
             return $this->redirect(['index', 'id' => $id]);
         }
+        $imagenes = array_merge(Plantilla::find()->all(), PlantillaUsuario::find()
+                                  ->where(['usuario_id' => Yii::$app->user->identity->id])
+                                  ->all());
 
         return $this->render('create', [
             'model' => $model,
             'equipo' => $this->findEquipo($id),
-            'imagenes' => Plantilla::find()->all(),
+            'imagenes' => $imagenes,
         ]);
     }
 

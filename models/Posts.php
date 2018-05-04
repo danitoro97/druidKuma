@@ -91,7 +91,7 @@ class Posts extends \yii\db\ActiveRecord
     public function upload()
     {
         $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $this->canvas));
-        $id = self::find()->orderBy('id DESC')->one()->id;
+        $id = self::find()->orderBy('id DESC')->one()->id + 1;
         $filepath = getenv('RutaPosts') . $id . '.png'; // or image.jpg
 
         // Save the image in a defined path
