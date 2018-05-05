@@ -291,11 +291,11 @@ DROP TABLE IF EXISTS plantilla CASCADE;
 CREATE TABLE plantilla
 (
         id bigserial primary key,
-        extension varchar(255) not null
+        ruta varchar(255) not null
 );
 
-INSERT INTO plantilla(extension)
-VALUES ('jpg'),('png');
+INSERT INTO plantilla(ruta)
+VALUES ('https://www.dropbox.com/s/unfngu74syxeyrz/cropped-logo-pizarra.png?dl=1'),('https://www.dropbox.com/s/lmh9fq7f62dj1sp/vinilo-decorativo-pizarra-campo-de-futbol-3012.png?dl=1');
 
 --plantilla usuario --
 DROP TABLE IF EXISTS plantilla_usuario CASCADE;

@@ -58,6 +58,10 @@ class PlantillaUsuario extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Simple funcion para llamar a una columna con otro nombre.
+     * @return [type] [description]
+     */
     public function getRuta()
     {
         return $this->url;
@@ -72,7 +76,8 @@ class PlantillaUsuario extends \yii\db\ActiveRecord
         if ($this->img === null) {
             return true;
         }
-        $id = self::find()->orderBy('id DESC')->one()->id;
+        $conexion = self::find()->orderBy('id DESC')->one();
+        $id = $conexion == null ? 1 : $conexion->id + 1;
         $nombre = getenv('Ruta') . 'plantillaUsuario' . $id . '.' . $this->img->extension;
 
         $res = $this->img->saveAs($nombre);

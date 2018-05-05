@@ -27,6 +27,7 @@ $js = <<<EOT
                 canvas.add(oImg);
                 canvas.centerObject(oImg);
                 oImg.set('selectable', false);
+                
             });
         },
         imagePosition:"center",
@@ -56,7 +57,7 @@ $this->registerJs($js);
     <div id="imagenes">
         <select>
             <?php foreach ($imagenes as $imagen) :?>
-                <option value="<?=$imagen->id?>" data-imagesrc="<?=$imagen->ruta?>"></option>
+                <option value="<?=$imagen->id?>" data-imagesrc="<?=$imagen->ruta?>" crossorigin></option>
             <?php endforeach?>
         </select>
     </div>
