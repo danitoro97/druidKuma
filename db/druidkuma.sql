@@ -296,3 +296,19 @@ CREATE TABLE plantilla
 
 INSERT INTO plantilla(extension)
 VALUES ('jpg'),('png');
+
+
+--comentar partidos --
+DROP TABLE IF EXISTS comentar_partidos CASCADE;
+CREATE TABLE comentar_partidos
+(
+    id bigserial primary key,
+    partido_id bigint not null references partidos(id)
+                            on delete cascade
+                            on update cascade,
+    usuario_id bigint not null references usuarios(id)
+                            on delete CASCADE
+                            on update cascade,
+    texto varchar(255) not NULL,
+    created_at TIMESTAMP(0)
+);

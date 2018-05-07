@@ -18,11 +18,11 @@ class RespuestasController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create-padre'],
+                'only' => ['create-padre', 'crear'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['create-padre'],
+                        'actions' => ['create-padre', 'crear'],
                         'roles' => ['@'],
                     ],
                 ],
