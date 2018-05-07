@@ -37,6 +37,4 @@ $this->registerCssFile('/css/comentarios.css');
             } ?>
         </div>
     </div>
-
-
 </div>
