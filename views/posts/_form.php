@@ -23,12 +23,15 @@ $js = <<<EOT
     $('#imagenes').ddslick({
         onSelected: function(selectedData){
             canvas.clear();
+
             fabric.Image.fromURL(selectedData.selectedData.imageSrc, function(oImg) {
                 canvas.add(oImg);
                 canvas.centerObject(oImg);
                 oImg.set('selectable', false);
-                
-            });
+            }, null , {crossOrigin:'anonymous'});
+
+
+
         },
         imagePosition:"center",
     });
