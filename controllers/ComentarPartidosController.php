@@ -42,7 +42,7 @@ class ComentarPartidosController extends \yii\web\Controller
 
             if ($model->save()) {
                 $model->refresh();
-                return $this->renderPartial('/comentarios/_comentarios', ['model' => $model]);
+                return $this->renderPartial('/comentarios/_comentarios', ['model' => $model, 'padre' => true]);
             }
         }
         return false;

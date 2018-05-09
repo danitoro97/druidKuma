@@ -99,6 +99,7 @@ $this->registerJs($js);
                                 'query' => $model->getComentarPartidos()->orderBy('created_at ASC'),
                             ]),
                             'itemView' => '/comentarios/_comentarios',
+                            'viewParams' => ['padre' => true],
                             'summary' =>''
                     ]);
                 } ?>
