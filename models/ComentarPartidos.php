@@ -2,15 +2,13 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "comentar_partidos".
  *
  * @property int $id
  * @property int $partido_id
  * @property int $usuario_id
- * @property string $texto
+ * @property string $comentario
  * @property string $created_at
  *
  * @property Partidos $partido
@@ -32,11 +30,11 @@ class ComentarPartidos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['partido_id', 'usuario_id', 'texto'], 'required'],
+            [['partido_id', 'usuario_id', 'comentario'], 'required'],
             [['partido_id', 'usuario_id'], 'default', 'value' => null],
             [['partido_id', 'usuario_id'], 'integer'],
             [['created_at'], 'safe'],
-            [['texto'], 'string', 'max' => 255],
+            [['comentario'], 'string', 'max' => 255],
             [['partido_id'], 'exist', 'skipOnError' => true, 'targetClass' => Partidos::className(), 'targetAttribute' => ['partido_id' => 'id']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
         ];
@@ -51,7 +49,7 @@ class ComentarPartidos extends \yii\db\ActiveRecord
             'id' => 'ID',
             'partido_id' => 'Partido ID',
             'usuario_id' => 'Usuario ID',
-            'texto' => 'Texto',
+            'comentario' => 'comentario',
             'created_at' => 'Created At',
         ];
     }
@@ -69,6 +67,6 @@ class ComentarPartidos extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id'])->inverseOf('comentarPartidos');
+        return $this->hasOne(UsuariosId::className(), ['id' => 'usuario_id'])->inverseOf('comentarPartidos');
     }
 }

@@ -33,6 +33,7 @@ $js=<<<EOT
     $('#boton').on('click',function(e){
         e.preventDefault();
         var texto = $(this).prev().val();
+        $(this).prev().val(null);
         var div = $(this).parent().parent();
         $.ajax({
             url:'$ruta',
@@ -97,7 +98,8 @@ $this->registerJs($js);
                             'dataProvider' => new ActiveDataProvider([
                                 'query' => $model->getComentarPartidos()->orderBy('created_at ASC'),
                             ]),
-                            'itemView' => '_comentarios',
+                            'itemView' => '/comentarios/_comentarios',
+                            'viewParams' => ['padre' => true],
                             'summary' =>''
                     ]);
                 } ?>

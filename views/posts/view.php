@@ -92,7 +92,7 @@ $this->registerJs($js);
                         'dataProvider' => new ActiveDataProvider([
                             'query' => $model->getRespuestas()->where('padre_id is null')->orderBy('created_at ASC'),
                         ]),
-                        'itemView' => '_respuestas',
+                        'itemView' => '/comentarios/_comentarios',
                         'summary' =>''
                 ]);
             } ?>
