@@ -17,7 +17,7 @@ use yii\widgets\ListView;
                 $nombre = ($model->usuario->usuarios) ? Html::a(
                     Html::encode($model->usuario->usuarios->nombre), ['usuarios/view', 'id' => $model->usuario_id])
                  : 'anonimo';
-                 $nombre = 'a';
+                 
             ?>
                 <?=$nombre?>
             </span>

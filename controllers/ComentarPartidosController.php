@@ -41,6 +41,7 @@ class ComentarPartidosController extends \yii\web\Controller
             $model->comentario = Yii::$app->request->post('texto');
 
             if ($model->save()) {
+                $model->refresh();
                 return $this->renderPartial('/comentarios/_comentarios', ['model' => $model]);
             }
         }

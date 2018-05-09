@@ -33,6 +33,7 @@ $js=<<<EOT
     $('#boton').on('click',function(e){
         e.preventDefault();
         var texto = $(this).prev().val();
+        $(this).prev().val(null);
         var div = $(this).parent().parent();
         $.ajax({
             url:'$ruta',
