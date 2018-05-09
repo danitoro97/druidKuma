@@ -58,7 +58,7 @@ class ComentariosController extends \yii\web\Controller
                         'dataProvider' => new ActiveDataProvider([
                             'query' => Comentarios::find()->where(['id' => $model->id]),
                         ]),
-                        'itemView' => '/noticias/_comentarios',
+                        'itemView' => '/comentarios/_comentarios',
                         'summary' => '',
                 ]);
             }
@@ -81,7 +81,7 @@ class ComentariosController extends \yii\web\Controller
                                     ->where('padre_id is null')
                                     ->andWhere(['noticia_id' => $id]),
                     ]),
-                    'itemView' => '/noticias/_comentarios',
+                    'itemView' => '/comentarios/_comentarios',
                     'summary' => '',
             ]);
         }

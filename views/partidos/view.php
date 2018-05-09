@@ -97,7 +97,7 @@ $this->registerJs($js);
                             'dataProvider' => new ActiveDataProvider([
                                 'query' => $model->getComentarPartidos()->orderBy('created_at ASC'),
                             ]),
-                            'itemView' => '_comentarios',
+                            'itemView' => '/comentarios/_comentarios',
                             'summary' =>''
                     ]);
                 } ?>

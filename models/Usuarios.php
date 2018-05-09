@@ -304,12 +304,4 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->hasOne(UsuariosId::className(), ['id' => 'id'])->inverseOf('usuarios');
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getComentarPartidos()
-    {
-        return $this->hasMany(ComentarPartidos::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
-    }
 }

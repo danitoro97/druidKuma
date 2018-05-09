@@ -13,9 +13,11 @@ use yii\widgets\ListView;
         <p class="usuario">
             <span class="nombre_usuario">
             <?php
+
                 $nombre = ($model->usuario->usuarios) ? Html::a(
                     Html::encode($model->usuario->usuarios->nombre), ['usuarios/view', 'id' => $model->usuario_id])
                  : 'anonimo';
+                 $nombre = 'a';
             ?>
                 <?=$nombre?>
             </span>
@@ -25,19 +27,19 @@ use yii\widgets\ListView;
         </p>
         <p>
             <?php
-                if ($model->padre_id!=null){
+                if (isset($model->padre_id)){
                     echo '#' . $nombre;
                 }
             ?>
             <?=Html::encode($model->comentario)?>
         </p>
-        <?php if(!Yii::$app->user->isGuest) : ?>
+        <?php if(!Yii::$app->user->isGuest && isset($model->padre_id)) : ?>
             <?=Html::button('Responder', ['class' => 'btn-xs btn-info responder']) ?>
         <?php endif;?>
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1 comentario">
-            <?php if ($model->comentarios) {
+            <?php if (false) {
                 echo ListView::widget([
                         'dataProvider' => new ActiveDataProvider([
                             'query' => $model->getComentarios()->orderBy('created_at ASC'),

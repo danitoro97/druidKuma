@@ -52,11 +52,11 @@ class RespuestasController extends \yii\web\Controller
         if (Yii::$app->request->isAjax && Yii::$app->request->post()) {
             $model = new Respuestas();
             $model->scenario = $escenario;
-            $model->texto = Yii::$app->request->post('comentario');
+            $model->comentario = Yii::$app->request->post('comentario');
             $model->post_id = Yii::$app->request->post('noticia');
             $model->padre_id = Yii::$app->request->post('padre_id');
 
-            $model->creador_id = Yii::$app->user->identity->id;
+            $model->usuario_id = Yii::$app->user->identity->id;
             //var_dump($model);
             if ($model->save()) {
                 $model->refresh();
@@ -64,7 +64,7 @@ class RespuestasController extends \yii\web\Controller
                             'dataProvider' => new ActiveDataProvider([
                                 'query' => Respuestas::find()->where(['id' => $model->id]),
                             ]),
-                            'itemView' => '/posts/_respuestas',
+                            'itemView' => '/comentarios/_comentarios',
                             'summary' => '',
                     ]);
             }
