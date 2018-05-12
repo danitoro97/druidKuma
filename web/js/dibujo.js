@@ -201,13 +201,11 @@ function insertarTexto(div) {
 }
 
 $('#posts-form').on('beforeValidate', function (e) {
-    $('#posts-canvas').val(canvas.toDataURL());
-
+    $('#posts-canvas').val(canvas.toDataURL({'format':'png'}));
 });
 
 $(function() {
     $('input[type="radio"]').checkboxradio();
-
 });
 
 

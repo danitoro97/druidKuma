@@ -23,22 +23,24 @@ $js = <<<EOT
     $('#imagenes').ddslick({
         onSelected: function(selectedData){
             canvas.clear();
-
-            fabric.Image.fromURL(selectedData.selectedData.imageSrc, function(oImg) {
+            var p = 'https://dl.dropboxusercontent.com/1/view/hfg2y3aqwvy8znn/Aplicaciones/druidKuma/1.png';
+            //https://www.dropbox.com/s/hfg2y3aqwvy8znn/1.png?dl=0
+            var p1 = p.substring(0,41);
+            var p2 = selectedData.selectedData.imageSrc.substring(26)
+            var p3 = p1 + p2;
+            console.log(p3)
+            fabric.Image.fromURL(p3, function(oImg) {
                 canvas.add(oImg);
                 canvas.centerObject(oImg);
                 oImg.set('selectable', false);
-            }, null , {crossOrigin:'anonymous'});
-
-
-
+            },{crossOrigin: "Anonymous"});
         },
         imagePosition:"center",
     });
+
 EOT;
 $this->registerJs($js);
 ?>
-
 <div class="posts-form">
 
     <?php $form = ActiveForm::begin([

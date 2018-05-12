@@ -95,6 +95,7 @@ class PlantillaUsuario extends \yii\db\ActiveRecord
 
         $res = $client->createSharedLinkWithSettings($nombre, [
             'requested_visibility' => 'public',
+            //'linkType' => 'direct', // or "direct"
         ]);
         $url = $res['url'][mb_strlen($res['url']) - 1] = '1';
         $this->url = $res['url'];
