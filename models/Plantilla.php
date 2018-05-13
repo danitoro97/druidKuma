@@ -17,7 +17,6 @@ class Plantilla extends \yii\db\ActiveRecord
     {
         return 'plantilla';
     }
-
     /**
      * {@inheritdoc}
      */
@@ -28,7 +27,6 @@ class Plantilla extends \yii\db\ActiveRecord
             [['extension'], 'string', 'max' => 255],
         ];
     }
-
     /**
      * {@inheritdoc}
      */
@@ -39,9 +37,8 @@ class Plantilla extends \yii\db\ActiveRecord
             'extension' => 'Extension',
         ];
     }
-
     public function getRuta()
     {
-        return $this->ruta();
+        return 'plantilla/' . $this->id . '.' . $this->extension;
     }
 }
