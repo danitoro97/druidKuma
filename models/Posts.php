@@ -91,8 +91,10 @@ class Posts extends \yii\db\ActiveRecord
     public function upload()
     {
         $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $this->canvas));
-        $id = self::find()->orderBy('id DESC')->one()->id;
-        $filepath = getenv('RutaPosts') . $id . '.png'; // or image.jpg
+        $conexion = self::find()->orderBy('id DESC')->one();
+        $id = $conexion == null ? 1 : $conexion->id + 1;
+
+        $filepath = getenv('RutaPosts') . 'posts' . $id . '.png'; // or image.jpg
 
         // Save the image in a defined path
         file_put_contents($filepath, $data);

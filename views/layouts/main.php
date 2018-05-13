@@ -66,6 +66,8 @@ AppAsset::register($this);
            'items' => [
                ['label' => 'Modificar datos', 'url' => ['usuarios/update']],
                '<li class="divider"></li>',
+               ['label' => 'Ver plantilla imagenes', 'url' => ['/plantilla-usuario']],
+               '<li class="divider"></li>',
                [
                    'label' => 'Logout',
                    'url' => ['site/logout'],

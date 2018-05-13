@@ -304,4 +304,12 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->hasOne(UsuariosId::className(), ['id' => 'id'])->inverseOf('usuarios');
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPlantillaUsuarios()
+    {
+        return $this->hasMany(PlantillaUsuario::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
+    }
 }

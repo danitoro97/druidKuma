@@ -23,18 +23,30 @@ $js = <<<EOT
     $('#imagenes').ddslick({
         onSelected: function(selectedData){
             canvas.clear();
-            fabric.Image.fromURL(selectedData.selectedData.imageSrc, function(oImg) {
+            if (selectedData.selectedData.imageSrc.indexOf('dropbox')>= 0) {
+                var p = 'https://dl.dropboxusercontent.com/1/view/hfg2y3aqwvy8znn/Aplicaciones/druidKuma/1.png';
+                //https://www.dropbox.com/s/hfg2y3aqwvy8znn/1.png?dl=0
+                var p1 = p.substring(0,41);
+                var p2 = selectedData.selectedData.imageSrc.substring(26)
+                var p3 = p1 + p2;
+            }
+            else {
+                p3 =  selectedData.selectedData.imageSrc;
+            }
+
+
+            fabric.Image.fromURL(p3, function(oImg) {
                 canvas.add(oImg);
                 canvas.centerObject(oImg);
                 oImg.set('selectable', false);
-            });
+            },{crossOrigin: "Anonymous"});
         },
         imagePosition:"center",
     });
+
 EOT;
 $this->registerJs($js);
 ?>
-
 <div class="posts-form">
 
     <?php $form = ActiveForm::begin([
@@ -56,7 +68,7 @@ $this->registerJs($js);
     <div id="imagenes">
         <select>
             <?php foreach ($imagenes as $imagen) :?>
-                <option value="<?=$imagen->id?>" data-imagesrc="<?=$imagen->ruta?>"></option>
+                <option value="<?=$imagen->id?>" data-imagesrc="<?=$imagen->ruta?>" crossorigin></option>
             <?php endforeach?>
         </select>
     </div>

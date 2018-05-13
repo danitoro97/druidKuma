@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\PlantillaUsuario;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
 use Yii;
@@ -123,6 +124,13 @@ class UsuariosController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionPlantilla()
+    {
+        return $this->render('plantilla', [
+            'model' => PlantillaUsuario::find()->where(['usuario_id' => Yii::$app->user->identity->id])->all(),
         ]);
     }
 
