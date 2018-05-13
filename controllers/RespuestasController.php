@@ -47,6 +47,11 @@ class RespuestasController extends \yii\web\Controller
         return $this->crear(Respuestas::ESCENARIO_EQUIPO);
     }
 
+    /**
+     * Añade un comentario al post con un determinado escenario.
+     * @param  [type] $escenario [description]
+     * @return [type]            [description]
+     */
     public function crear($escenario)
     {
         if (Yii::$app->request->isAjax && Yii::$app->request->post()) {

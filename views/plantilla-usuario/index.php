@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Plantilla Usuarios';
+$this->title = 'Plantilla Imagenes';
 $this->params['breadcrumbs'][] = $this->title;
 $ruta = Url::to(['plantilla-usuario/delete']);
 $js =<<<EOT

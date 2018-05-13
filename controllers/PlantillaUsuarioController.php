@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\PlantillaUsuario;
 use Yii;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -25,6 +26,17 @@ class PlantillaUsuarioController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+            'access' => [
+                    'class' => AccessControl::className(),
+                    'only' => ['create', 'delete', 'index'],
+                    'rules' => [
+                            [
+                                'allow' => true,
+                                'actions' => ['index', 'delete', 'create'],
+                                'roles' => ['@'],
+                            ],
+                    ],
             ],
         ];
     }
@@ -70,7 +82,6 @@ class PlantillaUsuarioController extends Controller
     /**
      * Deletes an existing PlantillaUsuario model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */

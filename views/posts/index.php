@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Posts';
+$this->title = $equipo->nombre;
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCssFile('/css/equiposUsuarios.css');
 ?>

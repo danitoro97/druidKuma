@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use app\models\PlantillaUsuario;
 use app\models\Usuarios;
-use app\models\UsuariosSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -32,36 +31,21 @@ class UsuariosController extends Controller
             ],
             'access' => [
                     'class' => AccessControl::className(),
-                    'only' => ['create', 'update', 'delete'],
+                    'only' => ['create', 'update', 'delete', 'plantilla', 'validar'],
                     'rules' => [
                             [
                                 'allow' => true,
-                                'actions' => ['create'],
+                                'actions' => ['create', 'validar'],
                                 'roles' => ['?'],
                             ],
                             [
                                 'allow' => true,
-                                'actions' => ['update', 'delete'],
+                                'actions' => ['update', 'delete', 'plantilla'],
                                 'roles' => ['@'],
                             ],
                     ],
             ],
         ];
-    }
-
-    /**
-     * Lists all Usuarios models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        /*$searchModel = new UsuariosSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);*/
     }
 
     /**

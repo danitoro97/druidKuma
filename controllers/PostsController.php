@@ -160,6 +160,11 @@ class PostsController extends Controller
         throw new NotFoundHttpException('The requested page does not exist dasds.');
     }
 
+    /**
+     * Busca el equipo con ese identificador y lo devuelve si existe.
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function findEquipo($id)
     {
         if (($model = EquiposUsuarios::findOne($id)) !== null) {
@@ -168,7 +173,11 @@ class PostsController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
+    /**
+     * Comprueba si el usuario es parte del equipo.
+     * @param  [type]  $id [description]
+     * @return bool     [description]
+     */
     public function isParticipante($id)
     {
         return Participantes::find()

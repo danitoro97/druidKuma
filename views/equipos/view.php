@@ -10,7 +10,7 @@ use yii\widgets\DetailView;
 
 $this->title = $model->nombre;
 $this->registerCssFile('/css/equipo.css');
-$this->params['breadcrumbs'][] = ['label' => 'Equipos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->liga->nombre, 'url' => ['/ligas/view','id' => $model->liga_id]];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJsFile('/js/carrousel.js',['depends' => [\yii\web\JqueryAsset::className()]]);

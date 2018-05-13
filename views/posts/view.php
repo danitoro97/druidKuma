@@ -12,7 +12,7 @@ use yii\widgets\ListView;
 /* @var $model app\models\Posts */
 
 $this->title = $model->titulo . 'asdas';
-$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->equipoUsuario->nombre, 'url' => ['/posts/index', 'id' => $model->equipo_usuario_id]];
 $this->params['breadcrumbs'][] = $this->title;
 
 $rutaPadre = Url::to(['/respuestas/create-padre']);

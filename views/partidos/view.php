@@ -13,7 +13,7 @@ use yii\widgets\ListView;
 /* @var $model app\models\Partidos */
 
 $this->title = $model->local->nombre . ' - ' . $model->visitante->nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Partidos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->liga->nombre, 'url' => ['/ligas/view','id' => $model->liga_id]];
 $this->params['breadcrumbs'][] = $this->title;
 $css=<<<EOT
     .escudo {

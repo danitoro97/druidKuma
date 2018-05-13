@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\PlantillaUsuario */
 
-$this->title = 'Create Plantilla Usuario';
-$this->params['breadcrumbs'][] = ['label' => 'Plantilla Usuarios', 'url' => ['index']];
+$this->title = 'Añadir imagen a la Plantilla';
+$this->params['breadcrumbs'][] = ['label' => 'Mi Plantilla ', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="plantilla-usuario-create">
