@@ -9,7 +9,7 @@ use yii\helpers\Html;
  *
  * @property int $id
  * @property string $texto
- * @property int $creador_id
+ * @property int $usuario_id
  * @property int $post_id
  * @property int $padre_id
  *
@@ -42,28 +42,29 @@ class Respuestas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['texto', 'creador_id', 'post_id'], 'required'],
+            [['comentario', 'usuario_id', 'post_id'], 'required'],
             [['padre_id'], 'required', 'on' => self::ESCENARIO_EQUIPO_PADRE],
-            [['texto'], 'string'],
-            [['creador_id', 'post_id', 'padre_id'], 'default', 'value' => null],
-            [['creador_id', 'post_id', 'padre_id'], 'integer'],
-            [['creador_id'], function ($attributes) {
+            [['comentario'], 'string'],
+            [['usuario_id', 'post_id', 'padre_id'], 'default', 'value' => null],
+            [['usuario_id', 'post_id', 'padre_id'], 'integer'],
+            [['usuario_id'], function ($attributes) {
                 $post = Posts::findOne($this->post_id);
 
                 $participante = Participantes::find()
                                 ->where(['equipo_id' => $post->equipo_usuario_id])
-                                ->andWhere(['usuario_id' => $this->creador_id])
+                                ->andWhere(['usuario_id' => $this->usuario_id])
                                 ->exists();
 
                 if (!$participante) {
-                    $this->addError('creador_id', ' Usuario no valido');
+                    $this->addError('usuario_id', ' Usuario no valido');
                 }
             }, 'on' => [self::ESCENARIO_EQUIPO, self::ESCENARIO_EQUIPO_PADRE]],
             [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => Posts::className(), 'targetAttribute' => ['post_id' => 'id']],
             [['padre_id'], 'exist', 'skipOnError' => true, 'targetClass' => self::className(), 'targetAttribute' => ['padre_id' => 'id']],
-            [['creador_id'], 'exist', 'skipOnError' => true, 'targetClass' => UsuariosId::className(), 'targetAttribute' => ['creador_id' => 'id']],
+            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => UsuariosId::className(), 'targetAttribute' => ['usuario_id' => 'id']],
         ];
     }
+
 
     /**
      * {@inheritdoc}
@@ -73,7 +74,7 @@ class Respuestas extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'texto' => 'Texto',
-            'creador_id' => 'Creador ID',
+            'usuario_id' => 'Creador ID',
             'post_id' => 'Post ID',
             'padre_id' => 'Padre ID',
         ];
@@ -81,7 +82,7 @@ class Respuestas extends \yii\db\ActiveRecord
 
     public function getCreadorNombre()
     {
-        return ($this->creador->usuarios->nombre) ? Html::encode($this->creador->usuarios->nombre) : 'anonimo';
+        return ($this->usuario->usuarios->nombre) ? Html::encode($this->usuario->usuarios->nombre) : 'anonimo';
     }
 
     /**
@@ -111,8 +112,16 @@ class Respuestas extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCreador()
+    public function getComentarios()
     {
-        return $this->hasOne(UsuariosId::className(), ['id' => 'creador_id'])->inverseOf('respuestas');
+        return $this->hasMany(self::className(), ['padre_id' => 'id'])->inverseOf('padre');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuario()
+    {
+        return $this->hasOne(UsuariosId::className(), ['id' => 'usuario_id'])->inverseOf('respuestas');
     }
 }

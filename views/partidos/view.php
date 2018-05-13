@@ -1,7 +1,12 @@
 <?php
 
 use app\models\Equipos;
+use yii\data\ActiveDataProvider;
+
 use yii\helpers\Html;
+use yii\helpers\Url;
+
+use yii\widgets\ListView;
 
 
 /* @var $this yii\web\View */
@@ -22,6 +27,33 @@ $css=<<<EOT
 EOT;
 
 $this->registerCss($css);
+$ruta= Url::to(['/comentar-partidos/create']);
+$js=<<<EOT
+
+    $('#boton').on('click',function(e){
+        e.preventDefault();
+        var texto = $(this).prev().val();
+        $(this).prev().val(null);
+        var div = $(this).parent().parent();
+        $.ajax({
+            url:'$ruta',
+            type:'post',
+            data:{
+                partido_id:'$model->id',
+                texto:texto
+            },
+            success: function(data) {
+                if (data != false) {
+                    div.append(data)
+                }
+            }
+        })
+    })
+
+EOT;
+
+
+$this->registerJs($js);
 ?>
 <div class="partidos-view">
 
@@ -56,6 +88,22 @@ $this->registerCss($css);
         </div>
         <div class="col-xs-12 col-sm-2">
             <?= Html::img($model->visitante->escudo, ['class' => 'img-responsive escudo']) ?>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 comentario">
+                <textarea></textarea>
+                <input type="button" id="boton" value="Comentar">
+                <?php if ($model->comentarPartidos) {
+                    echo ListView::widget([
+                            'dataProvider' => new ActiveDataProvider([
+                                'query' => $model->getComentarPartidos()->orderBy('created_at ASC'),
+                            ]),
+                            'itemView' => '/comentarios/_comentarios',
+                            'viewParams' => ['padre' => true],
+                            'summary' =>''
+                    ]);
+                } ?>
+            </div>
         </div>
     </div>
 

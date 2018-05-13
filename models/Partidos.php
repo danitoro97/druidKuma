@@ -99,4 +99,12 @@ class Partidos extends \yii\db\ActiveRecord
     {
         return $this->hasMany(DetallesPartidos::className(), ['partido_id' => 'id'])->inverseOf('partido');
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComentarPartidos()
+    {
+        return $this->hasMany(ComentarPartidos::className(), ['partido_id' => 'id'])->inverseOf('partido');
+    }
 }
