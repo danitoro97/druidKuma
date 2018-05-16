@@ -9,8 +9,8 @@ function circulo (options, config = []) {
     var circle = new fabric.Circle({
       radius: config.radius,
       fill: config.fill,
-      left: options.e.layerX,
-      top: options.e.layerY
+      left: options.e.layerX-config.radius/2,
+      top: options.e.layerY-config.radius/2
     });
 
     return circle;
@@ -22,8 +22,8 @@ function cruz (options,config = []) {
         width: config.width,
         height: config.height,
         fill: config.fill,
-        left: options.e.layerX,
-        top: options.e.layerY,
+        top: options.e.layerY-config.height/2,
+        left: options.e.layerX-config.width/2,
     });
 
     return triangle;
@@ -33,8 +33,8 @@ function cuadrado(options, config = []) {
     config = configuracion();
 
     var cuadrado = new fabric.Rect({
-        top: options.e.layerY,
-        left: options.e.layerX,
+        top: options.e.layerY-config.height/2,
+        left: options.e.layerX-config.width/2,
         width : config.width,
         fill: config.fill,
     });
@@ -173,12 +173,17 @@ function configuracion()
     input.each(function(i,elemento){
         var data = $(this).data('configuracion');
         if ($(this).val() != '') {
-            config[data] = $(this).val();
-        }
+            var dato = $(this).val();
 
+            if (!isNaN(dato)) {
+                dato = parseInt($(this).val());
+            }
+            config[data] = dato;
+        }
 
     });
 
+    console.log($.extend(predefinido,config))
     return $.extend(predefinido,config);
 }
 
@@ -230,3 +235,4 @@ fabric.util.addListener(fabric.document, 'touchmove',function(){
 });
 canvas.on('mouse:dblclick', eventos);
 canvas.on('mouse:down', downColor);
+canvas.hoverCursor = 'pointer';
