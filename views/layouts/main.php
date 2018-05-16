@@ -50,7 +50,11 @@ AppAsset::register($this);
 
 
     }
-
+    echo "<form class='navbar-form navbar-right'>
+       <div class='form-group has-feedback'>
+            <input id='searchbox' type='text' placeholder='Buscar equipo' class='form-control'>
+        </div>
+  </form>";
     $item = [
             ['label' => 'Inicio', 'url' => ['/noticias/index']],
             ['label' => 'Ligas', 'items' => $i],

@@ -49,6 +49,14 @@ class EquiposController extends Controller
         ]);
     }
 
+    public function actionEquipos($busqueda)
+    {
+        //if (Yii::$app->request->isAjax) {
+        $equipos = Equipos::find()->where(['ilike', 'nombre', '%' . $busqueda . '%']);
+        return $equipos->all();
+        //}
+    }
+
     /**
      * Muestra el equipo y sus jugadores. Si la peticion es ajax te devolvera
      * los jugadores que toquen.

@@ -48,8 +48,19 @@ function crearLienzo(id) {
         height:500,
         width:500,
     });
+    fabric.util.addListener(fabric.document, 'keypress',eliminar);
+}
 
+function eliminar(event) {
+    var code = event.keyCode;
+    //supr 46 delete 8 supr chrome 127
+    if (code == '46' || code =='8' || code == '127') {
+        var objecto = canvas.getActiveObject();
+        if (objecto != undefined) {
+            canvas.remove(objecto);
+        }
 
+    }
 }
 
 function modoLibre(div)
@@ -74,7 +85,9 @@ function modoLibre(div)
             canvas.isDrawingMode= false;
 
         }
-    })
+    });
+
+
 
 }
 
@@ -139,8 +152,7 @@ function eventos (options){
             objecto = cruz(options);
         break;
     }
-
-    canvas.add(objecto).setActiveObject();
+    canvas.add(objecto);
 }
 
 function figuras() {
@@ -212,5 +224,9 @@ $(function() {
 crearLienzo('myCanvas');
 colocarBotones();
 botonesConfiguracion();
+fabric.util.addListener(fabric.document, 'touchmove',function(){
+    canvas.isDrawingMode= true;
+    canvas.freeDrawingBrush.width = 10;
+});
 canvas.on('mouse:dblclick', eventos);
 canvas.on('mouse:down', downColor);
