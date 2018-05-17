@@ -56,23 +56,29 @@ $this->registerCssFile('/css/equiposUsuarios.css');
     <div class="container col-md-8 col-md-offset-2">
         <div class="col-md-12 text-center">
             <h3>Mis equipos</h3>
+
         </div>
+
         <div class="row">
+            <div class="col-md-12">
+
+
             <?php
                 if ($model == null) {
                     echo $this->render('_guia');
                 } else {
-                    echo Html::a('Crear equipo', ['/equipos-usuarios/create'], ['class' => 'col-xs-offset-9 btn btn-success']);
+                    echo Html::a('Crear equipo', ['/equipos-usuarios/create'], ['class' => 'col-md-offset-10 btn btn-xs btn-success']);
                 }
             ?>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <?php foreach ($model as $m) : ?>
+                <?php foreach ($model as $equipo) : ?>
                     <?php
-                        $ruta = ($m->aceptar) ? '_equiposDisponibles' : '_equiposInvitaciones';
+                        $ruta = ($equipo->aceptar) ? '_equiposDisponibles' : '_equiposInvitaciones';
                     ?>
-                    <?= $this->render($ruta,['model' => $m]) ?>
+                    <?= $this->render($ruta,['model' => $equipo]) ?>
                 <?php endforeach; ?>
             </div>
         </div>

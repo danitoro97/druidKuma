@@ -11,7 +11,8 @@ use yii\widgets\ListView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Posts */
 
-$this->title = $model->titulo . 'asdas';
+$this->title = $model->titulo;
+$this->params['breadcrumbs'][] = ['label' => 'Mis Equipos', 'url' => ['/equipos-usuarios/index']];
 $this->params['breadcrumbs'][] = ['label' => $model->equipoUsuario->nombre, 'url' => ['/posts/index', 'id' => $model->equipo_usuario_id]];
 $this->params['breadcrumbs'][] = $this->title;
 

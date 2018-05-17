@@ -7,6 +7,7 @@ use yii\helpers\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = $equipo->nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Mis Equipos', 'url' => ['/equipos-usuarios/index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCssFile('/css/equiposUsuarios.css');
 ?>
