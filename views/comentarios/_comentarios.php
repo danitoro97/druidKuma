@@ -28,7 +28,7 @@ $this->registerCssFile('@web/css/comentarios.css');
         <p>
             <?php
                 if (isset($model->padre_id)){
-                    echo '#' . $nombre;
+                    echo '#' . $model->padre->usuario->usuarios->nombre;
                 }
             ?>
             <?=Html::encode($model->comentario)?>

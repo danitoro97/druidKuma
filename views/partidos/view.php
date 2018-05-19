@@ -24,6 +24,15 @@ $css=<<<EOT
     h2,h3 {
         text-align: center;
     }
+
+    input {
+        margin-top:10px;
+        border-radius: 5px;
+       	border: 1px solid black;
+    }
+    .comentario {
+        text-align:center;
+    }
 EOT;
 
 $this->registerCss($css);
@@ -90,9 +99,9 @@ $this->registerJs($js);
             <?= Html::img($model->visitante->escudo, ['class' => 'img-responsive escudo']) ?>
         </div>
         <div class="row">
-            <div class="col-md-10 col-md-offset-1 comentario">
-                <textarea></textarea>
-                <input type="button" id="boton" value="Comentar">
+            <div class="col-md-10 col-md-offset-1 comentario ">
+                <input type='text'></input>
+                <input type="button" id="boton" value="Comentar" class="btn-xs btn-info responder">
                 <?php if ($model->comentarPartidos) {
                     echo ListView::widget([
                             'dataProvider' => new ActiveDataProvider([
