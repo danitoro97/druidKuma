@@ -6,4 +6,4 @@ Incluir.
 
 ## Diagramas de estructura lógica de datos
 
-Incluir.
+![Image of E-R](images/er.png)
