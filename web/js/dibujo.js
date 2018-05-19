@@ -236,3 +236,20 @@ fabric.util.addListener(fabric.document, 'touchmove',function(){
 canvas.on('mouse:dblclick', eventos);
 canvas.on('mouse:down', downColor);
 canvas.hoverCursor = 'pointer';
+
+
+function myFunction(x) {
+    if (x.matches) { // If media query matches
+        $('.figura').hide();
+        $('.configuracion').hide();
+        //$('#libre').prop('checked',true);
+        $('#libre').trigger('click');
+    } else {
+        $('.figura').show();
+        $('.configuracion').show();
+    }
+}
+
+var x = window.matchMedia("(max-width: 700px)")
+myFunction(x) // Call listener function at run time
+x.addListener(myFunction) // Attach listener function on state changes
