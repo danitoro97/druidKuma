@@ -79,7 +79,7 @@ class Posts extends \yii\db\ActiveRecord
             'id' => 'ID',
             'creador_id' => 'Creador ID',
             'equipo_usuario_id' => 'Equipo Usuario ID',
-            'texto' => 'Texto',
+            'texto' => 'Descripcion',
             'img' => 'Img',
         ];
     }

@@ -49,6 +49,26 @@ class EquiposController extends Controller
         ]);
     }
 
+    public function actionEquipos($busqueda)
+    {
+        if (Yii::$app->request->isAjax) {
+            $equipos = Equipos::find()->where(['ilike', 'nombre', $busqueda])
+            ->orWhere(['ilike', 'alias', $busqueda]);
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+            $array = [];
+            foreach ($equipos->all() as $equipo) {
+                $array[] = [
+                        'label' => $equipo->nombre,
+                        //'value' => $equipo->nombre,
+                        'value' => Url::to(['/equipos/view', 'id' => $equipo->id]),
+                ];
+            }
+
+            return $array;
+        }
+    }
+
     /**
      * Muestra el equipo y sus jugadores. Si la peticion es ajax te devolvera
      * los jugadores que toquen.

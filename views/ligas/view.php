@@ -47,7 +47,7 @@ EOT;
 $this->registerJs($js);
 
 ?>
-<div class="ligas-view">
+<div class="ligas-view text-center">
 
     <h1><?= Html::encode($this->title) ?> (<?=Html::encode($model->siglas)?>)
          de <?=Html::encode(ucwords(mb_strtolower($model->pais->nombre)))?>
