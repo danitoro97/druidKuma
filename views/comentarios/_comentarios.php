@@ -15,7 +15,7 @@ $this->registerCssFile('@web/css/comentarios.css');
             <?php
 
                 $nombre = ($model->usuario->usuarios) ? Html::a(
-                    Html::encode($model->usuario->usuarios->nombre), ['usuarios/view', 'id' => $model->usuario_id])
+                    Html::encode($model->usuario->usuarios->nombre), ['/usuarios/view', 'id' => $model->usuario_id])
                  : 'anonimo';
 
             ?>
@@ -28,7 +28,7 @@ $this->registerCssFile('@web/css/comentarios.css');
         <p>
             <?php
                 if (isset($model->padre_id)){
-                    echo '#' . $model->padre->usuario->usuarios->nombre;
+                    echo '#' . Html::a(Html::encode($model->padre->usuario->usuarios->nombre) , ['/usuarios/view', 'id' => $model->padre->usuario_id]);
                 }
             ?>
             <?=Html::encode($model->comentario)?>

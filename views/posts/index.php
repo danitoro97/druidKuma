@@ -40,7 +40,8 @@ $this->registerCssFile('/css/equiposUsuarios.css');
         </div>
         <?php foreach ($model as $post) : ?>
                     <?= $this->render('_post', [
-                        'model' => $post
+                        'model' => $post,
+                        'ruta' => ['/posts/view','id' => $post->id]
                     ]) ?>
         <?php endforeach ?>
 

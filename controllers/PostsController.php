@@ -45,7 +45,7 @@ class PostsController extends Controller
     }
 
     /**
-     * Lists all Posts models.
+     * Lista de todos los posts de un equipo concreto.
      * @return mixed
      * @param mixed $id Representa el identificador del equipo
      */
@@ -61,6 +61,13 @@ class PostsController extends Controller
         ]);
     }
 
+    public function actionPublico()
+    {
+        return $this->render('publico', [
+            'model' => Posts::find()->where('equipo_usuario_id is null')->all(),
+        ]);
+    }
+
     /**
      * Displays a single Posts model.
      * @param mixed $id Representa el identificador del equipo
@@ -69,12 +76,14 @@ class PostsController extends Controller
      */
     public function actionView($id)
     {
-        /*if (!$this->isParticipante($id)) {
+        $model = $this->findModel($id);
+        if (!$this->isParticipante($model->equipo_usuario_id)) {
+            Yii::$app->session->setFlash('error', 'This is the message');
             return $this->goBack();
-        }*/
+        }
 
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
             //'equipo' => $this->findEquipo($id),
         ]);
     }
@@ -94,20 +103,40 @@ class PostsController extends Controller
         $model = new Posts();
         $model->creador_id = Yii::$app->user->identity->id;
         $model->equipo_usuario_id = $id;
+        $model->scenario = Posts::ESCENARIO_EQUIPO;
+        return $this->create($model, ['index', 'id' => $id]);
+    }
+
+    public function actionCreatePublico()
+    {
+        $model = new Posts();
+        $model->creador_id = Yii::$app->user->identity->id;
+        return $this->create($model, ['publico']);
+    }
+
+    public function actionViewPublico($id)
+    {
+        return $this->render('view-publico', [
+            'model' => $this->findModel($id),
+            //'equipo' => $this->findEquipo($id),
+        ]);
+    }
+
+    public function create($model, $ruta)
+    {
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->upload();
             $model->save();
-            return $this->redirect(['index', 'id' => $id]);
+            return $this->redirect($ruta);
         }
         $imagenes = array_merge(Plantilla::find()->all(), PlantillaUsuario::find()
-                                  ->where(['usuario_id' => Yii::$app->user->identity->id])
-                                  ->all());
+                                      ->where(['usuario_id' => Yii::$app->user->identity->id])
+                                      ->all());
 
         return $this->render('create', [
-            'model' => $model,
-            'equipo' => $this->findEquipo($id),
-            'imagenes' => $imagenes,
-        ]);
+                'model' => $model,
+                'imagenes' => $imagenes,
+            ]);
     }
 
     /**

@@ -47,6 +47,16 @@ class RespuestasController extends \yii\web\Controller
         return $this->crear(Respuestas::ESCENARIO_EQUIPO);
     }
 
+    public function actionCreatePublico()
+    {
+        return $this->crear(Respuestas::ESCENARIO_FORO);
+    }
+
+    public function actionCreatePadreForo()
+    {
+        return $this->crear(Respuestas::ESCENARIO_PADRE);
+    }
+
     /**
      * Añade un comentario al post con un determinado escenario.
      * @param  [type] $escenario [description]
