@@ -102,6 +102,7 @@ $this->registerJs($js);
     $item = [
             ['label' => 'Inicio', 'url' => ['/noticias/index']],
             ['label' => 'Ligas', 'items' => $i],
+            ['label' => 'Foro' , 'url' => ['/posts/publico']],
     ];
 
     if (Yii::$app->user->isGuest) {

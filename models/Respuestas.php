@@ -70,8 +70,8 @@ class Respuestas extends \yii\db\ActiveRecord
                 }
             }, 'on' => self::ESCENARIO_FORO],
             [['post_id'], function ($attributes) {
-                $post = Posts::findOne($this->padre_id);
-                if ($post->equipo_usuario_id != null) {
+                $post = Respuestas::findOne($this->padre_id);
+                if ($post == null || $post->post->equipo_usuario_id != null) {
                     $this->addError('post_id', ' Posts no valido');
                 }
             }, 'on' => self::ESCENARIO_PADRE],

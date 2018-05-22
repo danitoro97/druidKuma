@@ -11,13 +11,21 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->registerCssFile('/css/equiposUsuarios.css');
 ?>
 <div class="posts-index">
-        <?=Html::a('crear', ['/posts/crear-publico']) ?>
-        <?php foreach ($model as $post) : ?>
-                    <?= $this->render('_post', [
-                        'model' => $post,
-                        'ruta' => ['/posts/view-publico','id' => $post->id]
-                    ]) ?>
-        <?php endforeach ?>
+
+
+    <?=Html::a('Crear post', ['/posts/create-publico'], ['class' => 'btn btn-success']) ?>
+
+    <div class="container col-md-8 col-md-offset-1">
+        <div class="row">
+            <?php foreach ($model as $post) : ?>
+                        <?= $this->render('_post', [
+                            'model' => $post,
+                            'ruta' => ['/posts/view-publico','id' => $post->id]
+                        ]) ?>
+            <?php endforeach ?>
+        </div>
+    </div>
+
 
 
 

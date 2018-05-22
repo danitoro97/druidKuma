@@ -32,11 +32,11 @@ class PostsController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'create', 'view'],
+                'only' => ['index', 'create', 'view', 'create-publico'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'create', 'view'],
+                        'actions' => ['index', 'create', 'view', 'create-publico'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -60,11 +60,17 @@ class PostsController extends Controller
             'equipo' => $this->findEquipo($id),
         ]);
     }
-
+    /**
+     * Lista todos los posts publico.
+     * @return [type] [description]
+     */
     public function actionPublico()
     {
         return $this->render('publico', [
-            'model' => Posts::find()->where('equipo_usuario_id is null')->all(),
+            'model' => Posts::find()
+            ->where('equipo_usuario_id is null')
+            ->orderBy('created_at DESC')
+            ->all(),
         ]);
     }
 
@@ -107,6 +113,10 @@ class PostsController extends Controller
         return $this->create($model, ['index', 'id' => $id]);
     }
 
+    /**
+     * Crea un post publico.
+     * @return [type] [description]
+     */
     public function actionCreatePublico()
     {
         $model = new Posts();
@@ -114,6 +124,11 @@ class PostsController extends Controller
         return $this->create($model, ['publico']);
     }
 
+    /**
+     * Ves un post publico.
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function actionViewPublico($id)
     {
         return $this->render('view-publico', [
@@ -122,6 +137,12 @@ class PostsController extends Controller
         ]);
     }
 
+    /**
+     * Crea un post.
+     * @param  [type] $model [description]
+     * @param  [type] $ruta  [description]
+     * @return [type]        [description]
+     */
     public function create($model, $ruta)
     {
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
