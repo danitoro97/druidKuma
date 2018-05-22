@@ -7,8 +7,13 @@ use yii\helpers\Html;
 /* @var $model app\models\Posts */
 
 $this->title = 'Crear Posts';
-$this->params['breadcrumbs'][] = ['label' => 'Mis Equipos', 'url' => ['/equipos-usuarios/index']];
-$this->params['breadcrumbs'][] = ['label' => $equipo->nombre, 'url' => ['index', 'id' => $equipo->id]];
+if ($model->equipoUsuario) {
+    $this->params['breadcrumbs'][] = ['label' => 'Mis Equipos', 'url' => ['/equipos-usuarios/index']];
+    $this->params['breadcrumbs'][] = ['label' => $model->equipoUsuario->nombre, 'url' => ['index', 'id' => $model->equipo_usuario_id]];
+}else {
+    $this->params['breadcrumbs'][] = ['label' => 'Foro', 'url' => ['/posts/publico']];
+}
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="posts-create">

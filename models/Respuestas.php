@@ -28,6 +28,10 @@ class Respuestas extends \yii\db\ActiveRecord
 
     public const ESCENARIO_EQUIPO_PADRE = 'padre';
 
+    public const ESCENARIO_FORO = 'foro';
+
+    public const ESCENARIO_PADRE = 'padre foro';
+
     /**
      * {@inheritdoc}
      */
@@ -43,7 +47,7 @@ class Respuestas extends \yii\db\ActiveRecord
     {
         return [
             [['comentario', 'usuario_id', 'post_id'], 'required'],
-            [['padre_id'], 'required', 'on' => self::ESCENARIO_EQUIPO_PADRE],
+            [['padre_id'], 'required', 'on' => [self::ESCENARIO_EQUIPO_PADRE, self::ESCENARIO_PADRE]],
             [['comentario'], 'string'],
             [['usuario_id', 'post_id', 'padre_id'], 'default', 'value' => null],
             [['usuario_id', 'post_id', 'padre_id'], 'integer'],
@@ -59,6 +63,18 @@ class Respuestas extends \yii\db\ActiveRecord
                     $this->addError('usuario_id', ' Usuario no valido');
                 }
             }, 'on' => [self::ESCENARIO_EQUIPO, self::ESCENARIO_EQUIPO_PADRE]],
+            [['post_id'], function ($attributes) {
+                $post = Posts::findOne($this->post_id);
+                if ($post->equipo_usuario_id != null) {
+                    $this->addError('post_id', ' Posts no valido');
+                }
+            }, 'on' => self::ESCENARIO_FORO],
+            [['post_id'], function ($attributes) {
+                $post = Respuestas::findOne($this->padre_id);
+                if ($post == null || $post->post->equipo_usuario_id != null) {
+                    $this->addError('post_id', ' Posts no valido');
+                }
+            }, 'on' => self::ESCENARIO_PADRE],
             [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => Posts::className(), 'targetAttribute' => ['post_id' => 'id']],
             [['padre_id'], 'exist', 'skipOnError' => true, 'targetClass' => self::className(), 'targetAttribute' => ['padre_id' => 'id']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => UsuariosId::className(), 'targetAttribute' => ['usuario_id' => 'id']],

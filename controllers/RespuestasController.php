@@ -18,11 +18,11 @@ class RespuestasController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create-padre', 'crear'],
+                'only' => ['create-padre', 'create', 'create-publico', 'create-padre-foro'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['create-padre', 'crear'],
+                        'actions' => ['create-padre', 'create', 'create-publico', 'create-padre-foro'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -45,6 +45,24 @@ class RespuestasController extends \yii\web\Controller
     public function actionCreate()
     {
         return $this->crear(Respuestas::ESCENARIO_EQUIPO);
+    }
+
+    /**
+     * Crea el comentario de un post publico.
+     * @return [type] [description]
+     */
+    public function actionCreatePublico()
+    {
+        return $this->crear(Respuestas::ESCENARIO_FORO);
+    }
+
+    /**
+     * Crea el comentario de un comentario de un  post publico.
+     * @return [type] [description]
+     */
+    public function actionCreatePadreForo()
+    {
+        return $this->crear(Respuestas::ESCENARIO_PADRE);
     }
 
     /**
