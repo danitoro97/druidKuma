@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
-use app\models\ContactForm;
 use app\models\LoginForm;
+use app\models\Notificar;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -103,12 +103,11 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
-    public function actionContact()
+    public function actionNotificar()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
+        $model = new Notificar();
+        if ($model->load(Yii::$app->request->post()) && $model->enviar()) {
+            Yii::$app->session->setFlash('success', 'Gracias por su colaboracion');
             return $this->refresh();
         }
         return $this->render('contact', [
