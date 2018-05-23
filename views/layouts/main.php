@@ -154,9 +154,23 @@ $this->registerJs($js);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">DruidKuma <?= date('Y') ?></p>
+        <div class="row">
+                <div class="col-md-2 col-sm-4 col-xs-6">
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+                    <p class="">DruidKuma <?= date('Y') ?></p>
+
+
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <p class=""><?= Yii::powered() ?></p>
+                </div>
+                <div class="col-md-2 col-md-offset-5 col-sm-4 col-xs-6">
+                    <p>
+                        <?=Html::a('<span>Notificar un error</span>',['/notificar/create'])?>
+                    </p>
+                </div>
+
+
     </div>
 </footer>
 
