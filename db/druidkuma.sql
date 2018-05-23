@@ -268,21 +268,21 @@ DROP TABLE IF EXISTS respuestas CASCADE;
 CREATE TABLE respuestas
 (
          id bigserial primary KEY
-        ,texto text not null
-        ,creador_id bigint not null references usuarios_id(id)
+        ,comentario text not null
+        ,usuario_id bigint not null references usuarios_id(id)
                             on delete no action
                             on update cascade
         ,post_id bigint references posts(id)
                     on delete cascade
                     on update CASCADE
-        ,created_at TIMESTAMP(0)
-        ,updated_at TIMESTAMP(0)
+        ,created_at TIMESTAMP(0) default current_timestamp
+        , updated_at TIMESTAMP(0) default current_timestamp
         ,padre_id bigint references respuestas(id)
                     ON DELETE cascade
                     ON UPDATE CASCADE
 );
 
-insert into respuestas (texto,post_id,creador_id)
+insert into respuestas (comentario,post_id,usuario_id)
 values ('asdasd',1,1);
 
 
@@ -295,8 +295,18 @@ CREATE TABLE plantilla
 );
 
 INSERT INTO plantilla(extension)
-VALUES ('jpg'),('png');
+VALUES ('png'),('png');
 
+--plantilla usuario --
+DROP TABLE IF EXISTS plantilla_usuario CASCADE;
+CREATE TABLE plantilla_usuario
+(
+     id bigserial primary key
+    ,usuario_id bigint not null references usuarios(id)
+                        on delete cascade
+                        on update cascade
+    ,url varchar(255)
+);
 
 --comentar partidos --
 DROP TABLE IF EXISTS comentar_partidos CASCADE;
@@ -306,9 +316,10 @@ CREATE TABLE comentar_partidos
     partido_id bigint not null references partidos(id)
                             on delete cascade
                             on update cascade,
-    usuario_id bigint not null references usuarios(id)
+    usuario_id bigint not null references usuarios_id(id)
                             on delete CASCADE
                             on update cascade,
-    texto varchar(255) not NULL,
-    created_at TIMESTAMP(0)
+    comentario varchar(255) not NULL,
+    created_at TIMESTAMP(0) default current_timestamp
+    , updated_at TIMESTAMP(0) default current_timestamp
 );

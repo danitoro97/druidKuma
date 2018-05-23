@@ -103,6 +103,14 @@ class UsuariosId extends \yii\db\ActiveRecord
      */
     public function getRespuestas()
     {
-        return $this->hasMany(Respuestas::className(), ['creador_id' => 'id'])->inverseOf('creador');
+        return $this->hasMany(Respuestas::className(), ['usuario_id' => 'id'])->inverseOf('creador');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComentarPartidos()
+    {
+        return $this->hasMany(ComentarPartidos::className(), ['usuario_id' => 'id'])->inverseOf('creador');
     }
 }

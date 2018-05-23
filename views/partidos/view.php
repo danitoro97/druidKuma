@@ -13,7 +13,7 @@ use yii\widgets\ListView;
 /* @var $model app\models\Partidos */
 
 $this->title = $model->local->nombre . ' - ' . $model->visitante->nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Partidos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->liga->nombre, 'url' => ['/ligas/view','id' => $model->liga_id]];
 $this->params['breadcrumbs'][] = $this->title;
 $css=<<<EOT
     .escudo {
@@ -24,6 +24,15 @@ $css=<<<EOT
     h2,h3 {
         text-align: center;
     }
+
+    input {
+        margin-top:10px;
+        border-radius: 5px;
+       	border: 1px solid black;
+    }
+    .comentario {
+        text-align:center;
+    }
 EOT;
 
 $this->registerCss($css);
@@ -33,6 +42,7 @@ $js=<<<EOT
     $('#boton').on('click',function(e){
         e.preventDefault();
         var texto = $(this).prev().val();
+        $(this).prev().val(null);
         var div = $(this).parent().parent();
         $.ajax({
             url:'$ruta',
@@ -89,15 +99,16 @@ $this->registerJs($js);
             <?= Html::img($model->visitante->escudo, ['class' => 'img-responsive escudo']) ?>
         </div>
         <div class="row">
-            <div class="col-md-10 col-md-offset-1 comentario">
-                <textarea></textarea>
-                <input type="button" id="boton" value="Comentar">
+            <div class="col-md-10 col-md-offset-1 comentario ">
+                <input type='text'></input>
+                <input type="button" id="boton" value="Comentar" class="btn-xs btn-info responder">
                 <?php if ($model->comentarPartidos) {
                     echo ListView::widget([
                             'dataProvider' => new ActiveDataProvider([
                                 'query' => $model->getComentarPartidos()->orderBy('created_at ASC'),
                             ]),
-                            'itemView' => '_comentarios',
+                            'itemView' => '/comentarios/_comentarios',
+                            'viewParams' => ['padre' => true],
                             'summary' =>''
                     ]);
                 } ?>

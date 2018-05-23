@@ -38,10 +38,11 @@ class ComentarPartidosController extends \yii\web\Controller
             $model = new ComentarPartidos();
             $model->usuario_id = Yii::$app->user->identity->id;
             $model->partido_id = Yii::$app->request->post('partido_id');
-            $model->texto = Yii::$app->request->post('texto');
+            $model->comentario = Yii::$app->request->post('texto');
 
             if ($model->save()) {
-                return $this->renderPartial('/partidos/_comentarios', ['model' => $model]);
+                $model->refresh();
+                return $this->renderPartial('/comentarios/_comentarios', ['model' => $model, 'padre' => true]);
             }
         }
         return false;

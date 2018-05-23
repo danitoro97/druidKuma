@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\EquiposUsuarios;
 use app\models\Participantes;
 use app\models\Plantilla;
+use app\models\PlantillaUsuario;
 use app\models\Posts;
 use Yii;
 use yii\filters\AccessControl;
@@ -31,11 +32,11 @@ class PostsController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'create', 'view'],
+                'only' => ['index', 'create', 'view', 'create-publico'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'create', 'view'],
+                        'actions' => ['index', 'create', 'view', 'create-publico'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -44,7 +45,7 @@ class PostsController extends Controller
     }
 
     /**
-     * Lists all Posts models.
+     * Lista de todos los posts de un equipo concreto.
      * @return mixed
      * @param mixed $id Representa el identificador del equipo
      */
@@ -59,6 +60,19 @@ class PostsController extends Controller
             'equipo' => $this->findEquipo($id),
         ]);
     }
+    /**
+     * Lista todos los posts publico.
+     * @return [type] [description]
+     */
+    public function actionPublico()
+    {
+        return $this->render('publico', [
+            'model' => Posts::find()
+            ->where('equipo_usuario_id is null')
+            ->orderBy('created_at DESC')
+            ->all(),
+        ]);
+    }
 
     /**
      * Displays a single Posts model.
@@ -68,12 +82,14 @@ class PostsController extends Controller
      */
     public function actionView($id)
     {
-        /*if (!$this->isParticipante($id)) {
+        $model = $this->findModel($id);
+        if (!$this->isParticipante($model->equipo_usuario_id)) {
+            Yii::$app->session->setFlash('error', 'This is the message');
             return $this->goBack();
-        }*/
+        }
 
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
             //'equipo' => $this->findEquipo($id),
         ]);
     }
@@ -93,17 +109,55 @@ class PostsController extends Controller
         $model = new Posts();
         $model->creador_id = Yii::$app->user->identity->id;
         $model->equipo_usuario_id = $id;
+        $model->scenario = Posts::ESCENARIO_EQUIPO;
+        return $this->create($model, ['index', 'id' => $id]);
+    }
+
+    /**
+     * Crea un post publico.
+     * @return [type] [description]
+     */
+    public function actionCreatePublico()
+    {
+        $model = new Posts();
+        $model->creador_id = Yii::$app->user->identity->id;
+        return $this->create($model, ['publico']);
+    }
+
+    /**
+     * Ves un post publico.
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function actionViewPublico($id)
+    {
+        return $this->render('view-publico', [
+            'model' => $this->findModel($id),
+            //'equipo' => $this->findEquipo($id),
+        ]);
+    }
+
+    /**
+     * Crea un post.
+     * @param  [type] $model [description]
+     * @param  [type] $ruta  [description]
+     * @return [type]        [description]
+     */
+    public function create($model, $ruta)
+    {
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->upload();
             $model->save();
-            return $this->redirect(['index', 'id' => $id]);
+            return $this->redirect($ruta);
         }
+        $imagenes = array_merge(Plantilla::find()->all(), PlantillaUsuario::find()
+                                      ->where(['usuario_id' => Yii::$app->user->identity->id])
+                                      ->all());
 
         return $this->render('create', [
-            'model' => $model,
-            'equipo' => $this->findEquipo($id),
-            'imagenes' => Plantilla::find()->all(),
-        ]);
+                'model' => $model,
+                'imagenes' => $imagenes,
+            ]);
     }
 
     /**
@@ -156,6 +210,11 @@ class PostsController extends Controller
         throw new NotFoundHttpException('The requested page does not exist dasds.');
     }
 
+    /**
+     * Busca el equipo con ese identificador y lo devuelve si existe.
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function findEquipo($id)
     {
         if (($model = EquiposUsuarios::findOne($id)) !== null) {
@@ -164,7 +223,11 @@ class PostsController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
+    /**
+     * Comprueba si el usuario es parte del equipo.
+     * @param  [type]  $id [description]
+     * @return bool     [description]
+     */
     public function isParticipante($id)
     {
         return Participantes::find()

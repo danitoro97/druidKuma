@@ -9,8 +9,8 @@ function circulo (options, config = []) {
     var circle = new fabric.Circle({
       radius: config.radius,
       fill: config.fill,
-      left: options.e.layerX,
-      top: options.e.layerY
+      left: options.e.layerX-config.radius/2,
+      top: options.e.layerY-config.radius/2
     });
 
     return circle;
@@ -22,8 +22,8 @@ function cruz (options,config = []) {
         width: config.width,
         height: config.height,
         fill: config.fill,
-        left: options.e.layerX,
-        top: options.e.layerY,
+        top: options.e.layerY-config.height/2,
+        left: options.e.layerX-config.width/2,
     });
 
     return triangle;
@@ -33,8 +33,8 @@ function cuadrado(options, config = []) {
     config = configuracion();
 
     var cuadrado = new fabric.Rect({
-        top: options.e.layerY,
-        left: options.e.layerX,
+        top: options.e.layerY-config.height/2,
+        left: options.e.layerX-config.width/2,
         width : config.width,
         fill: config.fill,
     });
@@ -48,8 +48,19 @@ function crearLienzo(id) {
         height:500,
         width:500,
     });
+    fabric.util.addListener(fabric.document, 'keypress',eliminar);
+}
 
+function eliminar(event) {
+    var code = event.keyCode;
+    //supr 46 delete 8 supr chrome 127
+    if (code == '46' || code =='8' || code == '127') {
+        var objecto = canvas.getActiveObject();
+        if (objecto != undefined) {
+            canvas.remove(objecto);
+        }
 
+    }
 }
 
 function modoLibre(div)
@@ -74,7 +85,9 @@ function modoLibre(div)
             canvas.isDrawingMode= false;
 
         }
-    })
+    });
+
+
 
 }
 
@@ -139,8 +152,7 @@ function eventos (options){
             objecto = cruz(options);
         break;
     }
-
-    canvas.add(objecto).setActiveObject();
+    canvas.add(objecto);
 }
 
 function figuras() {
@@ -161,12 +173,17 @@ function configuracion()
     input.each(function(i,elemento){
         var data = $(this).data('configuracion');
         if ($(this).val() != '') {
-            config[data] = $(this).val();
-        }
+            var dato = $(this).val();
 
+            if (!isNaN(dato)) {
+                dato = parseInt($(this).val());
+            }
+            config[data] = dato;
+        }
 
     });
 
+    console.log($.extend(predefinido,config))
     return $.extend(predefinido,config);
 }
 
@@ -201,18 +218,38 @@ function insertarTexto(div) {
 }
 
 $('#posts-form').on('beforeValidate', function (e) {
-    $('#posts-canvas').val(canvas.toDataURL());
-
+    $('#posts-canvas').val(canvas.toDataURL({'format':'png'}));
 });
 
 $(function() {
     $('input[type="radio"]').checkboxradio();
-
 });
 
 
 crearLienzo('myCanvas');
 colocarBotones();
 botonesConfiguracion();
+fabric.util.addListener(fabric.document, 'touchmove',function(){
+    canvas.isDrawingMode= true;
+    canvas.freeDrawingBrush.width = 10;
+});
 canvas.on('mouse:dblclick', eventos);
 canvas.on('mouse:down', downColor);
+canvas.hoverCursor = 'pointer';
+
+
+function myFunction(x) {
+    if (x.matches) { // If media query matches
+        $('.figura').hide();
+        $('.configuracion').hide();
+        //$('#libre').prop('checked',true);
+        $('#libre').trigger('click');
+    } else {
+        $('.figura').show();
+        $('.configuracion').show();
+    }
+}
+
+var x = window.matchMedia("(max-width: 700px)")
+myFunction(x) // Call listener function at run time
+x.addListener(myFunction) // Attach listener function on state changes

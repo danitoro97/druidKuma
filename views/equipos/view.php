@@ -10,7 +10,7 @@ use yii\widgets\DetailView;
 
 $this->title = $model->nombre;
 $this->registerCssFile('/css/equipo.css');
-$this->params['breadcrumbs'][] = ['label' => 'Equipos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->liga->nombre, 'url' => ['/ligas/view','id' => $model->liga_id]];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJsFile('/js/carrousel.js',['depends' => [\yii\web\JqueryAsset::className()]]);
@@ -24,11 +24,13 @@ EOT;
 $this->registerJs($js);
 $css = <<<EOT
     a.disabled {
-    /* Make the disabled links grayish*/
-    color: gray;
-    /* And disable the pointer events */
-    pointer-events: none;
-}
+        color: gray;
+        pointer-events: none;
+
+    }
+    #myCarousel {
+        margin-top:100px;
+    }
 EOT;
 
 $this->registerCss($css);
@@ -43,7 +45,8 @@ $this->registerCss($css);
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5">
+            <?php echo $this->render('/ligas/_clasificacion', ['clasificacion' => $clasificacion, 'equipo' => $model->id]); ?>
+            <div class="col-md-4">
 
                 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
                     <!-- Indicators -->
@@ -70,9 +73,9 @@ $this->registerCss($css);
                      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                      <span class="sr-only">Next</span>
                    </a>
-               </div>
+                </div>
             </div>
-            <?php echo $this->render('/ligas/_clasificacion', ['clasificacion' => $clasificacion, 'equipo' => $model->id]); ?>
+
         </div>
 
     </div>

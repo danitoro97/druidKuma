@@ -21,8 +21,11 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'plugin/easy-autocomplete.css',
+        'plugin/easy-autocomplete.themes.css',
     ];
     public $js = [
+        'plugin/jquery.easy-autocomplete.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

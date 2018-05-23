@@ -6,7 +6,6 @@ use app\models\EquiposUsuarios;
 use app\models\Participantes;
 use app\models\Usuarios;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -42,36 +41,6 @@ class ParticipantesController extends Controller
             ],
         ];
     }
-
-    /**
-     * Lists all Participantes models.
-     * @return mixed
-     * @param mixed $equipoId
-     */
-    /*public function actionIndex()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Participantes::find(),
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
-    }*/
-
-    /**
-     * Displays a single Participantes model.
-     * @param int $equipoId
-     * @param int $usuarioId
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    /*public function actionView($equipoId, $usuarioId)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($equipoId, $usuarioId),
-        ]);
-    }*/
 
     /**
      * Creates a new Participantes model.
@@ -111,27 +80,6 @@ class ParticipantesController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Participantes model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $equipoId
-     * @param int $usuarioId
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    /*    public function actionUpdate($equipoId, $usuarioId)
-        {
-            $model = $this->findModel($equipoId, $usuarioId);
-
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'equipo_id' => $model->equipo_id, 'usuario_id' => $model->usuario_id]);
-            }
-
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    */
     /**
      * Deletes an existing Participantes model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

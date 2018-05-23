@@ -10,7 +10,6 @@ use yii\helpers\Html;
 /* @var $partidos app\models\Partidos*/
 
 $this->title = $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Ligas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerJsFile('plugin/fullcalendar/lib/moment.min.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('plugin/fullcalendar/fullcalendar.min.js',['depends' => [\yii\web\JqueryAsset::className()]]);
@@ -48,7 +47,7 @@ EOT;
 $this->registerJs($js);
 
 ?>
-<div class="ligas-view">
+<div class="ligas-view text-center">
 
     <h1><?= Html::encode($this->title) ?> (<?=Html::encode($model->siglas)?>)
          de <?=Html::encode(ucwords(mb_strtolower($model->pais->nombre)))?>

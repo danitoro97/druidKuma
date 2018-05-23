@@ -6,7 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Posts';
+$this->title = $equipo->nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Mis Equipos', 'url' => ['/equipos-usuarios/index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCssFile('/css/equiposUsuarios.css');
 ?>
@@ -39,7 +40,8 @@ $this->registerCssFile('/css/equiposUsuarios.css');
         </div>
         <?php foreach ($model as $post) : ?>
                     <?= $this->render('_post', [
-                        'model' => $post
+                        'model' => $post,
+                        'ruta' => ['/posts/view','id' => $post->id]
                     ]) ?>
         <?php endforeach ?>
 

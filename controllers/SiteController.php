@@ -125,9 +125,4 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
-
-    public function actionDibujar()
-    {
-        return $this->render('dibujar');
-    }
 }

@@ -5,6 +5,7 @@
 
 use app\models\Ligas;
 use app\widgets\Alert;
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -13,7 +14,50 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+$ruta = Url::to(['/equipos/equipos']);
+$js = <<<EOT
 
+    var options = {
+        url: "$ruta",
+
+        getValue: "label",
+
+        template: {
+            type: "links",
+            fields: {
+                link: "value"
+            }
+        },
+
+        list: {
+    		/*onClickEvent: function(event) {
+    			enlace = $("#search").getSelectedItemData().value;
+                window.location.href = enlace;
+    		},*/
+            match: {
+                enabled: true
+            },
+            sort: {
+                enabled: true
+            }
+	    },
+
+        ajaxSettings: {
+            dataType: "json",
+            method: "GET",
+            data: {
+              busqueda: $(this).val()
+            }
+        },
+
+        theme: "round"
+    };
+
+$("#search").easyAutocomplete(options);
+
+EOT;
+
+$this->registerJs($js);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -50,10 +94,15 @@ AppAsset::register($this);
 
 
     }
-
+    echo "<form class='navbar-form navbar-right'>
+       <div class='form-group has-feedback'>
+            <input id='search' type='text' placeholder='Buscar equipo' class='form-control'>
+        </div>
+    </form>";
     $item = [
             ['label' => 'Inicio', 'url' => ['/noticias/index']],
             ['label' => 'Ligas', 'items' => $i],
+            ['label' => 'Foro' , 'url' => ['/posts/publico']],
     ];
 
     if (Yii::$app->user->isGuest) {
@@ -65,6 +114,8 @@ AppAsset::register($this);
            'label' => 'Usuarios (' . Yii::$app->user->identity->nombre . ')',
            'items' => [
                ['label' => 'Modificar datos', 'url' => ['usuarios/update']],
+               '<li class="divider"></li>',
+               ['label' => 'Ver plantilla imagenes', 'url' => ['/plantilla-usuario']],
                '<li class="divider"></li>',
                [
                    'label' => 'Logout',

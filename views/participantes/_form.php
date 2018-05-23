@@ -1,10 +1,10 @@
 <?php
 
-use app\models\Usuarios;
+
 use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
+
 use yii\widgets\ActiveForm;
-use kartik\widgets\Select2;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Participantes */
@@ -15,7 +15,7 @@ use kartik\widgets\Select2;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'usuarios[]')->textInput()?>
+    <?= $form->field($model, 'usuarios[]')->textInput(['placeholder'=>'Introduce nombre de usuario'])?>
 
     <div class="form-group">
         <?= Html::submitButton('Invitar', ['class' => 'btn btn-success']) ?>
