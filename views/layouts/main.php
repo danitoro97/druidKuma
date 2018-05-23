@@ -166,7 +166,7 @@ $this->registerJs($js);
                 </div>
                 <div class="col-md-2 col-md-offset-5 col-sm-4 col-xs-6">
                     <p>
-                        <?=Html::a('<span>Notificar un error</span>',['/notificar/create'])?>
+                        <?=Html::a('<span>Notificar un error</span>',['/site/notificar'])?>
                     </p>
                 </div>
 
