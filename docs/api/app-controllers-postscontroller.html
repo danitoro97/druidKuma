@@ -48,6 +48,7 @@
 <a class="list-group-item" href="./app-controllers-noticiascontroller.html">NoticiasController</a>
 <a class="list-group-item" href="./app-controllers-participantescontroller.html">ParticipantesController</a>
 <a class="list-group-item" href="./app-controllers-partidoscontroller.html">PartidosController</a>
+<a class="list-group-item" href="./app-controllers-plantillausuariocontroller.html">PlantillaUsuarioController</a>
 <a class="list-group-item active" href="./app-controllers-postscontroller.html">PostsController</a>
 <a class="list-group-item" href="./app-controllers-respuestascontroller.html">RespuestasController</a>
 <a class="list-group-item" href="./app-controllers-sitecontroller.html">SiteController</a>
@@ -63,6 +64,7 @@
 <a class="list-group-item" href="./app-models-ligas.html">Ligas</a>
 <a class="list-group-item" href="./app-models-loginform.html">LoginForm</a>
 <a class="list-group-item" href="./app-models-noticiassearch.html">NoticiasSearch</a>
+<a class="list-group-item" href="./app-models-notificar.html">Notificar</a>
 <a class="list-group-item" href="./app-models-paises.html">Paises</a>
 <a class="list-group-item" href="./app-models-participantes.html">Participantes</a>
 <a class="list-group-item" href="./app-models-partidos.html">Partidos</a>
@@ -255,14 +257,29 @@ in the request.</td>
         <td>Creates a new Posts model.</td>
         <td><a href="app-controllers-postscontroller.html">app\controllers\PostsController</a></td>
     </tr>
+            <tr id="actionCreatePublico()">
+        <td><a href="app-controllers-postscontroller.html#actionCreatePublico()-detail">actionCreatePublico()</a></td>
+        <td>Crea un post publico.</td>
+        <td><a href="app-controllers-postscontroller.html">app\controllers\PostsController</a></td>
+    </tr>
             <tr id="actionIndex()">
         <td><a href="app-controllers-postscontroller.html#actionIndex()-detail">actionIndex()</a></td>
-        <td>Lists all Posts models.</td>
+        <td>Lista de todos los posts de un equipo concreto.</td>
+        <td><a href="app-controllers-postscontroller.html">app\controllers\PostsController</a></td>
+    </tr>
+            <tr id="actionPublico()">
+        <td><a href="app-controllers-postscontroller.html#actionPublico()-detail">actionPublico()</a></td>
+        <td>Lista todos los posts publico.</td>
         <td><a href="app-controllers-postscontroller.html">app\controllers\PostsController</a></td>
     </tr>
             <tr id="actionView()">
         <td><a href="app-controllers-postscontroller.html#actionView()-detail">actionView()</a></td>
         <td>Displays a single Posts model.</td>
+        <td><a href="app-controllers-postscontroller.html">app\controllers\PostsController</a></td>
+    </tr>
+            <tr id="actionViewPublico()">
+        <td><a href="app-controllers-postscontroller.html#actionViewPublico()-detail">actionViewPublico()</a></td>
+        <td>Ves un post publico.</td>
         <td><a href="app-controllers-postscontroller.html">app\controllers\PostsController</a></td>
     </tr>
             <tr class="inherited" id="actions()">
@@ -325,6 +342,11 @@ in the request.</td>
         <td>Returns the fully qualified name of this class.</td>
         <td><a href="yii-base-baseobject.html">yii\base\BaseObject</a></td>
     </tr>
+            <tr id="create()">
+        <td><a href="app-controllers-postscontroller.html#create()-detail">create()</a></td>
+        <td>Crea un post.</td>
+        <td><a href="app-controllers-postscontroller.html">app\controllers\PostsController</a></td>
+    </tr>
             <tr class="inherited" id="createAction()">
         <td><a href="yii-base-controller.html#createAction()-detail">createAction()</a></td>
         <td>Creates an action based on the given action ID.</td>
@@ -347,7 +369,7 @@ in the request.</td>
     </tr>
             <tr id="findEquipo()">
         <td><a href="app-controllers-postscontroller.html#findEquipo()-detail">findEquipo()</a></td>
-        <td></td>
+        <td>Busca el equipo con ese identificador y lo devuelve si existe.</td>
         <td><a href="app-controllers-postscontroller.html">app\controllers\PostsController</a></td>
     </tr>
             <tr class="inherited" id="findLayoutFile()">
@@ -422,7 +444,7 @@ in the request.</td>
     </tr>
             <tr id="isParticipante()">
         <td><a href="app-controllers-postscontroller.html#isParticipante()-detail">isParticipante()</a></td>
-        <td></td>
+        <td>Comprueba si el usuario es parte del equipo.</td>
         <td><a href="app-controllers-postscontroller.html">app\controllers\PostsController</a></td>
     </tr>
             <tr class="inherited" id="off()">
@@ -512,7 +534,7 @@ in the request.</td>
 <tr>
   <th>Method</th><th>Description</th><th>Defined By</th>
 </tr>
-                                                                                                                        <tr id="findModel()">
+                                                                                                                                        <tr id="findModel()">
         <td><a href="app-controllers-postscontroller.html#findModel()-detail">findModel()</a></td>
         <td>Finds the Posts model based on its primary key value.</td>
         <td><a href="app-controllers-postscontroller.html">app\controllers\PostsController</a></td>
@@ -589,6 +611,35 @@ in the request.</td>
 
 <!--	-->
 
+    <div class="detail-header h3" id="actionCreatePublico()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="app-controllers-postscontroller.html#actionCreatePublico()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        actionCreatePublico()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Crea un post publico.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">\app\controllers\[type]</span> <strong><a href="app-controllers-postscontroller.html#actionCreatePublico()-detail">actionCreatePublico</a></strong> ( )</td></tr>
+                                                <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col">\app\controllers\[type]</td>
+                  <td class="param-desc-col"><p>[description]</p>
+</td>
+                </tr>
+                                    </table>
+
+<!--	-->
+
     <div class="detail-header h3" id="actionIndex()-detail">
         <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
         <a class="tool-link hash" href="app-controllers-postscontroller.html#actionIndex()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
@@ -601,7 +652,7 @@ in the request.</td>
 
     
     <div class="doc-description">
-        <p><strong>Lists all Posts models.</strong></p>
+        <p><strong>Lista de todos los posts de un equipo concreto.</strong></p>
 
         
             </div>
@@ -615,6 +666,35 @@ in the request.</td>
 </td>
                 </tr>
                                                 </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="actionPublico()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="app-controllers-postscontroller.html#actionPublico()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        actionPublico()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Lista todos los posts publico.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">\app\controllers\[type]</span> <strong><a href="app-controllers-postscontroller.html#actionPublico()-detail">actionPublico</a></strong> ( )</td></tr>
+                                                <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col">\app\controllers\[type]</td>
+                  <td class="param-desc-col"><p>[description]</p>
+</td>
+                </tr>
+                                    </table>
 
 <!--	-->
 
@@ -650,6 +730,41 @@ in the request.</td>
 </td>
                 </tr>
                         </table>
+
+<!--	-->
+
+    <div class="detail-header h3" id="actionViewPublico()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="app-controllers-postscontroller.html#actionViewPublico()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        actionViewPublico()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Ves un post publico.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">\app\controllers\[type]</span> <strong><a href="app-controllers-postscontroller.html#actionViewPublico()-detail">actionViewPublico</a></strong> ( <span style="color: #0000BB">$id</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$id</span></td>
+                  <td class="param-type-col">\app\controllers\[type]</td>
+                  <td class="param-desc-col"><p>[description]</p>
+</td>
+                </tr>
+                                        <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col">\app\controllers\[type]</td>
+                  <td class="param-desc-col"><p>[description]</p>
+</td>
+                </tr>
+                                    </table>
 
 <!--	-->
 
@@ -696,6 +811,47 @@ or be detached using <a href="yii-base-component.html#detachBehavior()-detail">d
 
 <!--	-->
 
+    <div class="detail-header h3" id="create()-detail">
+        <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
+        <a class="tool-link hash" href="app-controllers-postscontroller.html#create()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
+        
+        create()
+        <span class="detail-header-tag small">
+            public                                    method
+                    </span>
+    </div>
+
+    
+    <div class="doc-description">
+        <p><strong>Crea un post.</strong></p>
+
+        
+            </div>
+
+    <table class="detail-table table table-striped table-bordered table-hover">
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">\app\controllers\[type]</span> <strong><a href="app-controllers-postscontroller.html#create()-detail">create</a></strong> ( <span style="color: #0000BB">$model</span>, <span style="color: #0000BB">$ruta</span> )</td></tr>
+                                    <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$model</span></td>
+                  <td class="param-type-col">\app\controllers\[type]</td>
+                  <td class="param-desc-col"><p>[description]</p>
+</td>
+                </tr>
+                            <tr>
+                  <td class="param-name-col"><span style="color: #0000BB">$ruta</span></td>
+                  <td class="param-type-col">\app\controllers\[type]</td>
+                  <td class="param-desc-col"><p>[description]</p>
+</td>
+                </tr>
+                                        <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col">\app\controllers\[type]</td>
+                  <td class="param-desc-col"><p>[description]</p>
+</td>
+                </tr>
+                                    </table>
+
+<!--	-->
+
     <div class="detail-header h3" id="findEquipo()-detail">
         <a href="#" class="tool-link" title="go to top"><span class="glyphicon glyphicon-arrow-up"></span></a>
         <a class="tool-link hash" href="app-controllers-postscontroller.html#findEquipo()-detail" title="direct link to this method"><span class="glyphicon icon-hash"></span></a>
@@ -708,19 +864,26 @@ or be detached using <a href="yii-base-component.html#detachBehavior()-detail">d
 
     
     <div class="doc-description">
-        <p><strong></strong></p>
+        <p><strong>Busca el equipo con ese identificador y lo devuelve si existe.</strong></p>
 
         
             </div>
 
     <table class="detail-table table table-striped table-bordered table-hover">
-        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">void</span> <strong><a href="app-controllers-postscontroller.html#findEquipo()-detail">findEquipo</a></strong> ( <span style="color: #0000BB">$id</span> )</td></tr>
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">\app\controllers\[type]</span> <strong><a href="app-controllers-postscontroller.html#findEquipo()-detail">findEquipo</a></strong> ( <span style="color: #0000BB">$id</span> )</td></tr>
                                     <tr>
                   <td class="param-name-col"><span style="color: #0000BB">$id</span></td>
-                  <td class="param-type-col"></td>
-                  <td class="param-desc-col"></td>
+                  <td class="param-type-col">\app\controllers\[type]</td>
+                  <td class="param-desc-col"><p>[description]</p>
+</td>
                 </tr>
-                                                </table>
+                                        <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col">\app\controllers\[type]</td>
+                  <td class="param-desc-col"><p>[description]</p>
+</td>
+                </tr>
+                                    </table>
 
 <!--	-->
 
@@ -777,19 +940,26 @@ or be detached using <a href="yii-base-component.html#detachBehavior()-detail">d
 
     
     <div class="doc-description">
-        <p><strong></strong></p>
+        <p><strong>Comprueba si el usuario es parte del equipo.</strong></p>
 
         
             </div>
 
     <table class="detail-table table table-striped table-bordered table-hover">
-        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type">void</span> <strong><a href="app-controllers-postscontroller.html#isParticipante()-detail">isParticipante</a></strong> ( <span style="color: #0000BB">$id</span> )</td></tr>
+        <tr><td colspan="3" class="signature"><span class="signature-defs">public</span> <span class="signature-type"><a href="http://www.php.net/language.types.boolean">boolean</a></span> <strong><a href="app-controllers-postscontroller.html#isParticipante()-detail">isParticipante</a></strong> ( <span style="color: #0000BB">$id</span> )</td></tr>
                                     <tr>
                   <td class="param-name-col"><span style="color: #0000BB">$id</span></td>
-                  <td class="param-type-col"></td>
-                  <td class="param-desc-col"></td>
+                  <td class="param-type-col">\app\controllers\[type]</td>
+                  <td class="param-desc-col"><p>[description]</p>
+</td>
                 </tr>
-                                                </table>
+                                        <tr>
+                  <th class="param-name-col">return</th>
+                  <td class="param-type-col"><a href="http://www.php.net/language.types.boolean">boolean</a></td>
+                  <td class="param-desc-col"><p>[description]</p>
+</td>
+                </tr>
+                                    </table>
 
 <!--	-->
 </div>
@@ -831,7 +1001,7 @@ or be detached using <a href="yii-base-component.html#detachBehavior()-detail">d
 </div>
 
 <footer class="footer">
-        <p class="pull-right"><small>Page generated on Mon, 07 May 2018 15:13:30 +0000</small></p>
+        <p class="pull-right"><small>Page generated on Thu, 24 May 2018 15:53:47 +0000</small></p>
     Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
 
 <script>jQuery(function ($) {

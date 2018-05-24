@@ -51,8 +51,20 @@
         <h1>Instrucciones de instalación y despliegue <span id="instrucciones-de-instalacion-y-despliegue"></span><a href="#instrucciones-de-instalacion-y-despliegue" class="hashlink">&para;</a></h1>
 <div class="toc"><ol><li><a href="#en-local">En local</a></li>
 <li><a href="#en-la-nube">En la nube</a></li></ol></div>
-<h2>En local <span id="en-local"></span><a href="#en-local" class="hashlink">&para;</a></h2><p>Explicar.</p>
-<h2>En la nube <span id="en-la-nube"></span><a href="#en-la-nube" class="hashlink">&para;</a></h2><p>Explicar.</p>
+<h2>En local <span id="en-local"></span><a href="#en-local" class="hashlink">&para;</a></h2><ol>
+<li>Crear un sitio virtual</li>
+<li>El documentroot debe ser la carpeta web</li>
+<li>Configurar variables de entorno en Apache con  SetEnv VARIABLE_NAME variable_value</li>
+</ol>
+<h2>En la nube <span id="en-la-nube"></span><a href="#en-la-nube" class="hashlink">&para;</a></h2><p>En Heroku</p>
+<ol>
+<li>Crear nueva app</li>
+<li>Conectamos con github</li>
+<li>Enlazar tu repositorio git con heroku (en nuestro repositorio git)
+heroku apps
+heroku git:remote --app nombre aplicacion</li>
+<li>Configurar variables de entorno</li>
+</ol>
         <div class="toplink"><a href="#" class="h1" title="go to top"><span class="glyphicon glyphicon-arrow-up"></a></div>
     </div>
 </div>
@@ -61,7 +73,7 @@
 </div>
 
 <footer class="footer">
-        <p class="pull-right"><small>Page generated on Sat, 19 May 2018 14:04:46 +0000</small></p>
+        <p class="pull-right"><small>Page generated on Thu, 24 May 2018 15:54:02 +0000</small></p>
     Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
 
 <script>jQuery(function ($) {

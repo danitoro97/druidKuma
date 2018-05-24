@@ -1,3 +1,3 @@
 # Conclusiones
 
-Explicar.
+Debo organizarme mejor.
