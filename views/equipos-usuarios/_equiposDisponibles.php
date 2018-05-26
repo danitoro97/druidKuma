@@ -15,6 +15,13 @@ use yii\helpers\Html;
         <?php
             if ($model->equipo->creador_id == Yii::$app->user->identity->id) : ?>
                 <?=Html::a('Añadir participantes', ['/participantes/create', 'equipoId' => $model->equipo_id], ['class' => 'btn btn-xs btn-info'])?>
+                <?=Html::a('Eliminar equipo', ['/equipos-usuarios/delete', 'id' => $model->equipo_id], [
+                    'class' => 'btn btn-xs btn-danger',
+                    'data' => [
+                            'confirm' => '¿Estas seguro que deseas eliminar este equipo?',
+                            'method' => 'post',
+                            ]
+                    ])?>
         <?php endif; ?>
     </div>
     <div class="col-xs-12">

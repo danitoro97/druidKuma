@@ -29,11 +29,11 @@ class EquiposUsuariosController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'create', 'eliminar-participante'],
+                'only' => ['index', 'create', 'eliminar-participante', 'delete'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'create', 'eliminar-participante'],
+                        'actions' => ['index', 'create', 'eliminar-participante', 'delete'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -94,6 +94,27 @@ class EquiposUsuariosController extends Controller
             }
             return false;
         }
+    }
+
+    /**
+     * Deletes an existing EquiposUsuarios model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     * @param mixed $id
+     */
+    public function actionDelete($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->creador_id == Yii::$app->user->identity->id) {
+            if ($model->delete()) {
+                Yii::$app->session->setFlash('success', 'Equipo eliminado correctamente');
+            }
+        } else {
+            Yii::$app->session->setFlash('error', 'No puedes eliminar este equipo');
+        }
+        return $this->redirect(['index']);
     }
 
     /**
