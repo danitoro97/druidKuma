@@ -48,8 +48,11 @@
 <a class="list-group-item" href="#navigation-44" data-toggle="collapse" data-parent="#navigation">Conclusiones <b class="caret"></b></a><div id="navigation-44" class="submenu panel-collapse collapse"><a class="list-group-item" href="./conclusiones.html">Conclusiones</a></div>
 <a class="list-group-item" href="#navigation-45" data-toggle="collapse" data-parent="#navigation">Anexos <b class="caret"></b></a><div id="navigation-45" class="submenu panel-collapse collapse"><a class="list-group-item" href="./anexos.html">Anexos</a></div></div>    </div>
     <div class="col-md-9 guide-content" role="main">
-        <h1>Dificultades encontradas <span id="dificultades-encontradas"></span><a href="#dificultades-encontradas" class="hashlink">&para;</a></h1><p>Explicar, indicando también las soluciones adoptadas en cada caso.</p>
-<p>Incluir aquí el elemento de innovación que se indicó en la propuesta.</p>
+        <h1>Dificultades encontradas <span id="dificultades-encontradas"></span><a href="#dificultades-encontradas" class="hashlink">&para;</a></h1><p>Al añadir la funcionalidad (R38) Añadir img a su plantilla , para que el usuario pudisese dibujar sobre esa imagen.
+Me encontre con un problema de seguridad CORS por el cual no podia manipular las imagenes subida por el usuario.
+Dropbox tiene dos tipos de enlaces preview y direct con este ultimo no tengo problamos de CORS pero no es un enlace
+permanente , con lo cual tengo que almacenar la imagen con un enlace de tipo preview y a la hora de añadirlo al canvas
+de dibujo convertirlo a un enlace direct.</p>
         <div class="toplink"><a href="#" class="h1" title="go to top"><span class="glyphicon glyphicon-arrow-up"></a></div>
     </div>
 </div>
@@ -58,7 +61,7 @@
 </div>
 
 <footer class="footer">
-        <p class="pull-right"><small>Page generated on Thu, 24 May 2018 15:54:02 +0000</small></p>
+        <p class="pull-right"><small>Page generated on Sun, 27 May 2018 15:06:05 +0000</small></p>
     Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></footer>
 
 <script>jQuery(function ($) {
