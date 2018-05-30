@@ -6,41 +6,73 @@ function downColor (options){
 
 function circulo (options, config = []) {
     config = configuracion();
-    var circle = new fabric.Circle({
+    return new fabric.Circle({
       radius: config.radius,
       fill: config.fill,
-      left: options.e.layerX-config.radius/2,
-      top: options.e.layerY-config.radius/2
+      left: options.e.layerX,
+      top: options.e.layerY,
+      originX: 'center',
+      originY: 'center',
     });
 
-    return circle;
 }
 
 function cruz (options,config = []) {
     config = configuracion();
-    var triangle = new fabric.Triangle({
+    return new fabric.Triangle({
         width: config.width,
         height: config.height,
         fill: config.fill,
-        top: options.e.layerY-config.height/2,
-        left: options.e.layerX-config.width/2,
+        originX: 'center',
+        originY: 'center',
+        top: options.e.layerY,
+        left: options.e.layerX,
     });
 
-    return triangle;
 }
 
 function cuadrado(options, config = []) {
     config = configuracion();
 
-    var cuadrado = new fabric.Rect({
-        top: options.e.layerY-config.height/2,
-        left: options.e.layerX-config.width/2,
+    return new fabric.Rect({
+        top: options.e.layerY,
+        left: options.e.layerX,
         width : config.width,
         fill: config.fill,
+        originX: 'center',
+        originY: 'center',
+        height :config.height
+
+
     });
-    //cuadrado.width = config.width;
-    cuadrado.height = config.height;
-    return cuadrado;
+
+}
+
+function xa(options, config = []) {
+    config = configuracion();
+
+    var line= new fabric.Line([50, 100, 100, 150],{
+
+     stroke: config.fill,
+     strokeWidth: 5,
+     width: config.width,
+     height: config.height,
+     top: options.e.layerY,
+     left: options.e.layerX,
+    // selectable: false
+   });
+   var line2= new fabric.Line([150, 100, 100, 150],{
+
+    stroke: config.fill,
+    strokeWidth: 5,
+    width: config.width,
+    height: config.height,
+    top: options.e.layerY,
+    left: options.e.layerX,
+   // selectable: false
+  });
+
+  return new fabric.Group([ line, line2 ]);
 }
 
 function crearLienzo(id) {
@@ -52,7 +84,7 @@ function crearLienzo(id) {
 }
 
 function eliminar(event) {
-    var code = event.keyCode;
+    var code = event.keyCode || event.which;
     //supr 46 delete 8 supr chrome 127
     if (code == '46' || code =='8' || code == '127') {
         var objecto = canvas.getActiveObject();
@@ -92,7 +124,7 @@ function modoLibre(div)
 }
 
 function colocarBotones() {
-    var botones = ['Circulo','Cuadrado','Cruz'];
+    var botones = ['Circulo','Cuadrado','Cruz','X'];
     var div = $('.figura');
 
     for (var i = 0; i < botones.length; i++) {
@@ -150,6 +182,9 @@ function eventos (options){
         break;
         case 'cruz':
             objecto = cruz(options);
+        break;
+        case 'x':
+            objecto = xa(options);
         break;
     }
     canvas.add(objecto);

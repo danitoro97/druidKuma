@@ -13,5 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
     'model' => $model,
     'rutaPadre'=> Url::to(['/respuestas/create-padre-foro']),
     'ruta' => Url::to(['respuestas/create-publico']),
+    'rutaIndex' => Url::to(['/posts/publico'),
 ])
 ?>

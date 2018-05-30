@@ -11,10 +11,10 @@ use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Partidos */
-
+/*
 $this->title = $model->local->nombre . ' - ' . $model->visitante->nombre;
 $this->params['breadcrumbs'][] = ['label' => $model->liga->nombre, 'url' => ['/ligas/view','id' => $model->liga_id]];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;*/
 $css=<<<EOT
     .escudo {
         max-width: 165px;
@@ -58,7 +58,7 @@ $js=<<<EOT
             }
         })
     })
-
+    $('.navbar-inverse').hide();
 EOT;
 
 

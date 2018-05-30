@@ -27,10 +27,7 @@ $(window).scroll(function(){
                 page:$('.noticias').length,
             },
             success : function (data) {
-
-                var h = $('.row').html();
-                h += data;
-                $('.row').html(h);
+                $('#noticias').append(data);
                 s = document.body.scrollHeight-800;
             },
             error: function (){
@@ -67,7 +64,7 @@ EOT;
 
 $this->registerJs($js);
 ?>
-<div class="noticias-index">
+<div class="noticias-index" id="noticias">
 
     <h1 id='top'><?= Html::encode($this->title) ?></h1>
     <?php
