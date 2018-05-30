@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 
 
@@ -41,7 +42,8 @@ $this->registerCssFile('/css/equiposUsuarios.css');
         <?php foreach ($model as $post) : ?>
                     <?= $this->render('_post', [
                         'model' => $post,
-                        'ruta' => ['/posts/view','id' => $post->id]
+                        'ruta' => ['/posts/view','id' => $post->id],
+                        'rutaIndex' => Url::to(['/posts/index', 'id' => $post->equipo_usuario_id]),
                     ]) ?>
         <?php endforeach ?>
 

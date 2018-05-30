@@ -32,11 +32,11 @@ class PostsController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'create', 'view', 'create-publico'],
+                'only' => ['index', 'create', 'view', 'create-publico', 'delete'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'create', 'view', 'create-publico'],
+                        'actions' => ['index', 'create', 'view', 'create-publico', 'delete'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -164,6 +164,7 @@ class PostsController extends Controller
      * Updates an existing Posts model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id
+     * @param mixed $ruta
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -187,13 +188,16 @@ class PostsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    /*public function actionDelete($id)
+    public function actionDelete($id, $ruta)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        if (Yii::$app->user->identity->id == $model->creador_id) {
+            $model->delete();
+        }
 
-        return $this->redirect(['index']);
+        return $this->redirect($ruta);
     }
-*/
+
     /**
      * Finds the Posts model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
