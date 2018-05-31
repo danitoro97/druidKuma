@@ -10,14 +10,9 @@ use yii\helpers\Html;
 
 <div class="col-xs-12 col-xs-offset-0 col-md-5 noticias">
     <h2><?=Html::a(Html::encode($noticia->titulo), ['noticias/view', 'id' => $noticia->id])?></h2>
-    <?php if ($noticia->img) {
-        $attr = "src=$noticia->img" ;
-    } else {
-        $attr = null;
-    }
-    ?>
+
     <figure>
-        <img <?=$attr?> alt="" class="noticia-img img-responsive">
+        <img src="<?=Html::encode($noticia->img ? $noticia->img : '#')?>" class="noticia-img img-responsive">
         <figcaption>Publicado por <?php
             if ($noticia->creador): ?>
             <?= Html::a(
