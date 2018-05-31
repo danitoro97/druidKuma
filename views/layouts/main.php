@@ -15,6 +15,9 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);
 $ruta = Url::to(['/equipos/equipos']);
+$foro = Url::to(['/posts/publico']);
+$crear = Url::to(['/posts/create-publico']);
+$home = Url::to(['/noticias/index']);
 $js = <<<EOT
 
     var options = {
@@ -54,6 +57,24 @@ $js = <<<EOT
     };
 
 $("#search").easyAutocomplete(options);
+
+$(document).on('keypress',function(event){
+        var x = event.which || event.keyCode;
+        var codes = [122,26,28,60,44,12];
+        var arrayRutas = ['$foro','$foro','$crear','$crear','$home','$home'];
+
+        if (event.ctrlKey) {
+            console.log(x);
+            var pos = codes.indexOf(x);
+            console.log(pos)
+            if (pos >= 0) {
+                event.preventDefault();
+                window.location.href = arrayRutas[pos];
+            }
+        }
+
+    });
+
 
 EOT;
 
@@ -167,6 +188,9 @@ $this->registerJs($js);
                 <div class="col-md-2 col-md-offset-5 col-sm-4 col-xs-6">
                     <p>
                         <?=Html::a('<span>Notificar un error</span>',['/site/notificar'])?>
+                    </p>
+                    <p>
+                        <?=Html::a('<span>Lista de atajos</span>',['/site/atajos'])?>
                     </p>
                 </div>
 
