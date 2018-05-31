@@ -12,7 +12,7 @@ use yii\helpers\Html;
     <h2><?=Html::a(Html::encode($noticia->titulo), ['noticias/view', 'id' => $noticia->id])?></h2>
 
     <figure>
-        <img src="<?=Html::encode($noticia->img ? $noticia->img : '#')?>" class="noticia-img img-responsive">
+        <img src="<?=Html::encode($noticia->img ? $noticia->img : '#')?>" alt="Imagen Noticia" class="noticia-img img-responsive">
         <figcaption>Publicado por <?php
             if ($noticia->creador): ?>
             <?= Html::a(
