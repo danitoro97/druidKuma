@@ -189,6 +189,9 @@ $this->registerJs($js);
                     <p>
                         <?=Html::a('<span>Notificar un error</span>',['/site/notificar'])?>
                     </p>
+                    <p>
+                        <?=Html::a('<span>Lista de atajos</span>',['/site/atajos'])?>
+                    </p>
                 </div>
 
 

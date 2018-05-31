@@ -124,4 +124,9 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionAtajos()
+    {
+        return $this->render('atajo');
+    }
 }
