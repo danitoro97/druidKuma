@@ -204,8 +204,7 @@ $this->registerJs($js);
                         <?=Html::a('<span>Lista de atajos</span>',['/site/atajos'])?>
                     </p>
                 </div>
-
-
+        </div>
     </div>
 </footer>
 
