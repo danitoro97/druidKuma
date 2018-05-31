@@ -124,4 +124,12 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+    /**
+     * Accion para ver la lista de atajos disponible.
+     * @return [type] [description]
+     */
+    public function actionAtajos()
+    {
+        return $this->render('atajo');
+    }
 }
