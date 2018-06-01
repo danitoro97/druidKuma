@@ -62,12 +62,17 @@ class ParticipantesController extends Controller
         $model->equipo_id = $equipo->id;
 
         if ($model->load(Yii::$app->request->post())) {
+            var_dump($model->usuarios);
+            //die();
+
             foreach ($model->usuarios as $usuario) {
+                $participante = new Participantes();
+                $participante->equipo_id = $equipo->id;
                 $user = Usuarios::findOne(['nombre' => $usuario]);
 
                 if ($user != null) {
-                    $model->usuario_id = $user->id;
-                    $model->save();
+                    $participante->usuario_id = $user->id;
+                    $participante->save();
                 }
             }
 
@@ -92,6 +97,19 @@ class ParticipantesController extends Controller
             $equipoId = Yii::$app->request->post('equipo_id');
             return $this->findModel($equipoId, Yii::$app->user->identity->id)->delete();
         }
+    }
+
+    public function actionAbandonar($id)
+    {
+        $model = $this->findModel($id, Yii::$app->user->identity->id);
+
+        if ($model->equipo->creador_id == Yii::$app->user->identity->id) {
+            Yii::$app->session->setFlash('error', 'No puedes abandonar este equipo');
+        } else {
+            $model->delete();
+        }
+
+        return $this->redirect(['/equipos-usuarios']);
     }
 
     /**

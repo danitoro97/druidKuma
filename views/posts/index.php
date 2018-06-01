@@ -31,10 +31,18 @@ $this->registerCssFile('/css/equiposUsuarios.css');
                 <h3>Equipo <?= Html::encode($equipo->nombre) ?></h3>
 
                 <p>
-                    <?= Html::a('Create Posts', ['create', 'id' => $equipo->id], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('Create Posts', ['create', 'id' => $equipo->id], ['class' => 'btn btn-xs btn-success']) ?>
                     <?php
                         if ($equipo->creador_id == Yii::$app->user->identity->id) : ?>
-                            <?=Html::a('Añadir participantes', ['/participantes/create', 'equipoId' => $equipo->id], ['class' => 'btn btn-info'])?>
+                            <?=Html::a('Añadir participantes', ['/participantes/create', 'equipoId' => $equipo->id], ['class' => 'btn btn-xs btn-info'])?>
+                        <?php else : ?>
+                            <?=Html::a('Abandonar equipo', ['/participantes/abandonar', 'id' => $equipo->id], [
+                                'class' => 'btn btn-xs btn-danger',
+                                'data' => [
+                                        'confirm' => '¿Estas seguro que deseas abandonar este equipo?',
+                                        'method' => 'post',
+                                        ]
+                                ])?>
                     <?php endif; ?>
                 </p>
             </div>

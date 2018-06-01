@@ -28,7 +28,7 @@ class Participantes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['equipo_id'], 'required'],
+            [['equipo_id', 'usuario_id'], 'required'],
             [['equipo_id', 'usuario_id'], 'default', 'value' => null],
             [['equipo_id', 'usuario_id', 'usuarios'], 'unique', 'targetAttribute' => ['equipo_id', 'usuario_id']],
             [['equipo_id'], 'exist', 'skipOnError' => true, 'targetClass' => EquiposUsuarios::className(), 'targetAttribute' => ['equipo_id' => 'id']],

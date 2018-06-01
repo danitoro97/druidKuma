@@ -22,6 +22,14 @@ use yii\helpers\Html;
                             'method' => 'post',
                             ]
                     ])?>
+        <?php else : ?>
+            <?=Html::a('Abandonar equipo', ['/participantes/abandonar', 'id' => $model->equipo_id], [
+                'class' => 'btn btn-xs btn-danger',
+                'data' => [
+                        'confirm' => '¿Estas seguro que deseas abandonar este equipo?',
+                        'method' => 'post',
+                        ]
+                ])?>
         <?php endif; ?>
     </div>
     <div class="col-xs-12">
