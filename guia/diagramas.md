@@ -2,8 +2,8 @@
 
 ## Diagramas de clases
 
-![Image of E-R](/images/clases.jpg)
+![Image of Clase](images/clases.jpg)
 
 ## Diagramas de estructura lógica de datos
 
-![Image of E-R](/images/er.png)
+![Image of E-R](images/e-r.png)

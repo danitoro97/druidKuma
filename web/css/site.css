@@ -113,6 +113,10 @@ a.desc:after {
     text-decoration: none;
 }
 
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus {
+    background-color: red !important;
+}
+
 .nav > li > form > button.logout:focus {
     outline: none;
 }

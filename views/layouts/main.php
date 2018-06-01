@@ -121,7 +121,7 @@ $this->registerJs($js);
 
         $i[] = [
             'label' => $liga->nombre,
-            'url' => ['ligas/view', 'id' => $liga->id],
+            'url' => ['/ligas/view', 'id' => $liga->id],
         ];
 
 
@@ -141,7 +141,7 @@ $this->registerJs($js);
 
         $item[] = ['label' => 'Iniciar sesión' , 'url' => ['/site/login']];
     }  else {
-        $item[] = ['label' => 'Mis Equipos', 'url' => ['/equipos-usuarios']];
+        $item[] = ['label' => 'Mis Equipos', 'url' => ['/equipos-usuarios/index']];
         $item[] = [
            'label' => 'Usuarios (' . Yii::$app->user->identity->nombre . ')',
            'items' => [
