@@ -1,8 +1,15 @@
 # Anexos
 
-Documentos específicos vinculados a determinados requisitos funcionales o
-técnicos ("prueba del seis" y similares).
+## R(62) Validador Html y Css
 
-Poner cada uno en un apartado separado, indicando en el título de cada apartado
-el código y la descripción corta del requisito asociado (por ejemplo,
-**(RF24) Prueba del seis**).
+###Css
+
+![Image of Css](images/site-css.png)
+
+###Html
+
+![Image of Html](images/html.png)
+
+## R(65) Uso de microdatos
+
+![Image of MicroDatos](images/microdatos.png)
