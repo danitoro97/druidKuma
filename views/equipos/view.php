@@ -71,11 +71,11 @@ EOT;
 
 $this->registerJs($js);
 ?>
-<div class="equipos-view">
+<div class="equipos-view" itemscope itemtype="http://schema.org/SportsTeam">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1><?= Html::encode($this->title) ?> <?=Html::encode($model->liga->nombre)?>
+                <h1 itemprop="name"><?= Html::encode($this->title) ?> <?=Html::encode($model->liga->nombre)?>
                     de <?=Html::encode($model->liga->pais->nombre) ?>
                 </h1>
             </div>

@@ -12,7 +12,7 @@ foreach ($jugadores as $jugador): ?>
     <div class="item <?=$activo?>">
       <?=Html::img($jugador->foto)?>
       <div class="carousel-caption">
-            <h3><?= $jugador->nombre ?> </h3>
+            <h3 itemprop="athlete"><?= $jugador->nombre ?> </h3>
             <p>Dorsal <?= $jugador->dorsal?></p>
         </div>
     </div>
