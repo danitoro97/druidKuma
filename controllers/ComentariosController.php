@@ -69,6 +69,7 @@ class ComentariosController extends \yii\web\Controller
     /**
      * Devuelve una vista con los comentarios de la noticia.
      * @param  [type] $id [description]
+     * @param mixed $pagination
      * @return [type]     [description]
      */
     public function actionView($id)
@@ -80,6 +81,7 @@ class ComentariosController extends \yii\web\Controller
                                     ->orderBy('created_at ASC')
                                     ->where('padre_id is null')
                                     ->andWhere(['noticia_id' => $id]),
+                        'pagination' => false,
                     ]),
                     'itemView' => '/comentarios/_comentarios',
                     'summary' => '',

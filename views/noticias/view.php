@@ -61,6 +61,7 @@ $('#bComentarios').on('click',function(){
         type:'get',
         data:{
             id:'$model->id',
+            pagination:false,
         },
         success: function (data) {
             var div = $('<div>');

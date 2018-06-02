@@ -11,6 +11,31 @@ $this->title = $equipo->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Mis Equipos', 'url' => ['/equipos-usuarios/index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->registerCssFile('/css/equiposUsuarios.css');
+
+$ruta = Url::to(['/equipos-usuarios/eliminar-participante'],true);
+$js=<<<EOT
+
+    $('.glyphicon-remove').parent().on('click',function(){
+        var div = $(this).closest('.row');
+        var id = $(this).data('id');
+
+        $.ajax({
+            url:'$ruta',
+            type:'post',
+            data: {
+                id:'$equipo->id',
+                participante_id:id,
+            },
+            success: function(data){
+                if (data) {
+                    div.remove();
+                }
+            }
+        })
+    });
+EOT;
+
+$this->registerJs($js);
 ?>
 <div class="posts-index">
     <div class="col-md-2">
