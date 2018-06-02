@@ -21,7 +21,7 @@ $this->registerCssFile('/css/login.css');
                 </fieldset>
 
                 <?=Html::a('¿No tienes cuenta ? Create una ', ['usuarios/create'])?>
-                <?=Html::a('¿No recuerdas tu contraseña ? Recuperala ', ['usuarios/recuperar'])?>
+                
                 <?php $form = ActiveForm::begin([
                     'id' => 'login-form',
                     'layout' => 'horizontal',
