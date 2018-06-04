@@ -37,7 +37,7 @@ $js=<<<EOT
             var y=parseInt((window.screen.height/2)-375);
             var x=parseInt((window.screen.width/2)-500);
            if (event.url) {
-             window.open(event.url,'Partidos',"width=1000,height=750, top="+y+",left="+x);
+             window.open(event.url,'Partidos',"toolbar=yes,width=1000,height=750, top="+y+",left="+x);
              return false;
            }
         },
