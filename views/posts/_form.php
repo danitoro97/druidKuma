@@ -60,7 +60,7 @@ $this->registerJs($js);
         <ul>
             <li>Para dibujar figuras selecciona la figura y haz dobleclick en el lienzo</li>
             <li>Para dibujar por libre marca modo libre y presiona click izquierdo mientras te muesves por el lienzo</li>
-            <li>Para borrar una figura pulsa sobre ella (con el modo libre desactivado) y pulsa supr</li>
+            <li>Para borrar una figura pulsa sobre ella (con el modo libre desactivado) y pulsa supr o e (en Chrome)</li>
         </ul>
         <div class="row">
             <div class="col-md-2 figura">
