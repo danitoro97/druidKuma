@@ -49,5 +49,37 @@ De los equipos podras ver las fotos de sus jugadores , su clasificacion en la li
 
 ![Image of Equipos](images/equipos.png)
 
-//Quedan los partidos
+## Partidos
+
+Se crea una ventana nueva con informacion del partido y sus comentarios
+
+![Image of Partidos](images/partidos.png)
+
+## Foro publico
+
+En el podras crea,ver y comentar publicaciones. Si eres el creador de un foro podras eliminarlo.
+
+![Image of Foro](images/foro.png)
+
+## Detalle de la publicaciones
+
+En el podras ver informacion mas detalleda de la publicacion y los comentarios al respecto.
+
+![Image of DetalleForo](images/detalleForo.png)
+
+## Mis Equipos
+
+Podras ver los diferentes equipos en los que participas.
+Podras acceder a su foro y si eres el creador podras añadir participantes o eliminar el equipo.
+
+![Image of Misequipos](images/misEquipos.png)
+
+## Detalles del equipo (o su foro)
+
+Podras ver los participantes y las publicaciones de ese equipo.
+Si eres el creador del equipo podras eliminar participantes
+
+![Image of DetalleEquipo](images/detallesEquipo.png)
+
+
 Explicar, incluyendo capturas de pantalla.

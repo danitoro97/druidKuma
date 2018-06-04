@@ -100,8 +100,12 @@ $this->registerJs($js);
         </div>
         <div class="row">
             <div class="col-md-10 col-md-offset-1 comentario ">
-                <input type='text'></input>
-                <input type="button" id="boton" value="Comentar" class="btn-xs btn-info responder">
+                <div class="row">
+                    <div class="col-md-7 col-md-offset-2">
+                        <textarea name="comentario" rows="5" cols="30"></textarea>
+                        <input type="button" id="boton" value="Comentar" class="btn-xs btn-info responder">
+                    </div>
+                </div>
                 <?php if ($model->comentarPartidos) {
                     echo ListView::widget([
                             'dataProvider' => new ActiveDataProvider([
