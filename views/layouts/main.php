@@ -145,7 +145,7 @@ $this->registerJs($js);
         $item[] = [
            'label' => 'Usuarios (' . Yii::$app->user->identity->nombre . ')',
            'items' => [
-               ['label' => 'Modificar datos', 'url' => ['usuarios/update']],
+               ['label' => 'Mi perfil', 'url' => ['usuarios/view', 'id' => Yii::$app->user->identity->id]],
                '<li class="divider"></li>',
                ['label' => 'Ver plantilla imagenes', 'url' => ['/plantilla-usuario']],
                '<li class="divider"></li>',

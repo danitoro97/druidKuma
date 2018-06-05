@@ -84,9 +84,7 @@ function crearLienzo(id) {
 }
 
 function eliminar(event) {
-    event.preventDefault();
     var code = event.keyCode || event.which;
-    console.log(code);
     //supr 46 delete 8 supr chrome 127
     if (code == '46' || code =='8' || code == '127' || code=='101') {
         var objecto = canvas.getActiveObject();
