@@ -1,0 +1,9 @@
+.visto {
+    background-color:green;
+    color:black;
+}
+
+.comentado {
+    background-color:yellow;
+    color:black;
+}

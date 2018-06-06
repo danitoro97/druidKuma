@@ -15,6 +15,7 @@ use yii\widgets\ListView;
 $this->title = $model->local->nombre . ' - ' . $model->visitante->nombre;
 $this->params['breadcrumbs'][] = ['label' => $model->liga->nombre, 'url' => ['/ligas/view','id' => $model->liga_id]];
 $this->params['breadcrumbs'][] = $this->title;*/
+$this->registerJsFile('js/ventana.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $css=<<<EOT
     .escudo {
         max-width: 165px;
@@ -53,12 +54,13 @@ $js=<<<EOT
             },
             success: function(data) {
                 if (data != false) {
-                    div.append(data)
+                    div.append(data);
+                    window.opener.comentado('$model->id');
                 }
             }
         })
     })
-    $('.navbar-inverse').hide();
+
 EOT;
 
 

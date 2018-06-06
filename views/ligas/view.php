@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->registerJsFile('plugin/fullcalendar/lib/moment.min.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('plugin/fullcalendar/fullcalendar.min.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('plugin/fullcalendar/locale/es.js',['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/ventana.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerCssFile('plugin/fullcalendar/fullcalendar.min.css');
 $ruta = Url::to(['partidos/partidos'], getenv('esquema'));
 $js=<<<EOT
@@ -34,17 +35,20 @@ $js=<<<EOT
         defaultView: 'month',
         eventClick: function(event) {
 
-            var y=parseInt((window.screen.height/2)-375);
-            var x=parseInt((window.screen.width/2)-500);
            if (event.url) {
-             window.open(event.url,'Partidos',"toolbar=yes,width=1000,height=750, top="+y+",left="+x);
-             return false;
+
+               var y=parseInt((window.screen.height/2)-375);
+               var x=parseInt((window.screen.width/2)-500);
+               $(this).addClass('visto');
+               window.open(event.url,'Partidos',"toolbar=yes,width=1000,height=750, top="+y+",left="+x);
+               return false;
            }
         },
     });
-EOT;
 
+EOT;
 $this->registerJs($js);
+$this->registerCssFile('css/ventana.css');
 
 ?>
 <div class="ligas-view text-center">

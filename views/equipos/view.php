@@ -39,6 +39,8 @@ $this->registerJsFile('plugin/fullcalendar/lib/moment.min.js',['depends' => [\yi
 $this->registerJsFile('plugin/fullcalendar/fullcalendar.min.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('plugin/fullcalendar/locale/es.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerCssFile('plugin/fullcalendar/fullcalendar.min.css');
+$this->registerCssFile('css/ventana.css');
+$this->registerJsFile('js/ventana.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $ruta = Url::to(['partidos/partidos'], getenv('esquema'));
 $js=<<<EOT
 
@@ -62,6 +64,7 @@ $js=<<<EOT
             var y=parseInt((window.screen.height/2)-375);
             var x=parseInt((window.screen.width/2)-500);
            if (event.url) {
+             $(this).addClass('visto');
              window.open(event.url,'Partidos',"width=1000,height=750, top="+y+",left="+x);
              return false;
            }
