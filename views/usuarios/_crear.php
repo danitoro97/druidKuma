@@ -7,6 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 /* @var $form yii\widgets\ActiveForm */
+$this->registerJsFile('@web/js/validacion.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 <div class="usuarios-form">
