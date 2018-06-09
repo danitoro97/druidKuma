@@ -2,6 +2,7 @@ var canvas;
 
 function downColor (options){
     canvas.freeDrawingBrush.color = color();
+    canvas.freeDrawingBrush.width = ancho();
 }
 
 function circulo (options, config = []) {
@@ -17,7 +18,7 @@ function circulo (options, config = []) {
 
 }
 
-function cruz (options,config = []) {
+function triangulo (options,config = []) {
     config = configuracion();
     return new fabric.Triangle({
         width: config.width,
@@ -52,25 +53,19 @@ function xa(options, config = []) {
     config = configuracion();
 
     var line= new fabric.Line([50, 100, 100, 150],{
-
-     stroke: config.fill,
-     strokeWidth: 5,
-     width: config.width,
-     height: config.height,
-     top: options.e.layerY,
-     left: options.e.layerX,
-    // selectable: false
-   });
+         stroke: config.fill,
+         strokeWidth: 5,
+         top: options.e.layerY,
+         left: options.e.layerX,
+        // selectable: false
+    });
    var line2= new fabric.Line([150, 100, 100, 150],{
-
-    stroke: config.fill,
-    strokeWidth: 5,
-    width: config.width,
-    height: config.height,
-    top: options.e.layerY,
-    left: options.e.layerX,
-   // selectable: false
-  });
+        stroke: config.fill,
+        strokeWidth: 5,
+        top: options.e.layerY,
+        left: options.e.layerX,
+       // selectable: false
+    });
 
   return new fabric.Group([ line, line2 ]);
 }
@@ -109,7 +104,7 @@ function modoLibre(div)
     input.on('click',function(){
         if ($(this).prop('checked')) {
             canvas.isDrawingMode= true;
-            canvas.freeDrawingBrush.width = 20;
+            canvas.freeDrawingBrush.width = ancho();
             canvas.freeDrawingBrush.color = color();
 
         }
@@ -124,7 +119,7 @@ function modoLibre(div)
 }
 
 function colocarBotones() {
-    var botones = ['Circulo','Cuadrado','Cruz','X'];
+    var botones = ['Circulo','Cuadrado','Triangulo','X'];
     var div = $('.figura');
 
     for (var i = 0; i < botones.length; i++) {
@@ -180,8 +175,8 @@ function eventos (options){
         case 'cuadrado':
             objecto = cuadrado(options);
         break;
-        case 'cruz':
-            objecto = cruz(options);
+        case 'triangulo':
+            objecto = triangulo(options);
         break;
         case 'x':
             objecto = xa(options);
@@ -200,7 +195,7 @@ function configuracion()
         width:50,
         height:50,
         fill:color(),
-        radius:5,
+        radius:10,
     };
     var config = {};
     var input = $('.configuracion').find('input');
@@ -218,8 +213,12 @@ function configuracion()
 
     });
 
-    console.log($.extend(predefinido,config))
     return $.extend(predefinido,config);
+}
+
+function ancho()
+{
+    return $('input[data-configuracion="width"]').val();
 }
 
 function color()
@@ -266,7 +265,7 @@ colocarBotones();
 botonesConfiguracion();
 fabric.util.addListener(fabric.document, 'touchmove',function(){
     canvas.isDrawingMode= true;
-    canvas.freeDrawingBrush.width = 10;
+    canvas.freeDrawingBrush.width = 5;
 });
 canvas.on('mouse:dblclick', eventos);
 canvas.on('mouse:down', downColor);

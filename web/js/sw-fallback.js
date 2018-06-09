@@ -3,7 +3,8 @@ var CACHE_NAME    = 'mi-segundo-sw';
 var urlsToCache   = [
     '/js/dibujo.js',
     '/js/sw-fallback.js',
-    '/css/fonts/AllerDisplay.ttf'
+    '/css/fonts/AllerDisplay.ttf',
+    '/css/site.css'
 ];
 
 
