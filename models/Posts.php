@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Spatie\Dropbox\Exceptions\BadRequest;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 use yii\imagine\Image;
 
 /**
@@ -44,6 +46,22 @@ class Posts extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'posts';
+    }
+
+    /**
+     * Comportamiento para añadir hora de creacion y modifiacion.
+     * @return [type] [description]
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            [
+            'class' => TimestampBehavior::className(),
+            'createdAtAttribute' => 'created_at',
+            'updatedAtAttribute' => 'updated_at',
+            'value' => new Expression('NOW()'),
+            ],
+        ]);
     }
 
     /**
